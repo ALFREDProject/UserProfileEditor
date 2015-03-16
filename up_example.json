@@ -1,0 +1,38 @@
+{
+    "firstName": "Rousse",
+    "middleName": "M.",
+    "lastName": "Grimm",
+    "prefferedName": "Rosie",
+    "gender": "FEMALE",
+
+    "phone": "+33 965 25 36 14",
+    "mobilePhone": "+33 685 14 52 85",
+    "email": "rgrimm48@mail.com",
+    "residentialAddress": {
+        "street": "Rue Désiré Vienot",
+        "number": "35",
+        "postalCode": "93170",
+        "city": "Bagnolet",
+        "state": "Île-de-France",
+        "country": "France"
+    },
+    "postalAddress": {
+        "street": "Rue Hérold",
+        "number": "16",
+        "postalCode": "75001",
+        "city": "Paris",
+        "state": "Île-de-France",
+        "country": "France"
+    },
+
+    "citizenship": "French",
+    "nationality": "British",
+    "language": "EN",
+    "socialSecurityNumber": "TZ874614F",
+    "maritalStatus": "MARRIED",
+    "educationLevel": "A",
+    "employmentStatus": "RETIRED",
+    "profession": "English Teacher",
+    "livingSituation": "ASSISTED_LIVING",
+    "healthInsurance": "UnitedHealthcare"
+}

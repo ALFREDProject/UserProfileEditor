@@ -1,0 +1,11 @@
+package eu.alfred.personalization_manager.db_administrator.model;
+
+public enum MuscleGradingScale {
+
+	NO_CONTRACTION,
+	TRACE_OF_CONTRACTION,
+	ACTIVE_MOVEMENT_WITHOUT_GRAVITY,
+	ACTIVE_MOVEMENT_AGAINST_GRAVITY,
+	ACTIVE_MOVEMENT_AGAINST_GRAVITY_AND_RESISTANCE,
+	NORMAL_POWER,
+}

@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="up_current_id">eu.alfred.personalization_manager.controller.CURRENT_UP_ID</string>
+
+    <!-- English -->
+    <string name="app_name">ALFRED Profile</string>
+    <string name="up_first_name_hint">John…</string>
+    <string name="up_first_name_text">First name</string>
+    <string name="up_middle_name_text">Middle name</string>
+    <string name="up_middle_name_hint">Larry…</string>
+    <string name="up_save_button_text">Save</string>
+    <string name="up_id_text">User Profile ID</string>
+    <string name="up_id_hint">Auto generated…</string>
+    <string name="up_last_name_text">Last name</string>
+    <string name="up_last_name_hint">Smith…</string>
+    <string name="up_preferred_name_text">Preferred name</string>
+    <string name="up_preferred_name_hint">Johnny…</string>
+    <string name="up_gender_text">Gender</string>
+    <string name="up_gender_male_text">Male</string>
+    <string name="up_gender_female_text">Female</string>
+    <string name="up_date_birth_text">Date of birth</string>
+    <string name="up_phone_text">Phone</string>
+    <string name="up_mobile_phone_text">Mobile phone</string>
+    <string name="up_phone_hint">+31 555 00 11 XX</string>
+    <string name="up_mobile_phone_hint">+31 955 00 11 XX</string>
+    <string name="up_email_text">e-mail</string>
+    <string name="up_email_hint">jonhlsmith@mail.com</string>
+    <string name="action_save_title">Save</string>
+    <string name="action_delete_profile_title">Delete</string>
+    <string name="action_new_profile_title">New</string>
+    <string name="activity_name">Your Profile</string>
+    <string name="up_contact_street">Street</string>
+    <string name="up_contact_street_hint">Av. United Nations</string>
+    <string name="up_contact_number">Number</string>
+    <string name="up_contact_number_hint">45, 6B, XII…</string>
+    <string name="up_contact_postalCode">Postal code</string>
+    <string name="up_contact_postalCode_hint">74300</string>
+    <string name="up_contact_city">City</string>
+    <string name="up_contact_city_hint">Utrecht</string>
+    <string name="up_contact_state">State/Province</string>
+    <string name="up_contact_state_hint">Utrecht</string>
+    <string name="up_contact_country">Country</string>
+    <string name="up_contact_country_hint">The Netherlands</string>
+    <string name="up_status_citizenship_text">Citizenship</string>
+    <string name="up_citizenship_hint">British, Dutch, French, Swedish…</string>
+    <string name="up_nationality_hint">Spanish, German, Irish…</string>
+    <string name="up_social_security_number_hint">8800–123–0000000</string>
+    <string name="up_health_insurance_hint">Partial, all assured…</string>
+    <string name="up_nationality_text">Nationality</string>
+    <string name="up_language_text">Language</string>
+    <string name="up_social_security_number_text">Social Security Number</string>
+    <string name="up_marital_status_text">Marital status</string>
+    <string name="up_education_level_text">Education level</string>
+    <string name="up_employment_status_text">Employment status</string>
+    <string name="up_living_situation_text">Living situation</string>
+    <string name="up_health_insurance_text">Health insurance</string>
+    <string name="select_one">Select one…</string>
+    <string name="up_profession_text">Profession</string>
+    <string name="up_profession_insurance_hint">Teacher, engineer, lawyer…</string>
+    <string name="up_health_id_text">ID</string>
+    <string name="up_health_id_hint">Auto…</string>
+    <string name="up_health_userID_text">userID</string>
+    <string name="up_health_userID_hint">Provided…</string>
+    <string name="up_health_bloodType_text">Blood type</string>
+    <string name="up_health_chronicalConditions_text">Chronical Conditions</string>
+    <string name="up_health_chronicalConditions_hint">Asthma, diabetes, glaucoma…</string>
+    <string name="up_health_medicationsTaking_text">Medications taking</string>
+    <string name="up_health_medicationsTaking_hint">Ibuprofen, Phenergan, Ambien CR….</string>
+    <string name="up_health_abilityLevel_text">Mod. Rankin Scale</string>
+    <string name="up_health_knownAllergies_text">Known allergies</string>
+    <string name="up_health_knownAllergies_hint">Pollen, mites, apricots…</string>
+    <string name="up_health_notableMedicalIncidents_text">Notable medication incidents</string>
+    <string name="up_health_notableMedicalIncidents_hint">Stroke, seizure, broken hip…</string>
+    <string name="up_health_surgeries_text">Surgeries</string>
+    <string name="up_health_surgeries_hint">Bursectomy, angioplasty, arthrotomy…</string>
+    <string name="up_health_vaccinations_text">Vaccinations</string>
+    <string name="up_health_vaccinations_hint">Hepatitis A, polio, rabies…</string>
+    <string name="up_health_dietaryRequirements_text">Dietary Requirements</string>
+    <string name="up_health_dietaryRequirements_hint">Low sodium, gluten intolerant, lacto vegetarian…</string>
+    <string name="up_health_pulseAtRest_text">Pulse at rest</string>
+    <string name="up_health_pulseAtRest_hint">80</string>
+    <string name="up_health_breathingRateAtRest_text">Breathing rate at rest</string>
+    <string name="up_health_breathingRateAtRest_hint">40</string>
+    <string name="up_health_bodyTemperatureAtRest_text">Body temperature at rest</string>
+    <string name="up_health_bodyTemperatureAtRest_hint">36ºC</string>
+    <string name="up_health_selfRatedHealth_text">Self-rated Health</string>
+    <string name="up_health_selfRatedHealth_hint">Normal…</string>
+    <string name="up_health_visionAcuityScore_text">Vision acuity Score</string>
+    <string name="up_health_visionAcuityScore_hint">3</string>
+    <string name="up_health_hearingAcuityScore_text">Hearing acuity score</string>
+    <string name="up_health_hearingAcuityScore_hint">4</string>
+    <string name="up_health_lifestyleHealthRelated_text">Lifestyle health related</string>
+    <string name="up_health_lifestyleHealthRelated_hint">Smoker, alcohol, sedentarism…</string>
+    <string name="up_health_weight_text">Weight</string>
+    <string name="up_health_weight_hint">72 kg</string>
+    <string name="up_health_height_text">Height</string>
+    <string name="up_health_height_hint">172 cm</string>
+    <string name="up_health_painLevel_text">Pain level</string>
+    <string name="up_health_painLevel_hint">Middle, low, sporadic…</string>
+    <string name="up_health_functionalReachScore_text">Functional Reach Score</string>
+    <string name="up_health_functionalReachScore_hint">Risk of fall off…</string>
+    <string name="up_health_fiveXSitToStandTestScore_text">Five X sit to stand test score</string>
+    <string name="up_health_fiveXSitToStandTestScore_hint">Normal…</string>
+    <string name="up_health_timedUpAndGoTestScore_text">Time up and go test score</string>
+    <string name="up_health_timedUpAndGoTestScore_hint">Normal…</string>
+    <string name="up_health_manualDynamometerGripStrengthScore_hint">Normal…</string>
+    <string name="up_health_handStrengthLevel_hint">Normal…</string>
+    <string name="up_health_sixMinuteWalkTestScore_hint">Normal…</string>
+    <string name="up_health_muscleGrading_hint">Normal…</string>
+    <string name="up_health_dailyLivingActivitiesScore_hint">Normal…</string>
+    <string name="up_health_cognitionLevel_hint">Normal…</string>
+    <string name="up_health_societyParticipationScore_hint">Normal…</string>
+    <string name="up_health_physicalActivityLevel_hint">Normal…</string>
+    <string name="up_health_fallRiskScore_hint">Normal…</string>
+    <string name="up_health_rangeOfMotionScore_hint">Normal…</string>
+    <string name="up_health_manualDynamometerGripStrengthScore_text">M. Dyn. Grip Strength Score</string>
+    <string name="up_health_handStrengthLevel_text">Hand Strength Level</string>
+    <string name="up_health_sixMinuteWalkTestScore_text">6 min Walk Test Score</string>
+    <string name="up_health_muscleGrading_text">Muscle Grading</string>
+    <string name="up_health_dailyLivingActivitiesScore_text">Daily Living Activities Score</string>
+    <string name="up_health_cognitionLevel_text">Cognition Level</string>
+    <string name="up_health_societyParticipationScore_text">Society Participation Score</string>
+    <string name="up_health_physicalActivityLevel_text">Physical ActivityLevel</string>
+    <string name="up_health_fallRiskScore_text">Fall Risk Score</string>
+    <string name="up_health_rangeOfMotionScore_text">Range Of Motion Score</string>
+    <string name="up_contact_postal_address">Postal Address</string>
+    <string name="edit_contact_activity_name">Edit Contact</string>
+    <string name="edit_new_contact_activity_name">New Contact</string>
+    <string name="tab_personal_title">Personal</string>
+    <string name="tab_contacts_title">Contacts</string>
+    <string name="tab_health_title">Health</string>
+    <string name="tab_personal_header_other">More info</string>
+    <string name="tab_personal_header_postal_address">Postal Address</string>
+    <string name="tab_personal_header_residential_address">Residential Address</string>
+    <string name="tab_personal_header_contact_info">Contact info</string>
+    <string name="contact_header_general">General</string>
+    <string name="up_relation_text">Relation</string>
+    <string name="contact_item_image_description">Contact icon</string>
+    <string name="delete_contact_attempt_title">Delete contact?</string>
+    <string name="delete_contact_attempt_message">This contact will be deleted.</string>
+    <string name="exit_edited_contact_attempt_title">Do you want to exit?</string>
+    <string name="exit_edited_contact_attempt_message">Changes will be lost.</string>
+    <string name="delete_profile_attempt_title">Delete profile?</string>
+    <string name="delete_profile_attempt_message">This will delete your entire profile.</string>
+
+
+    <!-- Source: http://www.textfixer.com/resources/dropdowns/country-list-array.txt -->
+    <string-array name="countries_array" >
+        <item>Afghanistan</item>
+        <item>Åland Islands</item>
+        <item>Albania</item>
+        <item>Algeria</item>
+        <item>American Samoa</item>
+        <item>Andorra</item>
+        <item>Angola</item>
+        <item>Anguilla</item>
+        <item>Antarctica</item>
+        <item>Antigua And Barbuda</item>
+        <item>Argentina</item>
+        <item>Armenia</item>
+        <item>Aruba</item>
+        <item>Australia</item>
+        <item>Austria</item>
+        <item>Azerbaijan</item>
+        <item>Bahamas</item>
+        <item>Bahrain</item>
+        <item>Bangladesh</item>
+        <item>Barbados</item>
+        <item>Belarus</item>
+        <item>Belgium</item>
+        <item>Belize</item>
+        <item>Benin</item>
+        <item>Bermuda</item>
+        <item>Bhutan</item>
+        <item>Bolivia</item>
+        <item>Bosnia And Herzegovina</item>
+        <item>Botswana</item>
+        <item>Bouvet Island</item>
+        <item>Brazil</item>
+        <item>British Indian Ocean Territory</item>
+        <item>Brunei Darussalam</item>
+        <item>Bulgaria</item>
+        <item>Burkina Faso</item>
+        <item>Burundi</item>
+        <item>Cambodia</item>
+        <item>Cameroon</item>
+        <item>Canada</item>
+        <item>Cape Verde</item>
+        <item>Cayman Islands</item>
+        <item>Central African Republic</item>
+        <item>Chad</item>
+        <item>Chile</item>
+        <item>China</item>
+        <item>Christmas Island</item>
+        <item>Cocos (Keeling) Islands</item>
+        <item>Colombia</item>
+        <item>Comoros</item>
+        <item>Congo</item>
+        <item>Congo, The Democratic Republic Of The</item>
+        <item>Cook Islands</item>
+        <item>Costa Rica</item>
+        <item>Cote D\'ivoire</item>
+        <item>Croatia</item>
+        <item>Cuba</item>
+        <item>Cyprus</item>
+        <item>Czech Republic</item>
+        <item>Denmark</item>
+        <item>Djibouti</item>
+        <item>Dominica</item>
+        <item>Dominican Republic</item>
+        <item>Ecuador</item>
+        <item>Egypt</item>
+        <item>El Salvador</item>
+        <item>Equatorial Guinea</item>
+        <item>Eritrea</item>
+        <item>Estonia</item>
+        <item>Ethiopia</item>
+        <item>Falkland Islands (Malvinas)</item>
+        <item>Faroe Islands</item>
+        <item>Fiji</item>
+        <item>Finland</item>
+        <item>France</item>
+        <item>French Guiana</item>
+        <item>French Polynesia</item>
+        <item>French Southern Territories</item>
+        <item>Gabon</item>
+        <item>Gambia</item>
+        <item>Georgia</item>
+        <item>Germany</item>
+        <item>Ghana</item>
+        <item>Gibraltar</item>
+        <item>Greece</item>
+        <item>Greenland</item>
+        <item>Grenada</item>
+        <item>Guadeloupe</item>
+        <item>Guam</item>
+        <item>Guatemala</item>
+        <item>Guernsey</item>
+        <item>Guinea</item>
+        <item>Guinea-bissau</item>
+        <item>Guyana</item>
+        <item>Haiti</item>
+        <item>Heard Island And Mcdonald Islands</item>
+        <item>Holy See (Vatican City State)</item>
+        <item>Honduras</item>
+        <item>Hong Kong</item>
+        <item>Hungary</item>
+        <item>Iceland</item>
+        <item>India</item>
+        <item>Indonesia</item>
+        <item>Iran, Islamic Republic Of</item>
+        <item>Iraq</item>
+        <item>Ireland</item>
+        <item>Isle Of Man</item>
+        <item>Israel</item>
+        <item>Italy</item>
+        <item>Jamaica</item>
+        <item>Japan</item>
+        <item>Jersey</item>
+        <item>Jordan</item>
+        <item>Kazakhstan</item>
+        <item>Kenya</item>
+        <item>Kiribati</item>
+        <item>Korea, Democratic People\'s Republic Of</item>
+        <item>Korea, Republic Of</item>
+        <item>Kuwait</item>
+        <item>Kyrgyzstan</item>
+        <item>Lao People\'s Democratic Republic</item>
+        <item>Latvia</item>
+        <item>Lebanon</item>
+        <item>Lesotho</item>
+        <item>Liberia</item>
+        <item>Libyan Arab Jamahiriya</item>
+        <item>Liechtenstein</item>
+        <item>Lithuania</item>
+        <item>Luxembourg</item>
+        <item>Macao</item>
+        <item>Macedonia, The Former Yugoslav Republic Of</item>
+        <item>Madagascar</item>
+        <item>Malawi</item>
+        <item>Malaysia</item>
+        <item>Maldives</item>
+        <item>Mali</item>
+        <item>Malta</item>
+        <item>Marshall Islands</item>
+        <item>Martinique</item>
+        <item>Mauritania</item>
+        <item>Mauritius</item>
+        <item>Mayotte</item>
+        <item>Mexico</item>
+        <item>Micronesia, Federated States Of</item>
+        <item>Moldova, Republic Of</item>
+        <item>Monaco</item>
+        <item>Mongolia</item>
+        <item>Montenegro</item>
+        <item>Montserrat</item>
+        <item>Morocco</item>
+        <item>Mozambique</item>
+        <item>Myanmar</item>
+        <item>Namibia</item>
+        <item>Nauru</item>
+        <item>Nepal</item>
+        <item>Netherlands</item>
+        <item>Netherlands Antilles</item>
+        <item>New Caledonia</item>
+        <item>New Zealand</item>
+        <item>Nicaragua</item>
+        <item>Niger</item>
+        <item>Nigeria</item>
+        <item>Niue</item>
+        <item>Norfolk Island</item>
+        <item>Northern Mariana Islands</item>
+        <item>Norway</item>
+        <item>Oman</item>
+        <item>Pakistan</item>
+        <item>Palau</item>
+        <item>Palestine</item>
+        <item>Panama</item>
+        <item>Papua New Guinea</item>
+        <item>Paraguay</item>
+        <item>Peru</item>
+        <item>Philippines</item>
+        <item>Pitcairn</item>
+        <item>Poland</item>
+        <item>Portugal</item>
+        <item>Puerto Rico</item>
+        <item>Qatar</item>
+        <item>Reunion</item>
+        <item>Romania</item>
+        <item>Russian Federation</item>
+        <item>Rwanda</item>
+        <item>Saint Helena</item>
+        <item>Saint Kitts And Nevis</item>
+        <item>Saint Lucia</item>
+        <item>Saint Pierre And Miquelon</item>
+        <item>Saint Vincent And The Grenadines</item>
+        <item>Samoa</item>
+        <item>San Marino</item>
+        <item>Sao Tome And Principe</item>
+        <item>Saudi Arabia</item>
+        <item>Senegal</item>
+        <item>Serbia</item>
+        <item>Seychelles</item>
+        <item>Sierra Leone</item>
+        <item>Singapore</item>
+        <item>Slovakia</item>
+        <item>Slovenia</item>
+        <item>Solomon Islands</item>
+        <item>Somalia</item>
+        <item>South Africa</item>
+        <item>South Georgia And The South Sandwich Islands</item>
+        <item>Spain</item>
+        <item>Sri Lanka</item>
+        <item>Sudan</item>
+        <item>Suriname</item>
+        <item>Svalbard And Jan Mayen</item>
+        <item>Swaziland</item>
+        <item>Sweden</item>
+        <item>Switzerland</item>
+        <item>Syrian Arab Republic</item>
+        <item>Taiwan, Province Of China</item>
+        <item>Tajikistan</item>
+        <item>Tanzania, United Republic Of</item>
+        <item>Thailand</item>
+        <item>Timor-leste</item>
+        <item>Togo</item>
+        <item>Tokelau</item>
+        <item>Tonga</item>
+        <item>Trinidad And Tobago</item>
+        <item>Tunisia</item>
+        <item>Turkey</item>
+        <item>Turkmenistan</item>
+        <item>Turks And Caicos Islands</item>
+        <item>Tuvalu</item>
+        <item>Uganda</item>
+        <item>Ukraine</item>
+        <item>United Arab Emirates</item>
+        <item>United Kingdom</item>
+        <item>United States</item>
+        <item>United States Minor Outlying Islands</item>
+        <item>Uruguay</item>
+        <item>Uzbekistan</item>
+        <item>Vanuatu</item>
+        <item>Venezuela</item>
+        <item>Viet Nam</item>
+        <item>Virgin Islands, British</item>
+        <item>Virgin Islands, U.S.</item>
+        <item>Wallis And Futuna</item>
+        <item>Western Sahara</item>
+        <item>Yemen</item>
+        <item>Zambia</item>
+        <item>Zimbabwe</item>
+    </string-array>
+    <!-- Source: http://www.guavastudios.com/downloads/nationalities/nationalities.txt -->
+    <string-array name="nationalities_array">
+        <item>Afghan</item>
+        <item>Albanian</item>
+        <item>Algerian</item>
+        <item>American</item>
+        <item>Andorran</item>
+        <item>Angolan</item>
+        <item>Antiguans</item>
+        <item>Argentinean</item>
+        <item>Armenian</item>
+        <item>Australian</item>
+        <item>Austrian</item>
+        <item>Azerbaijani</item>
+        <item>Bahamian</item>
+        <item>Bahraini</item>
+        <item>Bangladeshi</item>
+        <item>Barbadian</item>
+        <item>Barbudans</item>
+        <item>Batswana</item>
+        <item>Belarusian</item>
+        <item>Belgian</item>
+        <item>Belizean</item>
+        <item>Beninese</item>
+        <item>Bhutanese</item>
+        <item>Bolivian</item>
+        <item>Bosnian</item>
+        <item>Brazilian</item>
+        <item>British</item>
+        <item>Bruneian</item>
+        <item>Bulgarian</item>
+        <item>Burkinabe</item>
+        <item>Burmese</item>
+        <item>Burundian</item>
+        <item>Cambodian</item>
+        <item>Cameroonian</item>
+        <item>Canadian</item>
+        <item>Cape Verdean</item>
+        <item>Central African</item>
+        <item>Chadian</item>
+        <item>Chilean</item>
+        <item>Chinese</item>
+        <item>Colombian</item>
+        <item>Comoran</item>
+        <item>Congolese</item>
+        <item>Costa Rican</item>
+        <item>Croatian</item>
+        <item>Cuban</item>
+        <item>Cypriot</item>
+        <item>Czech</item>
+        <item>Danish</item>
+        <item>Djibouti</item>
+        <item>Dominican</item>
+        <item>Dutch</item>
+        <item>East Timorese</item>
+        <item>Ecuadorean</item>
+        <item>Egyptian</item>
+        <item>Emirian</item>
+        <item>Equatorial Guinean</item>
+        <item>Eritrean</item>
+        <item>Estonian</item>
+        <item>Ethiopian</item>
+        <item>Fijian</item>
+        <item>Filipino</item>
+        <item>Finnish</item>
+        <item>French</item>
+        <item>Gabonese</item>
+        <item>Gambian</item>
+        <item>Georgian</item>
+        <item>German</item>
+        <item>Ghanaian</item>
+        <item>Greek</item>
+        <item>Grenadian</item>
+        <item>Guatemalan</item>
+        <item>Guinea-Bissauan</item>
+        <item>Guinean</item>
+        <item>Guyanese</item>
+        <item>Haitian</item>
+        <item>Herzegovinian</item>
+        <item>Honduran</item>
+        <item>Hungarian</item>
+        <item>Icelander</item>
+        <item>Indian</item>
+        <item>Indonesian</item>
+        <item>Iranian</item>
+        <item>Iraqi</item>
+        <item>Irish</item>
+        <item>Israeli</item>
+        <item>Italian</item>
+        <item>Ivorian</item>
+        <item>Jamaican</item>
+        <item>Japanese</item>
+        <item>Jordanian</item>
+        <item>Kazakhstani</item>
+        <item>Kenyan</item>
+        <item>Kittian and Nevisian</item>
+        <item>Kuwaiti</item>
+        <item>Kyrgyz</item>
+        <item>Laotian</item>
+        <item>Latvian</item>
+        <item>Lebanese</item>
+        <item>Liberian</item>
+        <item>Libyan</item>
+        <item>Liechtensteiner</item>
+        <item>Lithuanian</item>
+        <item>Luxembourger</item>
+        <item>Macedonian</item>
+        <item>Malagasy</item>
+        <item>Malawian</item>
+        <item>Malaysian</item>
+        <item>Maldivan</item>
+        <item>Malian</item>
+        <item>Maltese</item>
+        <item>Marshallese</item>
+        <item>Mauritanian</item>
+        <item>Mauritian</item>
+        <item>Mexican</item>
+        <item>Micronesian</item>
+        <item>Moldovan</item>
+        <item>Monacan</item>
+        <item>Mongolian</item>
+        <item>Moroccan</item>
+        <item>Mosotho</item>
+        <item>Motswana</item>
+        <item>Mozambican</item>
+        <item>Namibian</item>
+        <item>Nauruan</item>
+        <item>Nepalese</item>
+        <item>Netherlander</item>
+        <item>New Zealander</item>
+        <item>Ni-Vanuatu</item>
+        <item>Nicaraguan</item>
+        <item>Nigerian</item>
+        <item>Nigerien</item>
+        <item>North Korean</item>
+        <item>Northern Irish</item>
+        <item>Norwegian</item>
+        <item>Omani</item>
+        <item>Pakistani</item>
+        <item>Palauan</item>
+        <item>Panamanian</item>
+        <item>Papua New Guinean</item>
+        <item>Paraguayan</item>
+        <item>Peruvian</item>
+        <item>Polish</item>
+        <item>Portuguese</item>
+        <item>Qatari</item>
+        <item>Romanian</item>
+        <item>Russian</item>
+        <item>Rwandan</item>
+        <item>Saint Lucian</item>
+        <item>Salvadoran</item>
+        <item>Samoan</item>
+        <item>San Marinese</item>
+        <item>Sao Tomean</item>
+        <item>Saudi</item>
+        <item>Scottish</item>
+        <item>Senegalese</item>
+        <item>Serbian</item>
+        <item>Seychellois</item>
+        <item>Sierra Leonean</item>
+        <item>Singaporean</item>
+        <item>Slovakian</item>
+        <item>Slovenian</item>
+        <item>Solomon Islander</item>
+        <item>Somali</item>
+        <item>South African</item>
+        <item>South Korean</item>
+        <item>Spanish</item>
+        <item>Sri Lankan</item>
+        <item>Sudanese</item>
+        <item>Surinamer</item>
+        <item>Swazi</item>
+        <item>Swedish</item>
+        <item>Swiss</item>
+        <item>Syrian</item>
+        <item>Taiwanese</item>
+        <item>Tajik</item>
+        <item>Tanzanian</item>
+        <item>Thai</item>
+        <item>Togolese</item>
+        <item>Tongan</item>
+        <item>Trinidadian or Tobagonian</item>
+        <item>Tunisian</item>
+        <item>Turkish</item>
+        <item>Tuvaluan</item>
+        <item>Ugandan</item>
+        <item>Ukrainian</item>
+        <item>Uruguayan</item>
+        <item>Uzbekistani</item>
+        <item>Venezuelan</item>
+        <item>Vietnamese</item>
+        <item>Welsh</item>
+        <item>Yemenite</item>
+        <item>Zambian</item>
+        <item>Zimbabwean</item>
+    </string-array>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/llContacts">
+
+
+    <Button
+        android:id="@+id/btNewContact"
+        style="@style/AlfredAddContactButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="ADD CONTACT"
+        android:drawableStart="@drawable/ic_add_contact2"
+        android:onClick="addContact"
+        />
+
+        <ListView
+            android:id="@+id/lvContacts"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+</LinearLayout>

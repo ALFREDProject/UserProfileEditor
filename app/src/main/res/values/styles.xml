@@ -1,0 +1,79 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/ActionBar</item>
+    </style>
+
+    <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:icon">@drawable/ic_launcher</item>
+        <item name="android:logo">@drawable/ic_launcher</item>
+    </style>
+    <style name="AlfredFormTextView" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/bluelight</item>
+    </style>
+    <style name="AlfredFormEditText" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+    </style>
+    <style name="AlfredFormSpinner" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <!--<item name="android:height">50dp</item>-->
+        <!--<item name="android:layout_margin"></item>-->
+    </style>
+    <style name="AlfredFormGenderRadioGroup">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+    <style name="AlfredFormGenderRadioButton">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="AlfredAddContactButton" parent="android:Holo.Light.ButtonBar">
+        <item name="android:background">#ffe7e7e7</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:gravity">start|center_vertical</item>
+    </style>
+
+    <style name="AlfredContactItem" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:color">@color/black</item>
+    </style>
+
+    <style name="AlfredTabText" parent="android:TextAppearance.Holo.Widget.TabWidget">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="AlfredTextViewTitle" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:layout_marginStart">3dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/bluelight</item>
+    </style>
+
+    <style name="AlfredFormSeparator">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/bluelight</item>
+        <item name="android:layout_marginStart">5dp</item>
+        <item name="android:layout_marginEnd">5dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+
+
+    </style>
+
+</resources>
