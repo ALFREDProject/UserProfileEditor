@@ -16,6 +16,13 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.type.TypeFactory;
@@ -25,6 +32,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,7 +54,7 @@ public class VolleyWebServiceClient {
     final static public String TAG = "Volley";
     private final String URL = "http://80.86.83.34:8080/personalization-manager/services/databaseServices/users/";
 
-    Date _tempDate = new Date(-880735200000L); //TODO Fix date parsing with server
+//    Date _tempDate = new Date(-880735200000L); //TODO Fix date parsing with server
 
     public static synchronized VolleyWebServiceClient getInstance(UserProfileController upController) {
         if (mInstance == null) {
@@ -58,7 +66,23 @@ public class VolleyWebServiceClient {
     public VolleyWebServiceClient(UserProfileController upController) {
         mUpController = upController;
         mRequestQueue = getRequestQueue();
-        mGson = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
+        GsonBuilder gsonBuilder = new GsonBuilder()
+                .registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
+
+                    @Override
+                    public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+                        return new Date(json.getAsJsonPrimitive().getAsLong());
+                    }
+                })
+                .registerTypeAdapter(Date.class, new JsonSerializer<Date>() {
+                    @Override
+                    public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
+                        return new JsonPrimitive(src.getTime());
+                    }
+                });
+
+        mGson = gsonBuilder.create();
+//        mGson = gsonBuilder.setDateFormat("dd/MM/yyyy").create();
     }
 
     private RequestQueue getRequestQueue() {
@@ -142,11 +166,11 @@ public class VolleyWebServiceClient {
                         Log.d(TAG, "Retrieved user: " + obj.toString());
                         Object aClass = obj.remove("_class");
                         Log.d(TAG, "\"_class\" was " + aClass);
-                        Object dateOfBirth = obj.remove("dateOfBirth");
-                        Log.d(TAG, "\"dateOfBirth\" was " + dateOfBirth);
+//                        Object dateOfBirth = obj.remove("dateOfBirth");
+//                        Log.d(TAG, "\"dateOfBirth\" was " + dateOfBirth);
                         String jsUpStr = obj.toString();
                         up = mGson.fromJson(jsUpStr, UserProfile.class);
-                        up.setDateOfBirth(_tempDate);
+//                        up.setDateOfBirth(_tempDate);
                     } else {
                         Log.e(TAG, "In doGetRequest() JSON obj was null");
                     }
@@ -194,8 +218,8 @@ public class VolleyWebServiceClient {
             final JSONObject jsUp = new JSONObject(jsUpStr);
             jsUp.remove("id");
             jsUp.remove("_class");
-            jsUp.remove("dateOfBirth");
-            _tempDate = up.getDateOfBirth();
+//            jsUp.remove("dateOfBirth");
+//            _tempDate = up.getDateOfBirth();
             jsUp.remove("livingSituation");
             Log.d(TAG, "Save User Profile: " + jsUp);
 
@@ -231,8 +255,9 @@ public class VolleyWebServiceClient {
             final JSONObject jsUp = new JSONObject(jsUpStr);
             jsUp.remove("id");
             jsUp.remove("_class");
-            jsUp.remove("dateOfBirth");
-            _tempDate = up.getDateOfBirth();
+//            jsUp.remove("dateOfBirth");
+//            jsUp.put("dateOfBirth", up.getDateOfBirth().getTime());
+//            _tempDate = up.getDateOfBirth();
             /*TODO Remove this hack if possible*/
             if (jsUp.has("residentialAddress")) {
                 JSONObject residentialAddress = jsUp.getJSONObject("residentialAddress");
