@@ -342,7 +342,18 @@ public class PersonalSectionFragment extends SectionFragment {
 
         if (dpDateOfBirth != null) {
             long dateLong = dpDateOfBirth.getCalendarView().getDate();
-            up.setDateOfBirth(new Date(dateLong));
+
+            //Drop hours, mins, secs and millisecs
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(dateLong);
+            calendar.set(Calendar.DST_OFFSET, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.HOUR, 0);
+
+
+            up.setDateOfBirth(new Date(calendar.getTimeInMillis()));
         }
 
         /**/
