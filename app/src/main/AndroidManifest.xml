@@ -27,6 +27,8 @@
         <activity
             android:name="eu.alfred.personalization_manager.gui.tabs.contacts.ContactActivity"
             android:label="@string/edit_contact_activity_name"/>
+        <activity android:name="eu.alfred.personalization_manager.gui.pref.SettingsActivity"
+            android:label="@string/pref_activity_name"/>
     </application>
 
 </manifest>

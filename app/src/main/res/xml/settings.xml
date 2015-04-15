@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/pref_dev_options_title"
+        android:key="pref_dev_options_key">
+        <EditTextPreference
+            android:key="pref_db_url_key"
+            android:title="@string/pref_db_url_title"
+            android:summary="@string/pref_db_url_summary"
+            android:defaultValue="@string/pref_db_url_default"
+            />
+        <EditTextPreference
+            android:key="pref_user_id_key"
+            android:title="@string/pref_user_id_title"
+            android:summary="@string/pref_user_id_summary"
+            android:defaultValue="false"
+            />
+
+    </PreferenceCategory>
+</PreferenceScreen>

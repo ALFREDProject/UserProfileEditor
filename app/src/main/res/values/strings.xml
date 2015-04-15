@@ -144,6 +144,13 @@
     <string name="delete_profile_attempt_title">Delete profile?</string>
     <string name="delete_profile_attempt_message">This will delete your entire profile.</string>
     <string name="action_settings_title">Settings</string>
+    <string name="pref_dev_options_title">Developer options</string>
+    <string name="pref_db_url_title">Users Database URL</string>
+    <string name="pref_db_url_summary">Location of MongoDB for User Profiles</string>
+    <string name="pref_db_url_default">http://80.86.83.34:8080/personalization-manager/services/databaseServices/users/</string>
+    <string name="pref_user_id_title">Current User</string>
+    <string name="pref_user_id_summary">Hexadecimal identifier</string>
+    <string name="pref_activity_name">Settings</string>
 
 
     <!-- Source: http://www.textfixer.com/resources/dropdowns/country-list-array.txt -->

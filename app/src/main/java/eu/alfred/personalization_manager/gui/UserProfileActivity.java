@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import eu.alfred.personalization_manager.controller.UserProfileController;
 import eu.alfred.personalization_manager.db_administrator.model.Contact;
 import eu.alfred.personalization_manager.db_administrator.model.UserProfile;
+import eu.alfred.personalization_manager.gui.pref.SettingsActivity;
 import eu.alfred.personalization_manager.gui.tabs.AppSectionsPagerAdapter;
 import eu.alfred.personalization_manager.gui.tabs.contacts.ContactActivity;
 import eu.alfred.userprofile.R;
@@ -42,6 +43,7 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
     private MenuItem miNew;
     private MenuItem miSave;
     private MenuItem miDelete;
+    private MenuItem miSettings;
     private AppSectionsPagerAdapter mSections;
     ViewPager mViewPager;
 
@@ -155,6 +157,7 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
         miNew = menu.findItem(R.id.action_new_profile);
         miSave = menu.findItem(R.id.action_save_profile);
         miDelete = menu.findItem(R.id.action_delete_profile);
+        miSettings = menu.findItem(R.id.action_settings);
         setMenuItemsVisibleForEditing(false);
         return true;
     }
@@ -165,6 +168,7 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
         miNew = menu.findItem(R.id.action_new_profile);
         miSave = menu.findItem(R.id.action_save_profile);
         miDelete = menu.findItem(R.id.action_delete_profile);
+        miSettings = menu.findItem(R.id.action_settings);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -197,9 +201,18 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
             case R.id.action_delete_profile:
                 onAttemptDeletingProfile();
                 return true;
+            case R.id.action_settings:
+                openSettings();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void openSettings() {
+        // Display the fragment as the main content.
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 
     private void newProfile() {
