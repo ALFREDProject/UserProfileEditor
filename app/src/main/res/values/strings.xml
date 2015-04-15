@@ -152,6 +152,7 @@
     <string name="pref_user_id_summary">Hexadecimal identifier</string>
     <string name="pref_activity_name">Settings</string>
     <string name="up_anniversary_date_text">Anniversary Date</string>
+    <string name="up_myers_briggs_indicator_text">Myers-Briggs Indicator</string>
 
 
     <!-- Source: http://www.textfixer.com/resources/dropdowns/country-list-array.txt -->

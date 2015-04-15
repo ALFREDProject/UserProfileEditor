@@ -528,6 +528,20 @@
             android:inputType="text|textCapSentences"
             android:labelFor="@id/up_status_health_insurance_label" />
 
+        <TextView
+            android:id="@+id/up_myers_briggs_indicator_label"
+            style="@style/AlfredFormTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/up_myers_briggs_indicator_text" />
+
+        <Spinner
+            android:id="@+id/txtMyersBriggsIndicator"
+            style="@style/AlfredFormSpinner"
+            android:prompt="@string/select_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/up_myers_briggs_indicator_label"/>
 
         <!--        <Button
                     android:id="@+id/sendButton"
