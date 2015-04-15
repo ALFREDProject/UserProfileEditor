@@ -20,6 +20,12 @@
         android:orderInCategory="70"
         android:showAsAction="ifRoom"
         android:title="@string/action_delete_profile_title" />
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_action_settings"
+        android:orderInCategory="80"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_settings_title" />
     <!--    <item android:id="@+id/action_settings"
             android:title="@string/action_settings"
             android:orderInCategory="100"

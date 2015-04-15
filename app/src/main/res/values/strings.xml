@@ -143,6 +143,7 @@
     <string name="exit_edited_contact_attempt_message">Changes will be lost.</string>
     <string name="delete_profile_attempt_title">Delete profile?</string>
     <string name="delete_profile_attempt_message">This will delete your entire profile.</string>
+    <string name="action_settings_title">Settings</string>
 
 
     <!-- Source: http://www.textfixer.com/resources/dropdowns/country-list-array.txt -->
