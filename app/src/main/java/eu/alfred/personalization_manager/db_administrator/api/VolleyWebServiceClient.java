@@ -55,7 +55,7 @@ public class VolleyWebServiceClient {
     final static public String TAG = "Volley";
     private final String URL = "http://80.86.83.34:8080/personalization-manager/services/databaseServices/users/";
 
-//    Date _tempDate = new Date(-880735200000L); //TODO Fix date parsing with server
+//    Date _tempDate = new Date(-880735200000L);
 
     public static synchronized VolleyWebServiceClient getInstance(UserProfileController upController) {
         if (mInstance == null) {
