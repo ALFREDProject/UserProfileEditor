@@ -176,8 +176,7 @@ public class UserProfile {
 	public MyersBriggsTypeIndicator getMyersBriggsIndicator() {
 		return myersBriggsIndicator;
 	}
-	public void setMyersBriggsIndicator(
-			MyersBriggsTypeIndicator myersBriggsIndicator) {
+	public void setMyersBriggsIndicator(MyersBriggsTypeIndicator myersBriggsIndicator) {
 		this.myersBriggsIndicator = myersBriggsIndicator;
 	}
 	public String[] getSelfDescrPersonalityChar() {
@@ -210,10 +209,10 @@ public class UserProfile {
 	public void setAlfedAppInstalationDate(Date alfedAppInstalationDate) {
 		this.alfedAppInstalationDate = alfedAppInstalationDate;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "id: " + getId() + ", first-name: " + getFirstName() + ", last-name: " + getLastName() + "...";
 	}
-			
+
 }
