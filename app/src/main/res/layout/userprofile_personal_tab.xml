@@ -451,6 +451,19 @@
             android:layout_height="wrap_content"
             android:labelFor="@id/up_status_marital_status_label"/>
 
+        <TextView
+            style="@style/AlfredFormTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/up_anniversary_date_text" />
+
+        <DatePicker
+            android:id="@+id/upAnniversaryDate"
+            style="@style/AlfredFormEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
 
         <TextView
             android:id="@+id/up_status_education_level_label"
