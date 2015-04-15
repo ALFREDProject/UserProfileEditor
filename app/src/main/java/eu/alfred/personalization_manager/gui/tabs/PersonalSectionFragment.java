@@ -20,7 +20,6 @@ import eu.alfred.personalization_manager.db_administrator.model.EducationLevel;
 import eu.alfred.personalization_manager.db_administrator.model.EmploymentStatus;
 import eu.alfred.personalization_manager.db_administrator.model.Gender;
 import eu.alfred.personalization_manager.db_administrator.model.Language;
-import eu.alfred.personalization_manager.db_administrator.model.LivingSituation;
 import eu.alfred.personalization_manager.db_administrator.model.MaritalStatus;
 import eu.alfred.personalization_manager.db_administrator.model.UserProfile;
 import eu.alfred.userprofile.R;
@@ -34,7 +33,6 @@ public class PersonalSectionFragment extends SectionFragment {
     private Spinner spEmploymentStatus;
     private Spinner spMaritalStatus;
     private Spinner spEducationLevel;
-    private Spinner spLivingSituation;
     private EditText etFirstName;
     private EditText etMiddleName;
     private EditText etLastName;
@@ -139,8 +137,7 @@ public class PersonalSectionFragment extends SectionFragment {
         spEmploymentStatus = (Spinner) view.findViewById(R.id.txtEmploymentStatus);
         spEmploymentStatus.setAdapter(new ArrayAdapter<EmploymentStatus>(view.getContext(), android.R.layout.simple_list_item_1, EmploymentStatus.values()));
 
-        spLivingSituation = (Spinner) view.findViewById(R.id.txtLivingSituation);
-        spLivingSituation.setAdapter(new ArrayAdapter<LivingSituation>(view.getContext(), android.R.layout.simple_list_item_1, LivingSituation.values()));
+
     }
 
     public void fillForm(UserProfile up) {
@@ -266,11 +263,6 @@ public class PersonalSectionFragment extends SectionFragment {
                 ArrayAdapter<EmploymentStatus> adapter = (ArrayAdapter<EmploymentStatus>) spEmploymentStatus.getAdapter();
                 int position = adapter.getPosition(up.getEmploymentStatus());
                 spEmploymentStatus.setSelection(position);
-            }
-            if(spLivingSituation != null && up.getLivingSituation()!= null) {
-                ArrayAdapter<LivingSituation> adapter = (ArrayAdapter<LivingSituation>) spLivingSituation.getAdapter();
-                int position = adapter.getPosition(up.getLivingSituation());
-                spLivingSituation.setSelection(position);
             }
 
         }
@@ -504,9 +496,6 @@ public class PersonalSectionFragment extends SectionFragment {
         }
         if(spEducationLevel != null) {
             up.setEducationLevel((EducationLevel) spEducationLevel.getSelectedItem());
-        }
-        if(spLivingSituation != null) {
-            up.setLivingSituation((LivingSituation) spLivingSituation.getSelectedItem());
         }
 
         return up;

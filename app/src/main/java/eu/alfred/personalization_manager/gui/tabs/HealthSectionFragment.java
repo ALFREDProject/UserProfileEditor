@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import eu.alfred.personalization_manager.db_administrator.model.BloodType;
-import eu.alfred.personalization_manager.db_administrator.model.ModifiedRankinScale;
 import eu.alfred.userprofile.R;
 
 /**
@@ -17,7 +16,6 @@ import eu.alfred.userprofile.R;
 public class HealthSectionFragment extends SectionFragment {
 
     private Spinner spBloodType;
-    private Spinner spAbilityLevel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,10 +36,6 @@ public class HealthSectionFragment extends SectionFragment {
     private void setSpinnersContent(View view) {
         spBloodType = (Spinner) view.findViewById(R.id.spHealthBloodType);
         spBloodType.setAdapter(new ArrayAdapter<BloodType>(view.getContext(), android.R.layout.simple_list_item_1, BloodType.values()));
-
-        spAbilityLevel = (Spinner) view.findViewById(R.id.spHealthAbilityLevel);
-        spAbilityLevel.setAdapter(new ArrayAdapter<ModifiedRankinScale>(view.getContext(), android.R.layout.simple_list_item_1, ModifiedRankinScale.values()));
-
 
     }
 }

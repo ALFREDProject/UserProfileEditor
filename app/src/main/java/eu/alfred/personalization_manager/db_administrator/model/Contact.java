@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Contact {
-	
+
 	private String id;
 	private String userID;
 	private String firstName;
@@ -17,10 +17,7 @@ public class Contact {
 	private String mobilePhone;
 	private String email;
 	private Address residentialAddress;
-	private Address postalAddress;
-	private String citizenship;
-	private String nationality;
-	private Language language;
+	private Address postalAddress; 
 	private Relation[] relationToUser;
 	private AccessLevels accessLevels;
 	private String[] socialMediaProfiles;
@@ -109,25 +106,7 @@ public class Contact {
 	}
 	public void setPostalAddress(Address postalAddress) {
 		this.postalAddress = postalAddress;
-	}
-	public String getCitizenship() {
-		return citizenship;
-	}
-	public void setCitizenship(String citizenship) {
-		this.citizenship = citizenship;
-	}
-	public String getNationality() {
-		return nationality;
-	}
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
-	}
-	public Language getLanguage() {
-		return language;
-	}
-	public void setLanguage(Language language) {
-		this.language = language;
-	}
+	} 
 	public Relation[] getRelationToUser() {
 		return relationToUser;
 	}

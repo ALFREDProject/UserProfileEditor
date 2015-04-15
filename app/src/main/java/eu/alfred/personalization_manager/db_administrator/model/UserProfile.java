@@ -12,27 +12,20 @@ public class UserProfile {
 	private String prefferedName;
 	private Gender gender;
 	private Date dateOfBirth;
-
-    //Contact section
 	private String phone;
 	private String mobilePhone;
 	private String email;
 	private Address residentialAddress;
 	private Address postalAddress;
-
-    //Status
 	private String citizenship;
 	private String nationality;
 	private Language language;
 	private String socialSecurityNumber;
 	private MaritalStatus maritalStatus;
 	private EducationLevel educationLevel;
-    private EmploymentStatus employmentStatus;
-    private String profession;
-    private LivingSituation livingSituation;
+	private EmploymentStatus employmentStatus; 
 	private String healthInsurance;
-
-
+	private String profession;
 	private Date anniversaryDate;
 	private Contact nextOfKin;
 	private MyersBriggsTypeIndicator myersBriggsIndicator;
@@ -40,17 +33,15 @@ public class UserProfile {
 	private String[] interests;
 	private String[] culturalOrFamilyNeeds;
 	private String[] socialMediaProfiles;
-	private Date alfedAppInstalationDate;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
+	private Date alfedAppInstalationDate;   
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) { // Change it to create id's with UUID that start with alfred-user-...
+		this.id = id;
+	}
+	public String getFirstName() {
 		return firstName;
 	}
 	public void setFirstName(String firstName) {
@@ -157,12 +148,6 @@ public class UserProfile {
 	}
 	public void setEmploymentStatus(EmploymentStatus employmentStatus) {
 		this.employmentStatus = employmentStatus;
-	}
-	public LivingSituation getLivingSituation() {
-		return livingSituation;
-	}
-	public void setLivingSituation(LivingSituation livingSituation) {
-		this.livingSituation = livingSituation;
 	}
 	public String getHealthInsurance() {
 		return healthInsurance;
