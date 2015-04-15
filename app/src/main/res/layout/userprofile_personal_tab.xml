@@ -506,16 +506,6 @@
             android:layout_height="wrap_content"
             android:text="@string/up_living_situation_text" />
 
-        <Spinner
-            android:id="@+id/txtLivingSituation"
-            style="@style/AlfredFormSpinner"
-            android:prompt="@string/select_one"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:labelFor="@id/up_status_living_situation_label"/>
-
-
-
         <TextView
             android:id="@+id/up_status_health_insurance_label"
             style="@style/AlfredFormTextView"

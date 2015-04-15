@@ -221,7 +221,7 @@ public class VolleyWebServiceClient {
             jsUp.remove("_class");
 //            jsUp.remove("dateOfBirth");
 //            _tempDate = up.getDateOfBirth();
-            jsUp.remove("livingSituation");
+//            jsUp.remove("livingSituation");
             Log.d(TAG, "Save User Profile: " + jsUp);
 
             UPRequest request = new UPRequest(
