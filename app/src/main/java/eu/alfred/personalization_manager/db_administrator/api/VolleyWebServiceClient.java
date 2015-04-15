@@ -35,6 +35,7 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import eu.alfred.personalization_manager.controller.UserProfileController;
@@ -258,52 +259,7 @@ public class VolleyWebServiceClient {
 //            jsUp.remove("dateOfBirth");
 //            jsUp.put("dateOfBirth", up.getDateOfBirth().getTime());
 //            _tempDate = up.getDateOfBirth();
-            /*TODO Remove this hack if possible*/
-            if (jsUp.has("residentialAddress")) {
-                JSONObject residentialAddress = jsUp.getJSONObject("residentialAddress");
-                if (residentialAddress.has("street")) {
-                    jsUp.put("residentialAddress.street", residentialAddress.get("street"));
-                }
-                if (residentialAddress.has("number")) {
-                    jsUp.put("residentialAddress.number", residentialAddress.get("number"));
-                }
-                if (residentialAddress.has("postalCode")) {
-                    jsUp.put("residentialAddress.postalCode", residentialAddress.get("postalCode"));
-                }
-                if (residentialAddress.has("city")) {
-                    jsUp.put("residentialAddress.city", residentialAddress.get("city"));
-                }
-                if (residentialAddress.has("state")) {
-                    jsUp.put("residentialAddress.state", residentialAddress.get("state"));
-                }
-                if (residentialAddress.has("country")) {
-                    jsUp.put("residentialAddress.country", residentialAddress.get("country"));
-                }
-                jsUp.remove("residentialAddress");
-            }
-
-            if (jsUp.has("postalAddress")) {
-                JSONObject postalAddress = jsUp.getJSONObject("postalAddress");
-                if (postalAddress.has("street")) {
-                    jsUp.put("postalAddress.street", postalAddress.get("street"));
-                }
-                if (postalAddress.has("number")) {
-                    jsUp.put("postalAddress.number", postalAddress.get("number"));
-                }
-                if (postalAddress.has("postalCode")) {
-                    jsUp.put("postalAddress.postalCode", postalAddress.get("postalCode"));
-                }
-                if (postalAddress.has("city")) {
-                    jsUp.put("postalAddress.city", postalAddress.get("city"));
-                }
-                if (postalAddress.has("state")) {
-                    jsUp.put("postalAddress.state", postalAddress.get("state"));
-                }
-                if (postalAddress.has("country")) {
-                    jsUp.put("postalAddress.country", postalAddress.get("country"));
-                }
-                jsUp.remove("postalAddress");
-            }
+            fixAddress(jsUp);
 
             Log.d(TAG, "Update User Profile: " + jsUp);
 
@@ -331,6 +287,38 @@ public class VolleyWebServiceClient {
             Log.d(TAG, "doPutRequest() -> " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Inline addresses fix when updating a User Profile.
+     * From: { "residentialAddress" :
+     *              {"street" : "A", "number":"B"},
+     *         "postalAddress":
+     *              {"street" : "C", "number":"D"}
+     *         }
+     * To: {
+     *     "residentialAddress.street" : "A",
+     *     "residentialAddress.number" : "B",
+     *     "postalAddress.street" : "C",
+     *     "postalAddress.number" : "D"
+     * }
+     * @param jsonUserProfile JSON User Profile to inline addresses.
+     * @throws JSONException
+     */
+    private void fixAddress(JSONObject jsonUserProfile) throws JSONException {
+        String[] addrs = {"residentialAddress", "postalAddress"};
+        for (String addrsLabels : addrs) {
+            if (jsonUserProfile.has(addrsLabels)) {
+                JSONObject jsonAddr = jsonUserProfile.getJSONObject(addrsLabels);
+                Iterator<String> keys = jsonAddr.keys();
+                while (keys.hasNext()) {
+                    String field = keys.next();
+                    jsonUserProfile.put(addrsLabels + "." + field, jsonAddr.get(field));
+                }
+                jsonUserProfile.remove(addrsLabels);
+            }
+        }
+
     }
 
     public void doGetAllContacts(String upId) {
