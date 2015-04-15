@@ -500,13 +500,6 @@
             android:labelFor="@id/up_status_profession_label" />
 
         <TextView
-            android:id="@+id/up_status_living_situation_label"
-            style="@style/AlfredFormTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/up_living_situation_text" />
-
-        <TextView
             android:id="@+id/up_status_health_insurance_label"
             style="@style/AlfredFormTextView"
             android:layout_width="match_parent"
