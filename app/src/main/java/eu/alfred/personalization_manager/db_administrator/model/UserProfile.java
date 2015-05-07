@@ -161,13 +161,15 @@ public class UserProfile {
 	public void setProfession(String profession) {
 		this.profession = profession;
 	}
+    //TODO Fix (same problem we had with dateOfBirth)
 	public Date getAnniversaryDate() {
 		return anniversaryDate;
 	}
 	public void setAnniversaryDate(Date anniversaryDate) {
 		this.anniversaryDate = anniversaryDate;
 	}
-	public Contact getNextOfKin() {
+	//TODO [UserProfile] Select Contact as Next Of Kin
+    public Contact getNextOfKin() {
 		return nextOfKin;
 	}
 	public void setNextOfKin(Contact nextOfKin) {
@@ -176,33 +178,39 @@ public class UserProfile {
 	public MyersBriggsTypeIndicator getMyersBriggsIndicator() {
 		return myersBriggsIndicator;
 	}
-	public void setMyersBriggsIndicator(MyersBriggsTypeIndicator myersBriggsIndicator) {
+	public void setMyersBriggsIndicator(
+            MyersBriggsTypeIndicator myersBriggsIndicator) {
 		this.myersBriggsIndicator = myersBriggsIndicator;
 	}
+    //TODO [UserProfile] SelfDescrPersonalityChar
 	public String[] getSelfDescrPersonalityChar() {
 		return selfDescrPersonalityChar;
 	}
 	public void setSelfDescrPersonalityChar(String[] selfDescrPersonalityChar) {
 		this.selfDescrPersonalityChar = selfDescrPersonalityChar;
 	}
+    //TODO [UserProfile] Interests
 	public String[] getInterests() {
 		return interests;
 	}
 	public void setInterests(String[] interests) {
 		this.interests = interests;
 	}
+    //TODO [UserProfile] CulturalOrFamilyNeeds
 	public String[] getCulturalOrFamilyNeeds() {
 		return culturalOrFamilyNeeds;
 	}
 	public void setCulturalOrFamilyNeeds(String[] culturalOrFamilyNeeds) {
 		this.culturalOrFamilyNeeds = culturalOrFamilyNeeds;
 	}
+    //TODO [UserProfile] SocialMediaProfiles
 	public String[] getSocialMediaProfiles() {
 		return socialMediaProfiles;
 	}
 	public void setSocialMediaProfiles(String[] socialMediaProfiles) {
 		this.socialMediaProfiles = socialMediaProfiles;
 	}
+    //TODO [UserProfile] AlfedAppInstalationDate
 	public Date getAlfedAppInstalationDate() {
 		return alfedAppInstalationDate;
 	}
@@ -212,7 +220,7 @@ public class UserProfile {
 
 	@Override
 	public String toString() {
-		return "id: " + getId() + ", first-name: " + getFirstName() + ", last-name: " + getLastName() + "...";
+        return "id: " + getId() + ", first-name: " + getFirstName() + ", last-name: " + getLastName() + ", date of birth: " + getDateOfBirth() + "...";
 	}
 
 }

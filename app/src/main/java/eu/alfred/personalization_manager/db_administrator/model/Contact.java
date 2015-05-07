@@ -1,6 +1,7 @@
 package eu.alfred.personalization_manager.db_administrator.model;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class Contact {
@@ -21,6 +22,7 @@ public class Contact {
 	private Relation[] relationToUser;
 	private AccessLevels accessLevels;
 	private String[] socialMediaProfiles;
+    private HashMap<String,Boolean> accessRightsToAttributes;
 	
 	public Contact() {
 		setId(); 
@@ -34,8 +36,13 @@ public class Contact {
 		this.id =  "alfred-user-contact-"+UUID.randomUUID().toString(); 
 		
 		return this.id; // When creating a new contact we provide the id back so they assign them to the users
-	}	
-	public String getUserID() {
+	}
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUserID() {
 		return userID;
 	}
 	public void setUserID(String userID) {
@@ -127,8 +134,16 @@ public class Contact {
 	public void setAccessLevels(AccessLevels accessLevels) {
 		this.accessLevels = accessLevels;
 	}
-	
-	@Override
+
+    public HashMap<String, Boolean> getAccessRightsToAttributes() {
+        return accessRightsToAttributes;
+    }
+
+    public void setAccessRightsToAttributes(HashMap<String, Boolean> accessRightsToAttributes) {
+        this.accessRightsToAttributes = accessRightsToAttributes;
+    }
+
+    @Override
 	public String toString() {
 		return "id: " + this.getId() + ", first-name: " + this.getFirstName() + "...";
 	}
