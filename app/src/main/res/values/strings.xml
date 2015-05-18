@@ -153,6 +153,12 @@
     <string name="pref_activity_name">Settings</string>
     <string name="up_anniversary_date_text">Anniversary Date</string>
     <string name="up_myers_briggs_indicator_text">Myers-Briggs Indicator</string>
+    <string name="contact_header_dev">Developer</string>
+    <string name="up_user_id_text">#dev My User ID</string>
+    <string name="up_user_id_hint">#dev Manual input</string>
+    <string name="up_user_contact_id_text">#dev Contact ID</string>
+    <string name="up_user_contact_id_hint">#dev Manual input</string>
+    <string name="up_edit_access_rights_text">Edit Access Rights</string>
 
 
     <!-- Source: http://www.textfixer.com/resources/dropdowns/country-list-array.txt -->

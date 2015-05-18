@@ -392,6 +392,46 @@
             android:layout_height="wrap_content"
             android:labelFor="@id/up_relation_label"/>
 
+        <!-- TODO Dev info. Will be removed-->
+        <View style="@style/AlfredFormSeparator"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AlfredTextViewTitle"
+            android:text="@string/contact_header_dev"/>
+        <TextView
+        style="@style/AlfredFormTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/up_user_id_text" />
+        <EditText
+            android:id="@+id/txtUserId"
+            style="@style/AlfredFormEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/up_user_id_hint"
+            android:inputType="text"
+            android:textColor="#aaa"/>
+        <TextView
+            style="@style/AlfredFormTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/up_user_contact_id_text" />
+        <EditText
+            android:id="@+id/txtContactId"
+            style="@style/AlfredFormEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/up_user_contact_id_hint"
+            android:inputType="text"
+            android:textColor="#aaa"/>
+        <Button
+            android:id="@+id/btEditAccessRights"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/up_edit_access_rights_text"
+            android:onClick="editAccessRights"/>
+
     </LinearLayout>
 
 </ScrollView>

@@ -26,12 +26,16 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 import eu.alfred.personalization_manager.controller.ContactsController;
 import eu.alfred.personalization_manager.db_administrator.model.Address;
+import eu.alfred.personalization_manager.db_administrator.model.AttributesHelper;
 import eu.alfred.personalization_manager.db_administrator.model.Contact;
 import eu.alfred.personalization_manager.db_administrator.model.Gender;
 import eu.alfred.personalization_manager.db_administrator.model.Relation;
+import eu.alfred.personalization_manager.db_administrator.model.Requesters;
 import eu.alfred.personalization_manager.gui.tabs.ContactsSectionFragment;
 import eu.alfred.userprofile.R;
 
@@ -41,7 +45,7 @@ import eu.alfred.userprofile.R;
 public class ContactActivity extends Activity {
 
     private static final String TAG = "ContactActivity";
-    ContactsController upController;
+    ContactsController controller;
     private MenuItem miSave;
     private MenuItem miDelete;
 
@@ -81,7 +85,7 @@ public class ContactActivity extends Activity {
         tvContactId.setText(contactId);
         tvContactId.setKeyListener(null);
         tvContactId.setVisibility(View.GONE);
-        upController = new ContactsController(this);
+        controller = new ContactsController(this);
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             //TODO Logo
@@ -625,5 +629,56 @@ public class ContactActivity extends Activity {
         toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(view);
         toast.show();
+    }
+    public void editAccessRights(View view) {
+        AttributesHelper attrHelp = new AttributesHelper();
+        List<String> upFields = attrHelp.getUserProfileFields();
+        final CharSequence[] items = upFields.toArray(new CharSequence[upFields.size()]);
+//        boolean[] checkedItems = new boolean[upFields.size()];
+        final boolean[] itemsChecked = new boolean[items.length];
+
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        final AlertDialog alertDialog = builder
+                .setMultiChoiceItems(items, itemsChecked, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                        itemsChecked[which] = isChecked;
+                    }
+                })
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        HashMap<String, Boolean> accessRights = new HashMap<String, Boolean>(items.length);
+                        for (int i = 0; i < items.length; i++) {
+                            accessRights.put(items[i].toString(), itemsChecked[i]);
+
+                        }
+                        for (String key : accessRights.keySet()) {
+                            System.out.println(String.format("{%s, %b}", key, accessRights.get(key)));
+                        }
+
+                        String myUserId = ((EditText) findViewById(R.id.txtUserId)).getText().toString();
+                        String contactId = ((EditText) findViewById(R.id.txtContactId)).getText().toString();
+
+                        Requesters req = new Requesters();
+                        req.setAccessRightsToAttributes(accessRights);
+                        req.setTargetAlfredId(myUserId); // MyUser
+                        req.setRequesterAlfredId(contactId); // The Contact
+
+
+                        controller.saveRequester(req);
+
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).create();
+        alertDialog.show();
+
     }
 }
