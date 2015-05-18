@@ -18,7 +18,7 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
     ArrayList<SectionFragment> sections;
     private final PersonalSectionFragment sfPersonal;
     private final ContactsSectionFragment sfContact;
-    private final HealthSectionFragment sfHealth;
+//    private final HealthSectionFragment sfHealth;
 
 
     public AppSectionsPagerAdapter(FragmentManager fm, Context ctx) {
@@ -37,11 +37,11 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
         sfContact.setLayout(R.layout.userprofile_contactlist_tab);
         sections.add(sfContact);
 
-        //Health Section
+/*        //Health Section
         sfHealth = new HealthSectionFragment();
         sfHealth.setTitle(ctx.getString(R.string.tab_health_title));
         sfHealth.setLayout(R.layout.userprofile_health_tab);
-        sections.add(sfHealth);
+        sections.add(sfHealth);*/
     }
 
     public PersonalSectionFragment getSfPersonal() {
@@ -50,9 +50,9 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
     public ContactsSectionFragment getSfContacts() {
         return sfContact;
     }
-    public HealthSectionFragment getSfHealth() {
+    /*public HealthSectionFragment getSfHealth() {
         return sfHealth;
-    }
+    }*/
 
     @Override
     public Fragment getItem(int i) {
