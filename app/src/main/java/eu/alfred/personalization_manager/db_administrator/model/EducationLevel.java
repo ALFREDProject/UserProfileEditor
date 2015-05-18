@@ -2,7 +2,7 @@ package eu.alfred.personalization_manager.db_administrator.model;
 
 public enum EducationLevel {
     //Based in ISCED 2011, change if needed
-    A("Primary education"),
+//    A("Primary education"),
     PRIMARY("Primary education"),
     LO_SECONDARY("Lower secondary education"),
     UP_SECONDARY("Upper secondary education"),
