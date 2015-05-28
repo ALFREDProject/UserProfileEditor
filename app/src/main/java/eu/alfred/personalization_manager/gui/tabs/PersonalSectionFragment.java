@@ -21,6 +21,7 @@ import eu.alfred.personalization_manager.db_administrator.model.EmploymentStatus
 import eu.alfred.personalization_manager.db_administrator.model.Gender;
 import eu.alfred.personalization_manager.db_administrator.model.Language;
 import eu.alfred.personalization_manager.db_administrator.model.MaritalStatus;
+import eu.alfred.personalization_manager.db_administrator.model.MyersBriggsTypeIndicator;
 import eu.alfred.personalization_manager.db_administrator.model.UserProfile;
 import eu.alfred.userprofile.R;
 
@@ -30,9 +31,11 @@ import eu.alfred.userprofile.R;
 public class PersonalSectionFragment extends SectionFragment {
 
     private Spinner spLanguage;
-    private Spinner spEmploymentStatus;
     private Spinner spMaritalStatus;
     private Spinner spEducationLevel;
+    private Spinner spEmploymentStatus;
+    private Spinner spMyersBriggsIndicator;
+
     private EditText etFirstName;
     private EditText etMiddleName;
     private EditText etLastName;
@@ -61,6 +64,8 @@ public class PersonalSectionFragment extends SectionFragment {
     private EditText etProfession;
     private EditText etHealthInsurance;
 
+    private DatePicker dpAnniversaryDate;
+
 
 
 
@@ -81,6 +86,7 @@ public class PersonalSectionFragment extends SectionFragment {
         etPreferredName = (EditText) view.findViewById(R.id.txtPreferredName);
         rgGender = (RadioGroup) view.findViewById(R.id.upGenderRadioGroup);
         dpDateOfBirth = (DatePicker) view.findViewById(R.id.upDateOfBirth);
+        dpAnniversaryDate = (DatePicker) view.findViewById(R.id.upAnniversaryDate);
         etPhone = (EditText) view.findViewById(R.id.txtPhone);
         etMobilePhone = (EditText) view.findViewById(R.id.txtMobilePhone);
         etEmail = (EditText) view.findViewById(R.id.txtEmail);
@@ -137,7 +143,8 @@ public class PersonalSectionFragment extends SectionFragment {
         spEmploymentStatus = (Spinner) view.findViewById(R.id.txtEmploymentStatus);
         spEmploymentStatus.setAdapter(new ArrayAdapter<EmploymentStatus>(view.getContext(), android.R.layout.simple_list_item_1, EmploymentStatus.values()));
 
-
+        spMyersBriggsIndicator = (Spinner) view.findViewById(R.id.txtMyersBriggsIndicator);
+        spMyersBriggsIndicator.setAdapter(new ArrayAdapter<MyersBriggsTypeIndicator>(view.getContext(), android.R.layout.simple_list_item_1, MyersBriggsTypeIndicator.values()));
     }
 
     public void fillForm(UserProfile up) {
@@ -180,6 +187,12 @@ public class PersonalSectionFragment extends SectionFragment {
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(date);
                 dpDateOfBirth.updateDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)-1, cal.get(Calendar.DATE));
+            }
+            if (dpAnniversaryDate != null && up.getAnniversaryDate() != null) {
+                Date date = up.getAnniversaryDate();
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                dpAnniversaryDate.updateDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)-1, cal.get(Calendar.DATE));
             }
 
             /**/
@@ -264,6 +277,11 @@ public class PersonalSectionFragment extends SectionFragment {
                 int position = adapter.getPosition(up.getEmploymentStatus());
                 spEmploymentStatus.setSelection(position);
             }
+            if(spMyersBriggsIndicator != null && up.getMyersBriggsIndicator()!= null) {
+                ArrayAdapter<MyersBriggsTypeIndicator> adapter = (ArrayAdapter<MyersBriggsTypeIndicator>) spMyersBriggsIndicator.getAdapter();
+                int position = adapter.getPosition(up.getMyersBriggsIndicator());
+                spMyersBriggsIndicator.setSelection(position);
+            }
 
         }
     }
@@ -333,19 +351,10 @@ public class PersonalSectionFragment extends SectionFragment {
         }
 
         if (dpDateOfBirth != null) {
-            long dateLong = dpDateOfBirth.getCalendarView().getDate();
-
-            //Drop hours, mins, secs and millisecs
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(dateLong);
-            calendar.set(Calendar.DST_OFFSET, 0);
-            calendar.set(Calendar.MILLISECOND, 0);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.HOUR, 0);
-
-
-            up.setDateOfBirth(new Date(calendar.getTimeInMillis()));
+            up.setDateOfBirth(getCleanDate(dpDateOfBirth));
+        }
+        if (dpAnniversaryDate != null) {
+            up.setAnniversaryDate(getCleanDate(dpAnniversaryDate));
         }
 
         /**/
@@ -491,14 +500,33 @@ public class PersonalSectionFragment extends SectionFragment {
         if(spMaritalStatus != null) {
             up.setMaritalStatus((MaritalStatus) spMaritalStatus.getSelectedItem());
         }
-        if(spEmploymentStatus != null) {
-            up.setEmploymentStatus((EmploymentStatus) spEmploymentStatus.getSelectedItem());
-        }
         if(spEducationLevel != null) {
             up.setEducationLevel((EducationLevel) spEducationLevel.getSelectedItem());
         }
+        if(spEmploymentStatus != null) {
+            up.setEmploymentStatus((EmploymentStatus) spEmploymentStatus.getSelectedItem());
+        }
+        if(spMyersBriggsIndicator != null) {
+            up.setMyersBriggsIndicator((MyersBriggsTypeIndicator) spMyersBriggsIndicator.getSelectedItem());
+        }
 
         return up;
+    }
+
+    private Date getCleanDate(DatePicker dpDate) {
+        long dateLong = dpDate.getCalendarView().getDate();
+
+        //Drop hours, mins, secs and millisecs
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(dateLong);
+        calendar.set(Calendar.DST_OFFSET, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.HOUR, 0);
+
+
+        return new Date(calendar.getTimeInMillis());
     }
 
     public void emptyForm() {

@@ -2,9 +2,15 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/action_save_contact"
-        android:icon="@drawable/ic_action_edit"
+        android:id="@+id/action_create_contact"
+        android:icon="@drawable/ic_action_new"
         android:orderInCategory="50"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_new_profile_title" />
+    <item
+        android:id="@+id/action_edit_contact"
+        android:icon="@drawable/ic_action_edit"
+        android:orderInCategory="60"
         android:showAsAction="ifRoom"
         android:title="@string/action_save_title" />
     <item

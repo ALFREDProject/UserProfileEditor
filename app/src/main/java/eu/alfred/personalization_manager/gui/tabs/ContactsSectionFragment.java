@@ -16,9 +16,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.GregorianCalendar;
 import java.util.List;
 
+import eu.alfred.personalization_manager.controller.ContactsController;
 import eu.alfred.personalization_manager.db_administrator.model.Contact;
 import eu.alfred.personalization_manager.db_administrator.model.Gender;
 import eu.alfred.personalization_manager.db_administrator.model.Relation;
@@ -36,6 +36,7 @@ public class ContactsSectionFragment extends SectionFragment {
     static private ContactListAdapter adapter;
     static private List<Contact> contacts;
     static private Comparator<Contact> contactComparator;
+    private ContactsController mController;
 
     static {
         contactComparator = new Comparator<Contact>() {
@@ -87,22 +88,34 @@ public class ContactsSectionFragment extends SectionFragment {
             }
         };
 
-        contacts = genContacts();
+//        contacts = genContacts();
     }
+
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
+        view = super.onCreateView(inflater, container, savedInstanceState);
 
 
-        createFakeContacts(view);
         mContext = view.getContext();
+        createFakeContacts(view);
         return view;
+    }
+
+    public void setContext(Context context) {
+        this.mContext = context;
+    }
+
+    public void init() {
+        mController.setFragment(this);
+
+        mController.getAllContacts();
     }
 
     //TODO Retrieve real data from server
     private void createFakeContacts(View view) {
-        contacts = genContacts();
+        contacts = new ArrayList<Contact>();
         adapter = new ContactListAdapter(view.getContext(), contacts);
         adapter.sort(contactComparator);
 
@@ -111,7 +124,7 @@ public class ContactsSectionFragment extends SectionFragment {
 
     }
 
-
+/*
     private static List<Contact> genContacts() {
         List<Contact> contacts = new ArrayList<Contact>();
 
@@ -249,7 +262,7 @@ public class ContactsSectionFragment extends SectionFragment {
         return str + number + "@mail.eu";
     }
 
-
+*/
     public static void removeContact(int contactPos) {
         Contact c = contacts.remove(contactPos);
         adapter.remove(c);
@@ -268,6 +281,12 @@ public class ContactsSectionFragment extends SectionFragment {
 
     public static Contact getContact(int contactPos) {
         return adapter.getItem(contactPos);
+    }
+
+    public void updateContactList(ArrayList<Contact> contactsList) {
+        for (Contact contact : contactsList) {
+            contacts.add(contact);
+        }
     }
 
     class ContactListAdapter extends ArrayAdapter<Contact> {
@@ -369,6 +388,7 @@ public class ContactsSectionFragment extends SectionFragment {
         Intent intent = new Intent(mContext, ContactActivity.class);
         intent.putExtra("contact-pos", position);
         intent.putExtra("contact-id", contact.getId());
+        intent.putExtra("user-id", contact.getUserID());
         mContext.startActivity(intent);
     }
 

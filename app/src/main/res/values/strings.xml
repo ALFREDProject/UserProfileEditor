@@ -93,6 +93,38 @@
     <string name="up_user_contact_id_text">#dev Contact ID</string>
     <string name="up_user_contact_id_hint">#dev Manual input</string>
     <string name="up_edit_access_rights_text">Edit Access Rights</string>
+    <string name="up_edit_access_rights_dialog_title">Edit Access Rights</string>
+
+    <!-- UserProfile fields' names -->
+    <string name="attr_up_profession">Profession</string>
+    <string name="attr_up_mobilePhone">Mobile Phone</string>
+    <string name="attr_up_socialSecurityNumber">Social Security Number</string>
+    <string name="attr_up_phone">Phone</string>
+    <string name="attr_up_myersBriggsIndicator">Myers-Briggs Indicator</string>
+    <string name="attr_up_gender">Gender</string>
+    <string name="attr_up_firstName">First Name</string>
+    <string name="attr_up_residentialAddress">Residential Address</string>
+    <string name="attr_up_prefferedName">Preferred Name</string>
+    <string name="attr_up_middleName">Middle Name</string>
+    <string name="attr_up_dateOfBirth">Date of Birth</string>
+    <string name="attr_up_id">Id</string>
+    <string name="attr_up_employmentStatus">Employment Status</string>
+    <string name="attr_up_postalAddress">Postal Address</string>
+    <string name="attr_up_selfDescrPersonalityChar">Self Description Personality</string>
+    <string name="attr_up_socialMediaProfiles">Social Media Profiles</string>
+    <string name="attr_up_anniversaryDate">Anniversary Date</string>
+    <string name="attr_up_interests">Interests</string>
+    <string name="attr_up_healthInsurance">Health Insurance</string>
+    <string name="attr_up_email">E-mail</string>
+    <string name="attr_up_nationality">Nationality</string>
+    <string name="attr_up_maritalStatus">Marital Status</string>
+    <string name="attr_up_culturalOrFamilyNeeds">Cultural or Family Needs</string>
+    <string name="attr_up_citizenship">Citizenship</string>
+    <string name="attr_up_educationLevel">Education Level</string>
+    <string name="attr_up_nextOfKin">Next of Kin</string>
+    <string name="attr_up_lastName">Last Name</string>
+    <string name="attr_up_alfedAppInstalationDate">Alfred App Installation Date</string>
+    <string name="attr_up_language">Language</string>
 
 
     <!-- Source: http://www.textfixer.com/resources/dropdowns/country-list-array.txt -->

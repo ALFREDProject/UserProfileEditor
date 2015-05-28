@@ -46,7 +46,8 @@ public class ContactActivity extends Activity {
 
     private static final String TAG = "ContactActivity";
     ContactsController controller;
-    private MenuItem miSave;
+    private MenuItem miCreate;
+    private MenuItem miUpdate;
     private MenuItem miDelete;
 
     private int contactPos;
@@ -69,23 +70,35 @@ public class ContactActivity extends Activity {
     private EditText etContactPostalPostalCode;
     private EditText etContactPostalCity;
     private EditText etContactPostalState;
+    private EditText etUserId;
+    private EditText etContactId;
     private AutoCompleteTextView autoContactPostalCountry;
     private RadioGroup rgGender;
     private DatePicker dpDateOfBirth;
     private Spinner spRelation;
     private boolean dirty = false;
+    private String userId;
+    private String contactId;
+    Contact mContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userprofile_contact_detail);
-        String contactId = getIntent().getExtras().getString("contact-id");
+        contactId = getIntent().getExtras().getString("contact-id");
         contactPos = getIntent().getExtras().getInt("contact-pos");
+        userId = getIntent().getExtras().getString("user-id");
+        mContact = new Contact();
+        mContact.setUserID(userId);
+        mContact.setId(contactId);
         EditText tvContactId = (EditText) findViewById(R.id.txt_upc_id);
         tvContactId.setText(contactId);
         tvContactId.setKeyListener(null);
         tvContactId.setVisibility(View.GONE);
-        controller = new ContactsController(this);
+//        controller = ContactsController.getInstance();
+//        controller.setContactActivity(this);
+        controller = new ContactsController(getApplicationContext());
+        controller.setContactActivity(this);
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             //TODO Logo
@@ -94,6 +107,7 @@ public class ContactActivity extends Activity {
             if (contactPos < 0) {
                 actionBar.setTitle(R.string.edit_new_contact_activity_name);
             }
+            setMenuItemsVisibleForEditing(!"new".equals(contactId));
 //            actionBar.setLogo(R.drawable.ic_launcher);
         }
         bindFields();
@@ -102,7 +116,8 @@ public class ContactActivity extends Activity {
         } else {
             fillForm(contactPos);
         }
-
+        etUserId.setText(userId);
+        etContactId.setText(contactId);
     }
 
     private void bindFields() {
@@ -179,12 +194,30 @@ public class ContactActivity extends Activity {
         etContactPostalState.addTextChangedListener(watcher);
         autoContactPostalCountry.addTextChangedListener(watcher);
 
+        etUserId = (EditText) findViewById(R.id.txtUserId);
+        etContactId = (EditText) findViewById(R.id.txtContactId);
 
+    }
 
+    public void setMenuItemsVisibleForEditing(boolean editMode) {
+        Log.d(TAG, String.format("setMenuItemsVisibleForEditing(%b)", editMode));
+        if (miCreate != null) miCreate.setVisible(!editMode);
+        if (miUpdate != null) miUpdate.setVisible(editMode);
+        if (miDelete != null) miDelete.setVisible(editMode);
+    }
+
+    private void fillForm() {
+        fillForm(mContact);
     }
 
     private void fillForm(int contactPos) {
         Contact contact = ContactsSectionFragment.getContact(contactPos);
+        fillForm(contact);
+    }
+
+
+    private void fillForm(Contact contact) {
+
         if (contact != null) {
             if (etFirstName != null) {
                 etFirstName.setText(contact.getFirstName());
@@ -274,6 +307,9 @@ public class ContactActivity extends Activity {
                 cal.setTime(date);
                 dpDateOfBirth.updateDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)-1, cal.get(Calendar.DATE));
             }
+
+            etUserId.setText(userId);
+            etContactId.setText(contactId);
         }
         dirty = false;
     }
@@ -281,6 +317,10 @@ public class ContactActivity extends Activity {
     public Contact extractContact(Contact contact) {
         if (contact == null) {
             contact = new Contact();
+        }
+        contact.setUserID(userId);
+        if (!"new".equals(contactId)) {
+            contact.setId(contactId);
         }
         if (etFirstName != null) {
             String str = etFirstName.getText().toString();
@@ -531,8 +571,10 @@ public class ContactActivity extends Activity {
             MenuItem item = menu.getItem(i);
             Log.d(TAG, "Item (" + i + "): " + item.getTitle());
         }
-        miSave = menu.findItem(R.id.action_save_contact);
+        miCreate = menu.findItem(R.id.action_create_contact);
+        miUpdate = menu.findItem(R.id.action_edit_contact);
         miDelete = menu.findItem(R.id.action_delete_contact);
+        setMenuItemsVisibleForEditing(!"new".equals(contactId));
         return true;
     }
 
@@ -544,8 +586,11 @@ public class ContactActivity extends Activity {
         Log.d(TAG, "onOptionsItemSelected(" + item.getTitle() + ")");
 
         switch (item.getItemId()) {
-            case R.id.action_save_contact:
-                saveContact();
+            case R.id.action_create_contact:
+                createContact();
+                return true;
+            case R.id.action_edit_contact:
+                updateContact();
                 return true;
             case R.id.action_delete_contact:
                 attemptDeleteContact();
@@ -553,6 +598,19 @@ public class ContactActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void createContact() {
+        Contact contact = extractContact(null);
+        controller.newContact(contact);
+/*        ContactsSectionFragment.setContact(contactPos, mContact);
+        notification(true, "Contact saved");
+        dirty = false;*/
+    }
+
+    private void updateContact() {
+        Contact contact = extractContact(null);
+        controller.updateContact(contact);
     }
 
     private void attemptDeleteContact(){
@@ -570,17 +628,41 @@ public class ContactActivity extends Activity {
     }
 
     private void deleteContact() {
+        Contact contact = extractContact(null);
+        controller.deleteContact(contact);
+    }
+
+    public void onSuccessDeletingContact() {
         ContactsSectionFragment.removeContact(contactPos);
         notification(true, "Contact removed");
         finish();
-
     }
 
-    private void saveContact() {
+    public void onErrorDeletingContact(String message) {
+        notification(false, "Error removing contact: " + message);
+    }
+
+
+    public void onSuccessCreatingContact(String newContactId) {
         Contact contact = extractContact(null);
+        this.contactId = newContactId;
+        contact.setId(contactId);
+        etContactId.setText(contactId);
+        notification(true, "Contact created with ID = " + contact.getId());
         ContactsSectionFragment.setContact(contactPos, contact);
-        notification(true, "Contact saved");
         dirty = false;
+        setMenuItemsVisibleForEditing(true);
+        setTitle(R.string.edit_contact_activity_name);
+    }
+
+    public void onSuccessUpdatingContact() {
+        Contact contact = extractContact(null);
+        contact.setId(contactId);
+        notification(true, "Contact updated with ID = " + contact.getId());
+        ContactsSectionFragment.setContact(contactPos, contact);
+        dirty = false;
+        setMenuItemsVisibleForEditing(true);
+        setTitle(R.string.edit_contact_activity_name);
     }
 
     private boolean onExitAttempt() {
@@ -630,10 +712,29 @@ public class ContactActivity extends Activity {
         toast.setView(view);
         toast.show();
     }
+
+    public String getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(String contactId) {
+        this.contactId = contactId;
+    }
+
+    public void onSuccessGettingContact(Contact contact) {
+        mContact = contact;
+        fillForm(contact);
+    }
+
     public void editAccessRights(View view) {
         AttributesHelper attrHelp = new AttributesHelper();
         List<String> upFields = attrHelp.getUserProfileFields();
         final CharSequence[] items = upFields.toArray(new CharSequence[upFields.size()]);
+        CharSequence[] itemsHuman = new CharSequence[items.length];
+        for (int i = 0; i < items.length; i++) {
+            int itemStringId = getResources().getIdentifier("attr_up_" + items[i], "string", getPackageName());
+            itemsHuman[i] = getResources().getText(itemStringId);
+        }
 //        boolean[] checkedItems = new boolean[upFields.size()];
         final boolean[] itemsChecked = new boolean[items.length];
 
@@ -642,7 +743,8 @@ public class ContactActivity extends Activity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         final AlertDialog alertDialog = builder
-                .setMultiChoiceItems(items, itemsChecked, new DialogInterface.OnMultiChoiceClickListener() {
+                .setTitle(R.string.up_edit_access_rights_dialog_title)
+                .setMultiChoiceItems(itemsHuman, itemsChecked, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                         itemsChecked[which] = isChecked;

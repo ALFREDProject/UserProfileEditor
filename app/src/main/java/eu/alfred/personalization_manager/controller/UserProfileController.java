@@ -5,12 +5,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import java.util.ArrayList;
-
-import eu.alfred.personalization_manager.db_administrator.api.VolleyWebServiceClient;
-import eu.alfred.personalization_manager.db_administrator.model.Contact;
+import eu.alfred.personalization_manager.db_administrator.api.volley.VolleyWebServiceClient;
 import eu.alfred.personalization_manager.db_administrator.model.UserProfile;
 import eu.alfred.personalization_manager.gui.UserProfileActivity;
+import eu.alfred.personalization_manager.gui.tabs.ContactsSectionFragment;
 import eu.alfred.userprofile.R;
 
 /**
@@ -23,12 +21,14 @@ public class UserProfileController {
     final private VolleyWebServiceClient client;
     private String upId;
     private final SharedPreferences shPref;
-    private ArrayList<Contact> mContacts;
+    private ContactsController mContactsController;
 
     public UserProfileController(UserProfileActivity context) {
         mActivity = context;
         this.client = new VolleyWebServiceClient(this);
         shPref = mActivity.getSharedPreferences(mActivity.getString(R.string.up_current_id), Context.MODE_PRIVATE);
+        mContactsController = new ContactsController(context.getApplicationContext());
+        mContactsController.setContext(mActivity.getApplicationContext());
     }
 
     public String getStoredUserProfileId() {
@@ -42,7 +42,7 @@ public class UserProfileController {
         SharedPreferences.Editor editor = shPref.edit();
         editor.putString(mActivity.getString(R.string.up_current_id), upId);
         boolean commitResult = editor.commit();
-        Log.d(TAG, String.format("Success storing upId: %b", commitResult));
+        Log.d(TAG, (commitResult?"Success":"Fail" ) + " storing upId.");
 
     }
 
@@ -74,12 +74,15 @@ public class UserProfileController {
     public void onSuccessRetrievingUser(UserProfile up) {
         mActivity.fillForm(up);
         mActivity.setMenuItemsVisibleForEditing(true);
+
     }
 
     public void init() {
         upId = getStoredUserProfileId();
         if (upId != null) {
+            mContactsController.setUserId(upId);
             client.doGetRequest(upId);
+            mContactsController.getAllContacts();
         }
     }
 
@@ -101,10 +104,7 @@ public class UserProfileController {
         return mActivity.getApplicationContext();
     }
 
-    public void onSuccessGetAllContacts(ArrayList<Contact> contacts) {
-        mContacts = contacts;
-        mActivity.setContacts(mContacts);
-    }
+
 
     public void onErrorRetrievingUser(Exception ex) {
         String msg = ex.getMessage();
@@ -124,5 +124,9 @@ public class UserProfileController {
     public void onErrorUpdatingUserProfile(Exception ex) {
         String msg = ex.getMessage();
         mActivity.notification(false, msg);
+    }
+
+    public void setContactsFragment(ContactsSectionFragment sfContacts) {
+        mContactsController.setFragment(sfContacts);
     }
 }

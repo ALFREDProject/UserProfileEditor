@@ -1,17 +1,12 @@
-package eu.alfred.personalization_manager.db_administrator.api;
+package eu.alfred.personalization_manager.db_administrator.api.volley;
 
 import android.util.Log;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
@@ -24,22 +19,15 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.type.TypeFactory;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 
 import eu.alfred.personalization_manager.controller.UserProfileController;
-import eu.alfred.personalization_manager.db_administrator.model.Contact;
 import eu.alfred.personalization_manager.db_administrator.model.UserProfile;
 
 /**
@@ -50,7 +38,6 @@ public class VolleyWebServiceClient {
     private static VolleyWebServiceClient mInstance;
     private final UserProfileController mUpController;
     private final Gson mGson;
-    private final String REQUEST_TYPE_APP_JSON = "application/json; charset=utf-8";
     private RequestQueue mRequestQueue;
     final static public String TAG = "Volley";
     private final String URL = "http://80.86.83.34:8080/personalization-manager/services/databaseServices/users/";
@@ -72,7 +59,13 @@ public class VolleyWebServiceClient {
 
                     @Override
                     public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                        return new Date(json.getAsJsonPrimitive().getAsLong());
+                        Date date = null;
+                        try {
+                            date = new Date(json.getAsJsonPrimitive().getAsLong());
+                        } catch (Exception e) {
+                            date = new Date();
+                        }
+                        return date;
                     }
                 })
                 .registerTypeAdapter(Date.class, new JsonSerializer<Date>() {
@@ -95,67 +88,10 @@ public class VolleyWebServiceClient {
         return mRequestQueue;
     }
 
-    public <T> void addToRequestQueue(Request<T> req) {
-        getRequestQueue().add(req);
-    }
-
-    public void doGetRequest(String urlToCall, final Class entityClass) {
-        StringRequest getRequest = new StringRequest(Request.Method.GET, urlToCall,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String resultOfRequest) {
-                        try {
-                            List<Object> resultList = null;
-                            ObjectMapper mapper = new ObjectMapper();
-                            resultList = mapper.readValue(resultOfRequest,
-                                    TypeFactory.defaultInstance().constructCollectionType(List.class, entityClass));
-
-                        } catch (IOException e) {
-
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Handle error
-                    }
-                });
-        addToRequestQueue(getRequest);
-    }
-
-    public String doPostRequestToCreate(String urlToPost, String jsonToPost) {
-        return null;
-    }
-
-    public List<Object> doPostRequestToRetrieve(String urlToPost, String jsonToPost, Class entityClass) {
-        return null;
-    }
-
-    public void doPutRequest(String urlToPut, String jsonToPut) {
-        try {
-            JSONObject jsonObject = new JSONObject(jsonToPut);
-            JsonObjectRequest putRequest = new JsonObjectRequest(
-                    Request.Method.PUT,
-                    urlToPut,
-                    jsonObject,
-                    new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject jsonObject) {
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-
-                }
-            });
-            addToRequestQueue(putRequest);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * GET User Profile. Fetches user from server.
+     * @param upId ID of the User Profile
+     */
     public void doGetRequest(final String upId) {
         JsonArrayRequest request = new JsonArrayRequest(URL + upId, new Response.Listener<JSONArray>() {
             @Override
@@ -191,6 +127,10 @@ public class VolleyWebServiceClient {
         mRequestQueue.add(request);
     }
 
+    /**
+     * DELETE User Profile. Deletes user in server.
+     * @param upId ID of the User Profile
+     */
     public void doDeleteRequest(final String upId) {
         Log.d(TAG, "Deleting User Profile: " + upId);
         StringRequest deleteRequest = new StringRequest(
@@ -213,15 +153,18 @@ public class VolleyWebServiceClient {
         mRequestQueue.add(deleteRequest);
     }
 
+    /**
+     * POST User Profile. Creates a user on server.
+     * @param up Content of the User Profile.
+     */
     public void doPostRequestToCreate(UserProfile up) {
         String jsUpStr = mGson.toJson(up);
         try {
             final JSONObject jsUp = new JSONObject(jsUpStr);
             jsUp.remove("id");
             jsUp.remove("_class");
-//            jsUp.remove("dateOfBirth");
-//            _tempDate = up.getDateOfBirth();
-//            jsUp.remove("livingSituation");
+            // Until Anniversary Date is fixed on server
+            jsUp.remove("anniversaryDate");
             Log.d(TAG, "Save User Profile: " + jsUp);
 
             UPRequest request = new UPRequest(
@@ -250,6 +193,10 @@ public class VolleyWebServiceClient {
         }
     }
 
+    /**
+     * PUT User Profile. Updates a user.
+     * @param up Content of the User Profile.
+     */
     public void doPutRequest(UserProfile up) {
         String jsUpStr = mGson.toJson(up);
         try {
@@ -259,6 +206,7 @@ public class VolleyWebServiceClient {
 //            jsUp.remove("dateOfBirth");
 //            jsUp.put("dateOfBirth", up.getDateOfBirth().getTime());
 //            _tempDate = up.getDateOfBirth();
+            jsUp.remove("anniversaryDate");
             fixAddress(jsUp);
 
             Log.d(TAG, "Update User Profile: " + jsUp);
@@ -291,17 +239,17 @@ public class VolleyWebServiceClient {
 
     /**
      * Inline addresses fix when updating a User Profile.
-     * From: { "residentialAddress" :
+     * From: {  "residentialAddress" :
      *              {"street" : "A", "number":"B"},
-     *         "postalAddress":
+     *          "postalAddress":
      *              {"street" : "C", "number":"D"}
-     *         }
-     * To: {
-     *     "residentialAddress.street" : "A",
-     *     "residentialAddress.number" : "B",
-     *     "postalAddress.street" : "C",
-     *     "postalAddress.number" : "D"
-     * }
+     *       }
+     * To:  {
+     *          "residentialAddress.street" : "A",
+     *          "residentialAddress.number" : "B",
+     *          "postalAddress.street" : "C",
+     *          "postalAddress.number" : "D"
+     *      }
      * @param jsonUserProfile JSON User Profile to inline addresses.
      * @throws JSONException
      */
@@ -321,90 +269,5 @@ public class VolleyWebServiceClient {
 
     }
 
-    public void doGetAllContacts(String upId) {
-        JsonArrayRequest request = new JsonArrayRequest(
-                URL + upId + "/contacts/all",
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray jsonArray) {
-                        ArrayList<Contact> contacts = new ArrayList<Contact>();
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            try {
-                                JSONObject jsonObj = jsonArray.getJSONObject(i);
-                                Contact contact = mGson.fromJson(jsonObj.toString(), Contact.class);
-                                contacts.add(contact);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        mUpController.onSuccessGetAllContacts(contacts);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
 
-                    }
-                });
-        mRequestQueue.add(request);
-    }
-
-    /**
-     * Custom Request for Volley API, as StringRequest acts as if it was function
-     * String function(String param)
-     * and JSONRequest acts like
-     * JSON function(JSON param)
-     * and what we need is a mixture of both
-     * String function(JSON param)
-     */
-    private class UPRequest extends Request<String> {
-
-        private JSONObject mBody;
-        private final Response.Listener<String> mListener;
-
-        /**
-         *
-         * @param method Usually Request.Method.POST or Request.Method.PUT
-         * @param url complete URL (String) like "new" or "54e5cd60..."
-         * @param body JSON Object we want to persist.
-         * @param listener If success, what we do after the call.
-         * @param errorListener If error, what we do after the call.
-         */
-        private UPRequest(int method, String url, JSONObject body, Response.Listener<String> listener, Response.ErrorListener errorListener) {
-            super(method, url, errorListener);
-            mBody = body;
-            mListener = listener;
-        }
-
-        @Override
-        public byte[] getBody() throws AuthFailureError {
-            return mBody.toString().getBytes();
-
-        }
-
-        @Override
-        public String getBodyContentType() {
-            return REQUEST_TYPE_APP_JSON;
-        }
-
-        /**
-         * This is where we parse the response, in our case a simple String with an ID
-         * @param response ID of the object we have persisted.
-         * @return parsed response.
-         */
-        @Override
-        protected Response<String> parseNetworkResponse(NetworkResponse response) {
-            try {
-                String id = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-                return Response.success(id, HttpHeaderParser.parseCacheHeaders(response));
-            } catch (UnsupportedEncodingException e) {
-                return Response.error(new ParseError(e));
-            }
-        }
-
-        @Override
-        protected void deliverResponse(String response) {
-            mListener.onResponse(response);
-        }
-    }
 }

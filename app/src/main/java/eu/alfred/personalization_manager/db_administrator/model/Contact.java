@@ -2,7 +2,6 @@ package eu.alfred.personalization_manager.db_administrator.model;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.UUID;
 
 public class Contact {
 
@@ -23,25 +22,13 @@ public class Contact {
 	private AccessLevels accessLevels;
 	private String[] socialMediaProfiles;
     private HashMap<String,Boolean> accessRightsToAttributes;
-	
-	public Contact() {
-		setId(); 
-	}
 			
 	public String getId() {
 		return id;
 	}
-	// For cases we create id for the contact
-	public String setId() {
-		this.id =  "alfred-user-contact-"+UUID.randomUUID().toString(); 
-		
-		return this.id; // When creating a new contact we provide the id back so they assign them to the users
-	}
-
     public void setId(String id) {
         this.id = id;
     }
-
     public String getUserID() {
 		return userID;
 	}

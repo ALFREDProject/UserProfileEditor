@@ -19,10 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import eu.alfred.personalization_manager.controller.UserProfileController;
-import eu.alfred.personalization_manager.db_administrator.model.Contact;
 import eu.alfred.personalization_manager.db_administrator.model.UserProfile;
 import eu.alfred.personalization_manager.gui.pref.SettingsActivity;
 import eu.alfred.personalization_manager.gui.tabs.AppSectionsPagerAdapter;
@@ -109,8 +106,8 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
 
 //        upController = UserControllerFactory.create(this);
 
+        upController.setContactsFragment(mSections.getSfContacts());
         upController.init();
-
     }
 
 
@@ -284,16 +281,15 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
 
     }
 
-    public void setContacts(ArrayList<Contact> contacts) {
-
-    }
 
 
     public void addContact(View view) {
         Log.d(TAG, "New contact");
         Intent intent = new Intent(this, ContactActivity.class);
+        String userId = upController.getStoredUserProfileId();
         intent.putExtra("contact-id", "new");
         intent.putExtra("contact-pos", -1);
+        intent.putExtra("user-id", userId);
         startActivity(intent);
     }
 
@@ -322,5 +318,9 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
         toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(view);
         toast.show();
+    }
+
+    public UserProfileController getUserProfileController() {
+        return upController;
     }
 }
