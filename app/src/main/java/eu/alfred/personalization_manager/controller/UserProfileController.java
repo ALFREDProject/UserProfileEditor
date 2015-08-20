@@ -117,8 +117,8 @@ public class UserProfileController {
             mContactsController.setUserId(upId);
             client.doGetRequest(upId);
         } else {
-            Log.d(TAG, "doGetRequestByEmail attempt #" + emailAttempts);
-            client.doGetRequestByEmail(this.user.getEmail());
+            Log.d(TAG, "doGetRequestByUsername attempt #" + emailAttempts);
+            client.doGetRequestByUsername(user.getEmail());
         }
     }
 
@@ -126,6 +126,7 @@ public class UserProfileController {
     public void initCreating(User user) {
         this.user = user;
         UserProfile up = new UserProfile();
+        up.setAlfredUserName(user.getEmail());
         up.setEmail(user.getEmail());
         up.setFirstName(user.getFirstName());
         up.setMiddleName(user.getMiddleName());
@@ -174,8 +175,8 @@ public class UserProfileController {
 
     public void onErrorRetrievingUserByEmail(Exception ex) {
         emailAttempts++;
-        Log.w(TAG, "doGetRequestByEmail attempt #" + emailAttempts);
-        client.doGetRequestByEmail(this.user.getEmail());
+        Log.w(TAG, "doGetRequestByUsername attempt #" + emailAttempts);
+        client.doGetRequestByUsername(user.getEmail());
     }
 
 

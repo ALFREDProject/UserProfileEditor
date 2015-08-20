@@ -9,6 +9,7 @@ public class UserProfile {
 	private String firstName;
 	private String middleName;
 	private String lastName;
+	private String alfredUserName;
 	private String prefferedName;
 	private Gender gender;
 	private Date dateOfBirth;
@@ -221,6 +222,12 @@ public class UserProfile {
 	@Override
 	public String toString() {
         return "id: " + getId() + ", first-name: " + getFirstName() + ", last-name: " + getLastName() + ", date of birth: " + getDateOfBirth() + "...";
+	}
+	public String getAlfredUserName() {
+		return alfredUserName;
+	}
+	public void setAlfredUserName(String alfredUserName) {
+		this.alfredUserName = alfredUserName;
 	}
 
 }

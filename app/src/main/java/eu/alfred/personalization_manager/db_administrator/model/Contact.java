@@ -6,6 +6,7 @@ import java.util.HashMap;
 public class Contact {
 
 	private String id;
+	private String alfredUserName; // contacts can be alfred users, we point to this user 
 	private String userID;
 	private String firstName;
 	private String middleName;
@@ -126,7 +127,8 @@ public class Contact {
         return accessRightsToAttributes;
     }
 
-    public void setAccessRightsToAttributes(HashMap<String, Boolean> accessRightsToAttributes) {
+    public void setAccessRightsToAttributes(
+			HashMap<String, Boolean> accessRightsToAttributes) {
         this.accessRightsToAttributes = accessRightsToAttributes;
     }
 
@@ -135,6 +137,13 @@ public class Contact {
 		return "id: " + this.getId() + ", first-name: " + this.getFirstName() + "...";
 	}
 
+	public String getAlfredUserName() {
+		return alfredUserName;
+	}
+
+	public void setAlfredUserName(String alfredUserName) {
+		this.alfredUserName = alfredUserName;
+	}
 	
 
 }
