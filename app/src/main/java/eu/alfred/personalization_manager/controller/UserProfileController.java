@@ -122,14 +122,6 @@ public class UserProfileController {
         }
     }
 
-    public void init(User user) {
-        UserProfile up = new UserProfile();
-        up.setEmail(user.getEmail());
-        up.setFirstName(user.getFirstName());
-        up.setMiddleName(user.getMiddleName());
-        up.setLastName(user.getLastName());
-        newProfile(up);
-    }
 
     public void initCreating(User user) {
         this.user = user;
