@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -65,8 +66,7 @@ public class PersonalSectionFragment extends SectionFragment {
     private EditText etHealthInsurance;
 
     private DatePicker dpAnniversaryDate;
-
-
+    private String upId;
 
 
     @Override
@@ -90,6 +90,14 @@ public class PersonalSectionFragment extends SectionFragment {
         etPhone = (EditText) view.findViewById(R.id.txtPhone);
         etMobilePhone = (EditText) view.findViewById(R.id.txtMobilePhone);
         etEmail = (EditText) view.findViewById(R.id.txtEmail);
+//        etEmail.setEnabled(false);
+        etEmail.setKeyListener(null);
+        etEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showEmailInfo();
+            }
+        });
         /***/
         etContactStreet = (EditText) view.findViewById(R.id.txtContactStreet);
         etContactNumber = (EditText) view.findViewById(R.id.txtContactNumber);
@@ -150,6 +158,7 @@ public class PersonalSectionFragment extends SectionFragment {
     public void fillForm(UserProfile up) {
         //        up = upController.load(userId);
         if (up != null) {
+            upId = up.getId();
             if(etFirstName!=null) {
                 etFirstName.setText(up.getFirstName());
             }
@@ -289,6 +298,9 @@ public class PersonalSectionFragment extends SectionFragment {
     public UserProfile extractProfile(UserProfile up) {
         if (up == null) {
             up = new UserProfile();
+        }
+        if (upId != null && up.getId() == null) {
+            up.setId(upId);
         }
         if (etFirstName != null) {
             String str = etFirstName.getText().toString();
@@ -605,5 +617,11 @@ public class PersonalSectionFragment extends SectionFragment {
         if (etHealthInsurance != null) {
             etHealthInsurance.setText("");
         }
+    }
+
+    private void showEmailInfo() {
+        Toast.makeText(getActivity(),
+                getResources().getString(R.string.up_email_info),
+                Toast.LENGTH_SHORT).show();
     }
 }

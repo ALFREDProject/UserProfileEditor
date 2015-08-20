@@ -157,7 +157,7 @@ public class VolleyWebServiceClient {
      * POST User Profile. Creates a user on server.
      * @param up Content of the User Profile.
      */
-    public void doPostRequestToCreate(UserProfile up) {
+    public void doPostRequestToCreate(final UserProfile up) {
         String jsUpStr = mGson.toJson(up);
         try {
             final JSONObject jsUp = new JSONObject(jsUpStr);
@@ -175,7 +175,8 @@ public class VolleyWebServiceClient {
                         @Override
                         public void onResponse(String response) {
                             Log.d(TAG, "doPostRequestToCreate() -> onResponse<String>() " + response);
-                            mUpController.onSuccessCreatingNewUserProfile(response);
+                            up.setId(response);
+                            mUpController.onSuccessCreatingNewUserProfile(up);
                         }
                     },
                     new Response.ErrorListener() {
@@ -270,4 +271,55 @@ public class VolleyWebServiceClient {
     }
 
 
+    public void doGetRequestByEmail(final String email) {
+        try {
+            final JSONObject jsCriteria = new JSONObject();
+            jsCriteria.put("email", email);
+            UPRequest rq = new UPRequest(
+                    Request.Method.POST,
+                    URL + "retrieve",
+                    jsCriteria,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String jsonArrStr) {
+                            Log.d(TAG, "doGetRequestByEmail() -> onResponse<JSONObject>() " + jsonArrStr);
+                            UserProfile up = null;
+                            try {
+                                JSONArray jsonArray = new JSONArray(jsonArrStr);
+                                if (jsonArray.length()>0) {
+
+                                    JSONObject obj = jsonArray.getJSONObject(0);
+                                    if (obj != null) {
+                                        Log.d(TAG, "Retrieved user from email (" + email + "): " + obj.toString());
+                                        Object aClass = obj.remove("_class");
+                                        Log.d(TAG, "\"_class\" was " + aClass);
+//                        Object dateOfBirth = obj.remove("dateOfBirth");
+//                        Log.d(TAG, "\"dateOfBirth\" was " + dateOfBirth);
+                                        String jsUpStr = obj.toString();
+                                        up = mGson.fromJson(jsUpStr, UserProfile.class);
+                                    } else {
+                                        Log.e(TAG, "In doGetRequestByEmail() JSON obj was null");
+                                    }
+                                }
+                                mUpController.onSuccessRetrievingUser(up);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            Log.w(TAG, "doGetRequestByEmail() -> onError<String>() " + volleyError.getMessage());
+                            mUpController.onErrorRetrievingUserByEmail(volleyError);
+                        }
+                    });
+
+
+            mRequestQueue.add(rq);
+        } catch (JSONException e) {
+            Log.d(TAG, String.format("doGetRequestByEmail(%s) -> %s", email, e.getMessage()));
+            e.printStackTrace();
+        }
+    }
 }

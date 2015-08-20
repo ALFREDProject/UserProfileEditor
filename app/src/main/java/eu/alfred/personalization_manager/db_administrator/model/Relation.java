@@ -3,7 +3,7 @@ package eu.alfred.personalization_manager.db_administrator.model;
 public enum Relation {
 
     WIFE("Wife"),
-    HUSBAND("Husband"),
+    HUSBANT("Husband"),
     DOCTOR("Doctor"),
     CARER("Carer"),
     NURSE("Nurse"),

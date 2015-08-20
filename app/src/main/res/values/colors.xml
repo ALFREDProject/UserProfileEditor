@@ -4,4 +4,9 @@
     <color name="bluelight">#2296cc</color>
     <color name="black">#000</color>
     <color name="darkgray">#888888</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="darkblue">#FF017BE3</color>
+    <color name="incorrect_form_field_bg">#C0FF0000</color>
+    <color name="incorrect_form_field_hint">#FFFFFFFF</color>
+    <color name="white">#FFFFFFFF</color>
 </resources>

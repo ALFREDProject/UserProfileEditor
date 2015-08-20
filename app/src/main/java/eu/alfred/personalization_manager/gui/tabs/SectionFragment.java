@@ -1,7 +1,9 @@
 package eu.alfred.personalization_manager.gui.tabs;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +13,10 @@ import android.view.ViewGroup;
  */
 public class SectionFragment extends Fragment {
 
-    private String title;
+    private static final String TAG = "Fragment";
+    private String title = "";
     private int layout;
+    private Context context;
 
     public void setTitle(String title) {
         this.title = title;
@@ -26,10 +30,24 @@ public class SectionFragment extends Fragment {
         return title;
     }
 
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView " + getTitle());
         return inflater.inflate(layout, container, false);
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.d(TAG, "onDestroyView " + getTitle());
+        super.onDestroyView();
     }
 }

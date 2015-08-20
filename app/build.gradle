@@ -17,15 +17,23 @@ repositories {
 //        url "https://raw.githubusercontent.com/avianey/android-jersey-client/mvn-repo/"
     }
 }
+configurations {
+    all*.exclude group: 'com.google.code.gson'
+//    all*.exclude module: 'support-v4'
+}
 
 dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.google.android:support-v4:r7'
+    compile 'com.mcxiaoke.volley:library-aar:1.0.0'
+    //    compile files('libs/authenticationServerWrapper-1.0-shaded.jar')
+    //    compile files('libs/healthMonitorServerWrapper-1.0-shaded.jar')
 }
 
 android {
 
     compileSdkVersion 21
-    buildToolsVersion "20.0.0"
+    buildToolsVersion '20.0.0'
 
     defaultConfig {
         applicationId "eu.alfred.userprofile"
@@ -54,38 +62,38 @@ android {
     }
 }
 
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.mcxiaoke.volley:library-aar:1.0.0'
-    compile 'com.google.code.gson:gson:2.3.1'
-    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
-    compile 'com.sun.jersey:jersey-client:1.18.3'
-
-    /*		<groupId>com.sun.jersey</groupId>
-		<artifactId>jersey-client</artifactId>
-		<version>1.18.3</version>*/
-
-    /*        <groupId>org.codehaus.jackson</groupId>
-        <artifactId>jackson-mapper-asl</artifactId>
-        <version>1.9.13</version>*/
-
-//////    apk files('libs/jsr173_api-1.0.jar')
-//////    compile files('libs/jersey-bundle-1.18.3.jar')
-////        compile files('libs/jersey-client-1.18.3.jar')
-//////        compile files('libs/jersey-core-1.18.3.jar')
-////    compile files('libs/camel-jackson-2.14.1.jar')
-////    compile files('libs/jackson-jaxrs-1.9.13.jar')
-////    compile files('libs/jackson-mapper-asl-1.9.13.jar')
-////    compile files('libs/jackson-core-asl-1.9.7.jar')
-//    compile 'com.sun.jersey:jersey-bundle:1.18.3'
-//    /*    <groupId>fr.avianey.android-jersey-client</groupId>
-//    <artifactId>jersey-client</artifactId>
-//    <version>1.17.1</version>*/
-////    compile 'fr.avianey.android-jersey-client:jersey-client:1.17.1'
+//dependencies {
+//    compile fileTree(dir: 'libs', include: ['*.jar'])
+//    compile 'com.mcxiaoke.volley:library-aar:1.0.0'
+////    compile 'com.google.code.gson:gson:2.3.1'
+//    //compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
+//    //compile 'com.sun.jersey:jersey-client:1.18.3'
 //
-//    compile 'org.codehaus.jackson:jackson-jaxrs:1.9.13'
-//    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
-//    compile 'org.apache.camel:camel-jackson:2.14.1'
+//    /*		<groupId>com.sun.jersey</groupId>
+//		<artifactId>jersey-client</artifactId>
+//		<version>1.18.3</version>*/
 //
-//    compile files('libs/personalization-manager-client-0.1.jar')
-}
+//    /*        <groupId>org.codehaus.jackson</groupId>
+//        <artifactId>jackson-mapper-asl</artifactId>
+//        <version>1.9.13</version>*/
+//
+////////    apk files('libs/jsr173_api-1.0.jar')
+////////    compile files('libs/jersey-bundle-1.18.3.jar')
+//////        compile files('libs/jersey-client-1.18.3.jar')
+////////        compile files('libs/jersey-core-1.18.3.jar')
+//////    compile files('libs/camel-jackson-2.14.1.jar')
+//////    compile files('libs/jackson-jaxrs-1.9.13.jar')
+//////    compile files('libs/jackson-mapper-asl-1.9.13.jar')
+//////    compile files('libs/jackson-core-asl-1.9.7.jar')
+////    compile 'com.sun.jersey:jersey-bundle:1.18.3'
+////    /*    <groupId>fr.avianey.android-jersey-client</groupId>
+////    <artifactId>jersey-client</artifactId>
+////    <version>1.17.1</version>*/
+//////    compile 'fr.avianey.android-jersey-client:jersey-client:1.17.1'
+////
+////    compile 'org.codehaus.jackson:jackson-jaxrs:1.9.13'
+////    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
+////    compile 'org.apache.camel:camel-jackson:2.14.1'
+////
+////    compile files('libs/personalization-manager-client-0.1.jar')
+//}

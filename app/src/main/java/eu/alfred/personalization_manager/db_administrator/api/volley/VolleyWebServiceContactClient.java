@@ -81,8 +81,11 @@ public class VolleyWebServiceContactClient {
     }
 
     public void doGetAllContacts(String upId) {
+        Log.d(TAG, "");
+        String url = URL + "users/" + upId + "/contacts/all";
+        Log.d(TAG, "doGetAllContacts " + url);
         JsonArrayRequest request = new JsonArrayRequest(
-                URL + "users/" + upId + "/contacts/all",
+                url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray jsonArray) {
@@ -102,13 +105,13 @@ public class VolleyWebServiceContactClient {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-
+                        controller.onErrorGetAllContacts(volleyError);
                     }
                 });
         mRequestQueue.add(request);
     }
 
-    public void doPostNewContact(Contact contact) {
+    public void doPostNewContact(final Contact contact) {
         String jsContactStr = mGson.toJson(contact);
         try {
             final JSONObject jsContact = new JSONObject(jsContactStr);
@@ -124,8 +127,8 @@ public class VolleyWebServiceContactClient {
                         @Override
                         public void onResponse(String response) {
                             Log.d(TAG, "doPostNewContact() -> onResponse<String>() " + response);
-
-                            controller.onSuccessCreatingNewContact(response);
+                            contact.setId(response);
+                            controller.onSuccessCreatingNewContact(contact);
                         }
                     },
                     new Response.ErrorListener() {
@@ -179,6 +182,8 @@ public class VolleyWebServiceContactClient {
      * @param upc Content of the User Profile.
      */
     public void doPutRequest(final Contact upc) {
+        String url = URL + "users/contacts/" + upc.getId();
+        Log.d(TAG, "doPutRequest " + url);
         String jsUpStr = mGson.toJson(upc);
         try {
             final JSONObject jsUp = new JSONObject(jsUpStr);
@@ -200,7 +205,7 @@ public class VolleyWebServiceContactClient {
 
             UPRequest request = new UPRequest(
                     Request.Method.PUT,
-                    URL + "users/contacts/" + upc.getId(),
+                    url,
                     jsUp,
                     new Response.Listener<String>() {
                         @Override
@@ -226,18 +231,18 @@ public class VolleyWebServiceContactClient {
 
     /**
      * DELETE User Profile. Deletes user in server.
-     * @param upId ID of the User Profile
+     * @param contact ID of the User Profile
      */
-    public void doDeleteRequest(final String upId) {
-        Log.d(TAG, "Deleting User Profile: " + upId);
+    public void doDeleteRequest(final Contact contact) {
+        Log.d(TAG, "Deleting User Profile: " + contact.getId());
         StringRequest deleteRequest = new StringRequest(
                 Request.Method.DELETE,
-                URL + "users/" + "contacts/" + upId,
+                URL + "users/" + "contacts/" + contact.getId(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String res) {
-                        Log.d(TAG, String.format("doDeleteRequest(%s) -> onResponse<String>(%s) ", upId, res));
-                        controller.onSuccessDeletingContact(res);
+                        Log.d(TAG, String.format("doDeleteRequest(%s) -> onResponse<String>(%s) ", contact.getId(), res));
+                        controller.onSuccessDeletingContact(contact);
                     }
                 },
                 new Response.ErrorListener() {

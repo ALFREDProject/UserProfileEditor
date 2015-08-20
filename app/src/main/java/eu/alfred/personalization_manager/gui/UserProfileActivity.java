@@ -19,7 +19,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import eu.alfred.internal.wrapper.authentication.AuthenticatedUser;
+import eu.alfred.internal.wrapper.authentication.AuthenticationException;
+import eu.alfred.internal.wrapper.authentication.AuthenticationServerWrapper;
+import eu.alfred.internal.wrapper.authentication.login.LoginData;
+import eu.alfred.internal.wrapper.authentication.login.LoginDataException;
+import eu.alfred.internal.wrapper.healthmonitor.DataType;
+import eu.alfred.internal.wrapper.healthmonitor.HealthMonitorServerException;
+import eu.alfred.internal.wrapper.healthmonitor.HealthMonitorServerWrapper;
+import eu.alfred.internal.wrapper.healthmonitor.resource.Resource;
+import eu.alfred.internal.wrapper.healthmonitor.resource.Value;
 import eu.alfred.personalization_manager.controller.UserProfileController;
+import eu.alfred.personalization_manager.controller.auth.User;
 import eu.alfred.personalization_manager.db_administrator.model.UserProfile;
 import eu.alfred.personalization_manager.gui.pref.SettingsActivity;
 import eu.alfred.personalization_manager.gui.tabs.AppSectionsPagerAdapter;
@@ -41,6 +55,7 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
     private MenuItem miSave;
     private MenuItem miDelete;
     private MenuItem miSettings;
+    private MenuItem miLogout;
     private AppSectionsPagerAdapter mSections;
     ViewPager mViewPager;
 
@@ -53,6 +68,44 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate()");
+        /*intent.putExtra("userId", user.getUserId());
+        intent.putExtra("accessToken", user.getAccessToken());
+        intent.putExtra("existingUser", existingUser);
+        if (!existingUser) {
+            intent.putExtra("firstName", user.getFirstName());
+            intent.putExtra("middleName", user.getMiddleName());
+            intent.putExtra("lastName", user.getLastName());
+        }
+        intent.putExtra("email", user.getEmail());*/
+        String userId, accessToken,
+                email = null,
+                firstName = null,
+                middleName = null,
+                lastName = null;
+        User user = new User();
+        userId = getIntent().getExtras().getString("userId");
+        user.setUserId(userId);
+
+        accessToken = getIntent().getExtras().getString("accessToken");
+        user.setAccessToken(accessToken);
+
+        boolean existingUser = getIntent().getExtras().getBoolean("existingUser");
+        email = getIntent().getExtras().getString("email");
+        user.setEmail(email);
+
+        if (!existingUser) {
+            firstName = getIntent().getExtras().getString("firstName");
+            user.setFirstName(firstName);
+
+            middleName = getIntent().getExtras().getString("middleName");
+            user.setMiddleName(middleName);
+
+            lastName = getIntent().getExtras().getString("lastName");
+            user.setLastName(lastName);
+        }
+
+        Log.d(TAG, "Put extra user was: " + user.toString());
+
         setContentView(R.layout.activity_main);
         setTitle(R.string.activity_name);
 
@@ -107,7 +160,12 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
 //        upController = UserControllerFactory.create(this);
 
         upController.setContactsFragment(mSections.getSfContacts());
-        upController.init();
+        upController.setHealthFragment(mSections.getSfHealth());
+        if (existingUser) {
+            upController.initRetrieving(user);
+        } else {
+            upController.initCreating(user);
+        }
     }
 
 
@@ -155,6 +213,7 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
         miSave = menu.findItem(R.id.action_save_profile);
         miDelete = menu.findItem(R.id.action_delete_profile);
         miSettings = menu.findItem(R.id.action_settings);
+        miLogout = menu.findItem(R.id.action_logout);
         setMenuItemsVisibleForEditing(false);
         return true;
     }
@@ -166,6 +225,7 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
         miSave = menu.findItem(R.id.action_save_profile);
         miDelete = menu.findItem(R.id.action_delete_profile);
         miSettings = menu.findItem(R.id.action_settings);
+        miLogout = menu.findItem(R.id.action_logout);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -176,9 +236,9 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
      */
     public void setMenuItemsVisibleForEditing(boolean editMode) {
         Log.d(TAG, String.format("setMenuItemsVisibleForEditing(%b)", editMode));
-        if (miNew != null) miNew.setVisible(!editMode);
+//        if (miNew != null) miNew.setVisible(!editMode);
         if (miSave != null) miSave.setVisible(editMode);
-        if (miDelete != null) miDelete.setVisible(editMode);
+//        if (miDelete != null) miDelete.setVisible(editMode);
     }
 
     @Override
@@ -200,6 +260,9 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
                 return true;
             case R.id.action_settings:
                 openSettings();
+                return true;
+            case R.id.action_logout:
+                onAttemptLoggingOut();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -229,6 +292,28 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
                         deleteProfile();
                     }})
                 .setNegativeButton(android.R.string.no, null).show();
+    }
+
+    private void onAttemptLoggingOut() {
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.logout_attempt_title))
+                .setMessage(getString(R.string.logout_attempt_message))
+                .setIcon(R.drawable.ic_action_warning)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        logout();
+                    }})
+                .setNegativeButton(android.R.string.no, null).show();
+    }
+
+    private void logout() {
+        Log.d(TAG, "logout()");
+        upController.logout();
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("result","logout");
+        setResult(RESULT_OK,returnIntent);
+        finish();
     }
 
     private void deleteProfile() {
@@ -293,6 +378,67 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
         startActivity(intent);
     }
 
+    public void tryMe(View view) {
+        Runnable runnable = new Runnable() {
+            public void run() {
+                Log.d(TAG, "start: ");
+                AuthenticationServerWrapper authWrapper = new AuthenticationServerWrapper();
+                List<String> roles = new ArrayList<String>();
+                try {
+                    LoginData data = new LoginData
+                            .Builder()
+                            .setEmail("artur.brotons@gmail.com")
+                            .setPassword("abcartagena2password")
+                            .create();
+                    Log.d(TAG, "Authenticating...");
+                    AuthenticatedUser authedUser = authWrapper.login(data);
+                    Log.d(TAG, "Authed: " + authedUser.getUserId());
+                    Log.d(TAG, "Authed: " + authedUser.getAccessToken());
+
+                    Log.d(TAG, "Health Wrapper creating");
+                    HealthMonitorServerWrapper healthWrapper = new HealthMonitorServerWrapper(authedUser.getUserId(), authedUser.getAccessToken());
+//                    HealthMonitorServerWrapper healthWrapper = new HealthMonitorServerWrapper("55a79aaaa65be2261b375d72", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NWE3OWFhYWE2NWJlMjI2MWIzNzVkNzIiLCJpYXQiOjE0MzcxMzEyMDc1ODgsImV4cCI6MTQzNzE0OTIwNzU4OH0.BRPmQFEmx605LMrcDvu2o42sHeCI5RXpub-SLR1-IaY");
+                    Log.d(TAG, "Health Wrapper created");
+                    Log.d(TAG, "Health Wrapper getting resource list");
+                    List<String> resourceList = healthWrapper.getResourceList(DataType.STATIC);
+                    Log.d(TAG, "Health Wrapper acquired resource list");
+                    for (String s : resourceList) {
+                        Log.d(TAG, s + " (Health Wrapper before)");
+                    }
+//                    Resource ccRes = healthWrapper.createHealthMonitorServerResource("fallriskscore", "Fall Risk Score", DataType.STATIC, "Float");
+//                    Value<Float> val = new Value<Float>(3.7f);
+//                    healthWrapper.updateResource(ccRes, val);
+
+//                    Value<String> val2 = new Value<String>("Alzheimer");
+//                    healthWrapper.updateResource(ccRes, val2);
+
+                    Log.d(TAG, "Health Wrapper getting resource list");
+                    List<String> resourceList2 = healthWrapper.getResourceList(DataType.STATIC);
+                    Log.d(TAG, "Health Wrapper acquired resource list");
+                    for (String s : resourceList2) {
+                        Log.d(TAG, s + " (Health Wrapper after)");
+                        Resource resource = healthWrapper.getResource(s, null);
+                        for (Value value : resource.getValues()) {
+                            Log.d(TAG, resource.getResourceName() + "<" + resource.getUnit() + ">: " + value.getStringValue());
+                        }
+
+                    }
+
+
+                } catch (LoginDataException e) {
+                    e.printStackTrace();
+                } catch (AuthenticationException e) {
+                    e.printStackTrace();
+                } catch (HealthMonitorServerException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        new Thread(runnable).start();
+
+    }
+
     /**
      * Hides the soft keyboard
      */
@@ -318,6 +464,15 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
         toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(view);
         toast.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.d(TAG, "onBackPressed Called");
+        Intent setIntent = new Intent(Intent.ACTION_MAIN);
+        setIntent.addCategory(Intent.CATEGORY_HOME);
+        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(setIntent);
     }
 
     public UserProfileController getUserProfileController() {

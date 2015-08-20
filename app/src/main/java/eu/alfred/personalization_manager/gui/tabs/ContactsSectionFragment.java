@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import eu.alfred.personalization_manager.controller.ContactsController;
 import eu.alfred.personalization_manager.db_administrator.model.Contact;
 import eu.alfred.personalization_manager.db_administrator.model.Gender;
 import eu.alfred.personalization_manager.db_administrator.model.Relation;
@@ -36,7 +35,7 @@ public class ContactsSectionFragment extends SectionFragment {
     static private ContactListAdapter adapter;
     static private List<Contact> contacts;
     static private Comparator<Contact> contactComparator;
-    private ContactsController mController;
+//    private ContactsController mController;
 
     static {
         contactComparator = new Comparator<Contact>() {
@@ -61,11 +60,11 @@ public class ContactsSectionFragment extends SectionFragment {
                 int lOrd = lRel.ordinal();
                 int rOrd = rRel.ordinal();
                 switch (lRel) {
-                    case HUSBAND: case SON: case FATHER: case BROTHER:
+                    case HUSBANT: case SON: case FATHER: case BROTHER:
                     lOrd--; break;
                 }
                 switch (rRel) {
-                    case HUSBAND: case SON: case FATHER: case BROTHER:
+                    case HUSBANT: case SON: case FATHER: case BROTHER:
                     rOrd--; break;
                 }
                 return lOrd - rOrd;
@@ -107,11 +106,11 @@ public class ContactsSectionFragment extends SectionFragment {
         this.mContext = context;
     }
 
-    public void init() {
+/*    public void init() {
         mController.setFragment(this);
 
         mController.getAllContacts();
-    }
+    }*/
 
     //TODO Retrieve real data from server
     private void createFakeContacts(View view) {
@@ -124,151 +123,13 @@ public class ContactsSectionFragment extends SectionFragment {
 
     }
 
-/*
-    private static List<Contact> genContacts() {
-        List<Contact> contacts = new ArrayList<Contact>();
 
-        String[] fNames = {
-                "Anne", "John", "Harold", "Joanna", "Harlan",
-                "Carol", "Patrick", "Myriam", "Jane", "Peter",
-                "Helene", "Patrick", "Rick", "Alenne", "Mary",
-                "Melissa", "Jose", "Laura", "Anais", "Giancarlo"};
-        String[] mNames = {
-                null, "M.", null, "Alene", "Theunis",
-                null, "L.", null, null, "Dean",
-                null, null, null, null, null,
-                null, "Manuel", null, null, null};
-        String[] lNames = {
-                "Van Andringa", "Grimm", "Grimm", "Suronne", "Bouchard",
-                "Bouvier", "Garris", "Garris", "Garris", "Smitherson",
-                "Collard", "Grimm", "Grimm", "Collard", "Grimm",
-                "Frayssinous", "Soler Falcon", "Garrido Gomez", "Vallaud-Belkacem", "Belucci"};
-        String[] number = {
-                "89", "70", "", "1946", "",
-                "68", "78", "", "", "",
-                "", "", "", "", "",
-                "", "", "", "", ""};
-        Relation[] relation = {
-                Relation.NURSE, Relation.SON, Relation.HUSBAND, Relation.SISTER, Relation.CARER,
-                Relation.DOCTOR, Relation.BROTHER, Relation.RELATIVE, Relation.RELATIVE, Relation.OTHER,
-                Relation.SISTER, Relation.SON, Relation.RELATIVE, Relation.RELATIVE, Relation.DAUGHTER,
-                Relation.FRIEND, Relation.OTHER, Relation.RELATIVE, Relation.RELATIVE, Relation.FRIEND};
-        Gender[] gender = {
-                Gender.FEMALE, Gender.MALE, Gender.MALE, Gender.FEMALE, Gender.MALE,
-                Gender.FEMALE, Gender.MALE, Gender.FEMALE, Gender.FEMALE, Gender.MALE,
-                Gender.FEMALE, Gender.MALE, Gender.MALE, Gender.FEMALE, Gender.FEMALE,
-                Gender.FEMALE, Gender.MALE, Gender.FEMALE, Gender.FEMALE, Gender.MALE};
-        String[] lPhones = {
-                "+33 964 13 09 39",
-                "+33 979 92 90 59",
-                "+33 963 74 59 65",
-                "+33 906 94 14 74",
-                "+33 920 38 20 64",
-                "+33 931 39 25 15",
-                "+33 958 90 21 24",
-                "+33 986 03 59 55",
-                "+33 936 25 66 52",
-                "+33 941 71 44 75",
-                "+33 964 13 09 39",
-                "+33 979 92 90 59",
-                "+33 963 74 59 65",
-                "+33 906 94 14 74",
-                "+33 920 38 20 64",
-                "+33 931 39 25 15",
-                "+33 958 90 21 24",
-                "+33 986 03 59 55",
-                "+33 936 25 66 52",
-                "+33 941 71 44 75"};
-        String[] mPhones = {
-                "+33 657 65 95 38",
-                "+33 618 96 29 17",
-                "+33 658 81 47 33",
-                "+33 674 84 14 39",
-                "+33 691 15 25 77",
-                "+33 662 11 30 47",
-                "+33 678 80 61 66",
-                "+33 673 06 53 05",
-                "+33 642 90 44 87",
-                "+33 696 58 54 14",
-                "+33 957 65 95 38",
-                "+33 618 96 29 17",
-                "+33 658 81 47 33",
-                "+33 674 84 14 39",
-                "+33 691 15 25 77",
-                "+33 662 11 30 47",
-                "+33 678 80 61 66",
-                "+33 673 06 53 05",
-                "+33 642 90 44 87",
-                "+33 696 58 54 14"};
-        GregorianCalendar calendars[] = {
-                new GregorianCalendar(1989,  7,  5),
-                new GregorianCalendar(1970,  5, 21),
-                new GregorianCalendar(1941, 10, 17),
-                new GregorianCalendar(1946,  6, 10),
-                new GregorianCalendar(1952,  7, 19),
-                new GregorianCalendar(1968, 12, 24),
-                new GregorianCalendar(1978,  3, 30),
-                new GregorianCalendar(1980,  1,  7),
-                new GregorianCalendar(2010,  3, 11),
-                new GregorianCalendar(1940,  8, 23),
-                new GregorianCalendar(1989,  6,  7),
-                new GregorianCalendar(1970,  8, 29),
-                new GregorianCalendar(1941, 12, 30),
-                new GregorianCalendar(1946, 12, 25),
-                new GregorianCalendar(1952,  1, 12),
-                new GregorianCalendar(1968,  9, 15),
-                new GregorianCalendar(1978, 10,  1),
-                new GregorianCalendar(1980,  5, 22),
-                new GregorianCalendar(1971,  9,  3),
-                new GregorianCalendar(1940,  3, 13)
-        };
-
-        for (int i = 0; i < fNames.length; i++) {
-
-            Contact contact = new Contact();
-            contact.setFirstName(fNames[i]);
-            contact.setMiddleName(mNames[i]);
-            contact.setLastName(lNames[i]);
-            contact.setGender(gender[i]);
-            contact.setPhone(lPhones[i]);
-            contact.setMobilePhone(mPhones[i]);
-            contact.setDateOfBirth(calendars[i].getTime());
-            Relation[] relations = new Relation[1];
-            relations[0] = relation[i];
-            contact.setRelationToUser(relations);
-            contact.setEmail(toMail(contact, number[i]));
-            contacts.add(contact);
-        }
-        return contacts;
-    }
-
-    private static String toMail(Contact contact, String number) {
-        String str = "";
-        if (contact.getFirstName() != null) {
-            str += contact.getFirstName().toLowerCase();
-        }
-        if (contact.getMiddleName() != null) {
-            str += contact.getMiddleName().toLowerCase();
-        }
-        if (contact.getLastName() != null) {
-            str += contact.getLastName().toLowerCase();
-        }
-
-        str = str.toLowerCase();
-        str = str.replace(" ", "");
-        str = str.replace(".", "");
-
-
-        return str + number + "@mail.eu";
-    }
-
-*/
     public static void removeContact(int contactPos) {
         Contact c = contacts.remove(contactPos);
         adapter.remove(c);
     }
 
-    public static void setContact(int contactPos, Contact contact) {
+    public static int setContact(int contactPos, Contact contact) {
         if (contactPos >= 0) {
             contacts.set(contactPos, contact);
             adapter.remove(contact);
@@ -277,6 +138,7 @@ public class ContactsSectionFragment extends SectionFragment {
             adapter.add(contact);
         }
         adapter.sort(contactComparator);
+        return adapter.getPosition(contact);
     }
 
     public static Contact getContact(int contactPos) {
@@ -284,9 +146,12 @@ public class ContactsSectionFragment extends SectionFragment {
     }
 
     public void updateContactList(ArrayList<Contact> contactsList) {
+        Log.d(TAG, "updateContactList with " + contactsList.size() + " contacts." );
         for (Contact contact : contactsList) {
-            contacts.add(contact);
+//            contacts.add(contact);
+            setContact(-1, contact);
         }
+
     }
 
     class ContactListAdapter extends ArrayAdapter<Contact> {

@@ -15,6 +15,7 @@ import eu.alfred.userprofile.R;
  */
 public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 
+    private final HealthSectionFragment sfHealth;
     ArrayList<SectionFragment> sections;
     private final PersonalSectionFragment sfPersonal;
     private final ContactsSectionFragment sfContact;
@@ -28,13 +29,22 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
         sfPersonal = new PersonalSectionFragment();
         sfPersonal.setTitle(ctx.getString(R.string.tab_personal_title));
         sfPersonal.setLayout(R.layout.userprofile_personal_tab);
+        sfPersonal.setContext(ctx);
         sections.add(sfPersonal);
 
         //Contact Section
         sfContact = new ContactsSectionFragment();
         sfContact.setTitle(ctx.getString(R.string.tab_contacts_title));
         sfContact.setLayout(R.layout.userprofile_contactlist_tab);
+        sfContact.setContext(ctx);
         sections.add(sfContact);
+
+        //Health Section
+        sfHealth = new HealthSectionFragment();
+        sfHealth.setTitle(ctx.getString(R.string.tab_health_title));
+        sfHealth.setLayout(R.layout.userprofile_health_tab);
+        sfHealth.setContext(ctx);
+        sections.add(sfHealth);
 
     }
 
@@ -43,6 +53,9 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
     }
     public ContactsSectionFragment getSfContacts() {
         return sfContact;
+    }
+    public HealthSectionFragment getSfHealth() {
+        return sfHealth;
     }
 
 

@@ -49,15 +49,18 @@ public class ContactsController {
     }
 
     public void getAllContacts() {
+        if (mUserId == null) {
+            throw new NullPointerException("In Contacts Controller, User ID cannot be null.");
+        }
         client.doGetAllContacts(mUserId);
     }
 
-    public void onSuccessGettingAllContacts(ArrayList<Contact> contacts) {
-        mContacts = contacts;
-        if (mFragment != null) {
-            mFragment.updateContactList(mContacts);
-        }
-    }
+//    public void onSuccessGettingAllContacts(ArrayList<Contact> contacts) {
+//        mContacts = contacts;
+//        if (mFragment != null) {
+//            mFragment.updateContactList(mContacts);
+//        }
+//    }
 
     public void getContacts(String id) {
         client.doGetAllContacts(id);
@@ -72,7 +75,7 @@ public class ContactsController {
     }
 
     public void deleteContact(Contact contact) {
-        client.doDeleteRequest(contact.getId());
+        client.doDeleteRequest(contact);
     }
 
     public void updateContact(Contact contact) {
@@ -86,9 +89,13 @@ public class ContactsController {
         mFragment.updateContactList(mContacts);
     }
 
-    public void onSuccessCreatingNewContact(String contactId) {
-        Log.d(TAG, "onSuccessCreatingNewContact: contactId=" + contactId);
-        mActivity.onSuccessCreatingContact(contactId);
+    public void onErrorGetAllContacts(Exception ex) {
+        Log.d(TAG, "onErrorGetAllContacts " + ex.getMessage());
+    }
+
+    public void onSuccessCreatingNewContact(Contact contact) {
+        Log.d(TAG, "onSuccessCreatingNewContact: contactId=" + contact.getId());
+        mActivity.onSuccessCreatingContact(contact);
     }
 
     public void onErrorCreatingNewContact(Exception ex) {
@@ -104,19 +111,19 @@ public class ContactsController {
         this.context = context;
     }
 
+
     public void onSuccessUpdatingContact(String contactId) {
         Log.d(TAG, "onSuccessUpdatingContact: contactId=" + contactId);
         mActivity.onSuccessUpdatingContact();
     }
 
-
     public void onErrorUpdatingContact(Exception ex) {
         Log.d(TAG, "onErrorUpdatingContact: " + ex.getMessage());
     }
 
-    public void onSuccessDeletingContact(String res) {
-        Log.d(TAG, "onSuccessUpdatingContact: contactId=" + res);
-        mActivity.onSuccessDeletingContact();
+    public void onSuccessDeletingContact(Contact contact) {
+        Log.d(TAG, "onSuccessDeletingContact: contactId=" + contact.getId());
+        mActivity.onSuccessDeletingContact(contact);
     }
 
     public void onErrorDeletingContact(Exception ex) {
@@ -142,10 +149,10 @@ public class ContactsController {
 
     }
 
+
     public void onSuccessCreatingNewRequesters(String response) {
         System.out.println("New Requesters id: " + response);
     }
-
 
     public void onErrorCreatingNewRequesters(Exception ex) {
         System.out.println("[ERROR] New Requesters id: " + ex.getMessage());

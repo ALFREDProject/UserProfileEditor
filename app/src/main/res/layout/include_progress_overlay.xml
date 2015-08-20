@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/progress_overlay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:alpha="0.75"
+    android:animateLayoutChanges="true"
+    android:background="@android:color/black"
+    android:visibility="gone">
+
+    <ProgressBar
+        android:id="@+id/progress_overlay_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:indeterminate="true"/>
+    <TextView
+        android:id="@+id/progress_overlay_text"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/white"
+        android:layout_below="@id/progress_overlay_bar"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:text="@string/progress_overlay_text_content"
+        android:alpha="1.0"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Cancel"
+        android:background="@color/white"
+        android:layout_below="@id/progress_overlay_text"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:onClick="cancel"
+        android:alpha="1.0"/>
+
+</RelativeLayout>

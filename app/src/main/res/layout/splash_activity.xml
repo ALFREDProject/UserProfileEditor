@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_vertical"
+    android:background="@drawable/background_alfred_v1">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#e5ffffff"
+        android:gravity="center_vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/groupBtName"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tvFirstName"
+                android:layout_gravity="center_horizontal"
+                android:textAllCaps="true"
+                android:text="@string/splash_tv_name" />
+
+            <EditText
+                android:id="@+id/etFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:labelFor="@id/tvFirstName"
+                android:hint="@string/splash_tv_firstname_hint"
+                android:layout_gravity="center_horizontal"
+                android:inputType="textCapWords"
+                android:layout_marginBottom="@dimen/splash_textview_bottom_margin" />
+
+            <!--<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tvMiddleName"
+                android:layout_gravity="center_horizontal"
+                android:textAllCaps="true"
+                android:text="@string/splash_tv_middlename" />-->
+
+            <EditText
+                android:id="@+id/etMiddleName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/splash_tv_middlename_hint"
+                android:layout_gravity="center_horizontal"
+                android:inputType="textCapWords"
+                android:layout_marginBottom="@dimen/splash_textview_bottom_margin" />
+
+<!--            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/splash_tv_lastname"
+                android:id="@+id/tvLastName"
+                android:layout_gravity="center_horizontal"
+                android:textAllCaps="true" />-->
+
+            <EditText
+                android:id="@+id/etLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/splash_tv_lastname_hint"
+                android:layout_gravity="center_horizontal"
+                android:inputType="textCapWords"
+                android:layout_marginBottom="@dimen/splash_textview_bottom_margin" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/splash_tv_email"
+            android:id="@+id/tvEmail"
+            android:layout_gravity="center_horizontal"
+            android:textAllCaps="true" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:labelFor="@id/tvEmail"
+            android:hint="@string/splash_tv_email_hint"
+            android:layout_marginBottom="@dimen/splash_textview_bottom_margin" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/splash_tv_password"
+            android:id="@+id/tvPassword"
+            android:layout_gravity="center_horizontal"
+            android:textAllCaps="true" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:labelFor="@id/tvPassword"
+            android:hint="@string/splash_tv_password_hint"
+            android:layout_marginBottom="@dimen/splash_textview_bottom_margin" />
+
+        <LinearLayout
+            android:id="@+id/groupBtLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <Button
+                android:id="@+id/btMoveToRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:text="@string/splash_bt_no_account"
+                android:background="@android:color/transparent"
+                android:textColor="@color/darkblue"
+                android:onClick="switchMode"
+                android:enabled="true" />
+            <Button
+                android:id="@+id/btLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:text="@string/splash_bt_login"
+                android:background="@color/darkblue"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:onClick="login"
+                android:enabled="true" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/groupBtRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <Button
+                android:id="@+id/btMoveToLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:text="@string/splash_bt_already_registered"
+                android:textColor="@color/darkblue"
+                android:onClick="switchMode"
+                android:enabled="true"
+                android:background="@android:color/transparent" />
+            <Button
+                android:id="@+id/btRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/splash_bt_register"
+                android:textColor="@android:color/white"
+                android:textAllCaps="true"
+                android:onClick="register"
+                android:background="@color/darkblue"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:enabled="true" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <include layout="@layout/include_progress_overlay"/>
+
+</RelativeLayout>

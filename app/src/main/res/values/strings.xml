@@ -2,6 +2,9 @@
 <resources>
 
     <string name="up_current_id">eu.alfred.personalization_manager.controller.CURRENT_UP_ID</string>
+    <string name="up_current_email">eu.alfred.personalization_manager.controller.CURRENT_UP_EMAIL</string>
+    <string name="up_current_password">eu.alfred.personalization_manager.controller.CURRENT_UP_PASSWORD</string>
+    <string name="up_current_userid">eu.alfred.personalization_manager.controller.CURRENT_UP_USERID</string>
 
     <!-- English -->
     <string name="app_name">ALFRED Profile</string>
@@ -27,7 +30,7 @@
     <string name="up_email_text">e-mail</string>
     <string name="up_email_hint">jonhlsmith@mail.com</string>
     <string name="action_save_title">Save</string>
-    <string name="action_delete_profile_title">Delete</string>
+    <string name="action_delete_profile_title">Delete profile</string>
     <string name="action_new_profile_title">New</string>
     <string name="activity_name">Your Profile</string>
     <string name="up_contact_street">Street</string>
@@ -58,6 +61,72 @@
     <string name="select_one">Select one…</string>
     <string name="up_profession_text">Profession</string>
     <string name="up_profession_insurance_hint">Teacher, engineer, lawyer…</string>
+    <string name="up_health_id_text">ID</string>
+    <string name="up_health_id_hint">Auto…</string>
+    <string name="up_health_userID_text">userID</string>
+    <string name="up_health_userID_hint">Provided…</string>
+    <string name="up_health_bloodType_text">Blood type</string>
+    <string name="up_health_chronicalConditions_text">Chronical Conditions</string>
+    <string name="up_health_chronicalConditions_hint">Asthma, diabetes, glaucoma…</string>
+    <string name="up_health_medicationsTaking_text">Medications taking</string>
+    <string name="up_health_medicationsTaking_hint">Ibuprofen, Phenergan, Ambien CR….</string>
+    <string name="up_health_abilityLevel_text">Mod. Rankin Scale</string>
+    <string name="up_health_knownAllergies_text">Known allergies</string>
+    <string name="up_health_knownAllergies_hint">Pollen, mites, apricots…</string>
+    <string name="up_health_notableMedicalIncidents_text">Notable medication incidents</string>
+    <string name="up_health_notableMedicalIncidents_hint">Stroke, seizure, broken hip…</string>
+    <string name="up_health_surgeries_text">Surgeries</string>
+    <string name="up_health_surgeries_hint">Bursectomy, angioplasty, arthrotomy…</string>
+    <string name="up_health_vaccinations_text">Vaccinations</string>
+    <string name="up_health_vaccinations_hint">Hepatitis A, polio, rabies…</string>
+    <string name="up_health_dietaryRequirements_text">Dietary Requirements</string>
+    <string name="up_health_dietaryRequirements_hint">Low sodium, gluten intolerant, lacto vegetarian…</string>
+    <string name="up_health_pulseAtRest_text">Pulse at rest</string>
+    <string name="up_health_pulseAtRest_hint">80</string>
+    <string name="up_health_breathingRateAtRest_text">Breathing rate at rest</string>
+    <string name="up_health_breathingRateAtRest_hint">40</string>
+    <string name="up_health_bodyTemperatureAtRest_text">Body temperature at rest</string>
+    <string name="up_health_bodyTemperatureAtRest_hint">36ºC</string>
+    <string name="up_health_selfRatedHealth_text">Self-rated Health</string>
+    <string name="up_health_selfRatedHealth_hint">Normal…</string>
+    <string name="up_health_visionAcuityScore_text">Vision acuity Score</string>
+    <string name="up_health_visionAcuityScore_hint">3</string>
+    <string name="up_health_hearingAcuityScore_text">Hearing acuity score</string>
+    <string name="up_health_hearingAcuityScore_hint">4</string>
+    <string name="up_health_lifestyleHealthRelated_text">Lifestyle health related</string>
+    <string name="up_health_lifestyleHealthRelated_hint">Smoker, alcohol, sedentarism…</string>
+    <string name="up_health_weight_text">Weight</string>
+    <string name="up_health_weight_hint">72 kg</string>
+    <string name="up_health_height_text">Height</string>
+    <string name="up_health_height_hint">172 cm</string>
+    <string name="up_health_painLevel_text">Pain level</string>
+    <string name="up_health_painLevel_hint">Middle, low, sporadic…</string>
+    <string name="up_health_functionalReachScore_text">Functional Reach Score</string>
+    <string name="up_health_functionalReachScore_hint">Risk of fall off…</string>
+    <string name="up_health_fiveXSitToStandTestScore_text">Five X sit to stand test score</string>
+    <string name="up_health_fiveXSitToStandTestScore_hint">Normal…</string>
+    <string name="up_health_timedUpAndGoTestScore_text">Time up and go test score</string>
+    <string name="up_health_timedUpAndGoTestScore_hint">Normal…</string>
+    <string name="up_health_manualDynamometerGripStrengthScore_hint">Normal…</string>
+    <string name="up_health_handStrengthLevel_hint">Normal…</string>
+    <string name="up_health_sixMinuteWalkTestScore_hint">Normal…</string>
+    <string name="up_health_muscleGrading_hint">Normal…</string>
+    <string name="up_health_dailyLivingActivitiesScore_hint">Normal…</string>
+    <string name="up_health_cognitionLevel_hint">Normal…</string>
+    <string name="up_health_societyParticipationScore_hint">Normal…</string>
+    <string name="up_health_physicalActivityLevel_hint">Normal…</string>
+    <string name="up_health_fallRiskScore_hint">Normal…</string>
+    <string name="up_health_rangeOfMotionScore_hint">Normal…</string>
+    <string name="up_health_manualDynamometerGripStrengthScore_text">M. Dyn. Grip Strength Score</string>
+    <string name="up_health_handStrengthLevel_text">Hand Strength Level</string>
+    <string name="up_health_sixMinuteWalkTestScore_text">6 min Walk Test Score</string>
+    <string name="up_health_muscleGrading_text">Muscle Grading</string>
+    <string name="up_health_dailyLivingActivitiesScore_text">Daily Living Activities Score</string>
+    <string name="up_health_cognitionLevel_text">Cognition Level</string>
+    <string name="up_health_societyParticipationScore_text">Society Participation Score</string>
+    <string name="up_health_physicalActivityLevel_text">Physical ActivityLevel</string>
+    <string name="up_health_fallRiskScore_text">Fall Risk Score</string>
+    <string name="up_health_rangeOfMotionScore_text">Range Of Motion Score</string>
     <string name="up_contact_postal_address">Postal Address</string>
     <string name="edit_contact_activity_name">Edit Contact</string>
     <string name="edit_new_contact_activity_name">New Contact</string>
@@ -77,6 +146,7 @@
     <string name="exit_edited_contact_attempt_message">Changes will be lost.</string>
     <string name="delete_profile_attempt_title">Delete profile?</string>
     <string name="delete_profile_attempt_message">This will delete your entire profile.</string>
+    <string name="action_logout_title">Logout</string>
     <string name="action_settings_title">Settings</string>
     <string name="pref_dev_options_title">Developer options</string>
     <string name="pref_db_url_title">Users Database URL</string>
@@ -92,6 +162,8 @@
     <string name="up_user_id_hint">#dev Manual input</string>
     <string name="up_user_contact_id_text">#dev Contact ID</string>
     <string name="up_user_contact_id_hint">#dev Manual input</string>
+    <string name="up_user_contact_pos_text">#dev Contact Position</string>
+    <string name="up_user_contact_pos_hint">#dev Manual input</string>
     <string name="up_edit_access_rights_text">Edit Access Rights</string>
     <string name="up_edit_access_rights_dialog_title">Edit Access Rights</string>
 
@@ -125,6 +197,34 @@
     <string name="attr_up_lastName">Last Name</string>
     <string name="attr_up_alfedAppInstalationDate">Alfred App Installation Date</string>
     <string name="attr_up_language">Language</string>
+    <string name="splash_bt_register">Register</string>
+    <string name="splash_bt_login">Login</string>
+    <string name="splash_tv_email">e-mail</string>
+    <string name="splash_tv_password">password</string>
+    <string name="splash_tv_email_hint">yourname@example.com</string>
+    <string name="splash_tv_password_hint">Your password</string>
+    <string name="splash_fill_all_fields">Please, fill all fields</string>
+    <string name="splash_logging_in">Verifying credentials</string>
+    <string name="splash_login_success">Login success!</string>
+    <string name="splash_tv_name">Complete Name</string>
+    <string name="splash_tv_name_hint">John Smith</string>
+    <string name="splash_bt_no_account">No account?</string>
+    <string name="splash_bt_already_registered">Already registered?</string>
+    <string name="logout_attempt_title">Logout?</string>
+    <string name="logout_attempt_message">Do you really want to close this session?</string>
+    <string name="splash_tv_firstname">First name</string>
+    <string name="splash_tv_firstname_hint">First name</string>
+    <string name="splash_tv_middlename">Middle name</string>
+    <string name="splash_tv_middlename_hint">Middle name</string>
+    <string name="splash_tv_lastname">Last name</string>
+    <string name="splash_tv_lastname_hint">Last name</string>
+    <string name="up_email_info">This is your username.</string>
+    <string name="contact_notification_create_success"><![CDATA[<font color=\'#017BE3\'>%s</font> is now in your contact list]]></string>
+    <string name="contact_notification_update_success"><![CDATA[<font color=\'#017BE3\'>%s</font>\'s info has been saved]]></string>
+    <string name="contact_notification_delete_success"><![CDATA[OK, <font color=\'#017BE3\'>%s</font> is no longer your contact]]></string>
+    <string name="progress_overlay_text_content">Connecting to server…</string>
+    <string name="progress_overlay_text_content_login">Connecting to server…</string>
+    <string name="progress_overlay_text_content_register">Connecting to server…</string>
 
 
     <!-- Source: http://www.textfixer.com/resources/dropdowns/country-list-array.txt -->

@@ -81,11 +81,7 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="gson-2.3.1" level="project" />
-    <orderEntry type="library" exported="" name="jackson-core-asl-1.9.13" level="project" />
-    <orderEntry type="library" exported="" name="jackson-mapper-asl-1.9.13" level="project" />
-    <orderEntry type="library" exported="" name="jersey-core-1.18.3" level="project" />
-    <orderEntry type="library" exported="" name="jersey-client-1.18.3" level="project" />
+    <orderEntry type="library" exported="" name="healthMonitorServerWrapper-1.0-shaded" level="project" />
     <orderEntry type="library" exported="" name="library-aar-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-r7" level="project" />
   </component>

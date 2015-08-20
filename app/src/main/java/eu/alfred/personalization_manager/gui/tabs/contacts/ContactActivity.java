@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -70,8 +72,11 @@ public class ContactActivity extends Activity {
     private EditText etContactPostalPostalCode;
     private EditText etContactPostalCity;
     private EditText etContactPostalState;
+
     private EditText etUserId;
     private EditText etContactId;
+    private EditText etContactPos;
+
     private AutoCompleteTextView autoContactPostalCountry;
     private RadioGroup rgGender;
     private DatePicker dpDateOfBirth;
@@ -80,6 +85,8 @@ public class ContactActivity extends Activity {
     private String userId;
     private String contactId;
     Contact mContact;
+
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +106,7 @@ public class ContactActivity extends Activity {
 //        controller.setContactActivity(this);
         controller = new ContactsController(getApplicationContext());
         controller.setContactActivity(this);
-        ActionBar actionBar = getActionBar();
+        actionBar = getActionBar();
         if (actionBar != null) {
             //TODO Logo
 //            actionBar.setIcon(R.drawable.ic_launcher);
@@ -118,6 +125,7 @@ public class ContactActivity extends Activity {
         }
         etUserId.setText(userId);
         etContactId.setText(contactId);
+        etContactPos.setText(String.valueOf(contactPos));
     }
 
     private void bindFields() {
@@ -196,6 +204,7 @@ public class ContactActivity extends Activity {
 
         etUserId = (EditText) findViewById(R.id.txtUserId);
         etContactId = (EditText) findViewById(R.id.txtContactId);
+        etContactPos = (EditText) findViewById(R.id.txtContactPos);
 
     }
 
@@ -310,6 +319,7 @@ public class ContactActivity extends Activity {
 
             etUserId.setText(userId);
             etContactId.setText(contactId);
+            etContactPos.setText(String.valueOf(contactPos));
         }
         dirty = false;
     }
@@ -566,11 +576,16 @@ public class ContactActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.m_edit_contact, menu);
-        Log.d(TAG, "onCreateOptionsMenu(" + menu.size() + " options)");
+        String menuItems = "";
         for (int i = 0; i < menu.size(); i++) {
-            MenuItem item = menu.getItem(i);
-            Log.d(TAG, "Item (" + i + "): " + item.getTitle());
+            String itemTitle = menu.getItem(i).getTitle().toString();
+            if (i == 0) {
+                menuItems += itemTitle;
+            } else {
+                menuItems += ", " + itemTitle;
+            }
         }
+        Log.v(TAG, "onCreateOptionsMenu: {" + menuItems + "}");
         miCreate = menu.findItem(R.id.action_create_contact);
         miUpdate = menu.findItem(R.id.action_edit_contact);
         miDelete = menu.findItem(R.id.action_delete_contact);
@@ -632,9 +647,11 @@ public class ContactActivity extends Activity {
         controller.deleteContact(contact);
     }
 
-    public void onSuccessDeletingContact() {
+    public void onSuccessDeletingContact(Contact contact) {
         ContactsSectionFragment.removeContact(contactPos);
-        notification(true, "Contact removed");
+        String completeName = completeName(contact);
+        String msg = getResources().getString(R.string.contact_notification_delete_success, completeName);
+        notification(true, msg);
         finish();
     }
 
@@ -643,26 +660,47 @@ public class ContactActivity extends Activity {
     }
 
 
-    public void onSuccessCreatingContact(String newContactId) {
+    public void onSuccessCreatingContact(Contact newContactId) {
         Contact contact = extractContact(null);
-        this.contactId = newContactId;
+        this.contactId = newContactId.getId();
         contact.setId(contactId);
         etContactId.setText(contactId);
-        notification(true, "Contact created with ID = " + contact.getId());
-        ContactsSectionFragment.setContact(contactPos, contact);
+        String completeName = completeName(contact);
+        String msg = getResources().getString(R.string.contact_notification_create_success, completeName);
+        notification(true, msg);
+        contactPos = ContactsSectionFragment.setContact(contactPos, contact);
+        etContactPos.setText(String.valueOf(contactPos));
         dirty = false;
         setMenuItemsVisibleForEditing(true);
-        setTitle(R.string.edit_contact_activity_name);
+        actionBar.setTitle(R.string.edit_contact_activity_name);
+    }
+
+    private String completeName(Contact contact) {
+        String ret = "";
+        if (contact.getFirstName() != null) {
+            ret += contact.getFirstName().trim();
+        }
+        if (contact.getMiddleName() != null && !contact.getMiddleName().trim().isEmpty()) {
+            ret += " " + contact.getMiddleName().trim();
+        }
+        if (contact.getLastName() != null) {
+            ret += " " + contact.getLastName().trim();
+        }
+        return ret.trim();
+
     }
 
     public void onSuccessUpdatingContact() {
         Contact contact = extractContact(null);
         contact.setId(contactId);
-        notification(true, "Contact updated with ID = " + contact.getId());
-        ContactsSectionFragment.setContact(contactPos, contact);
+        String completeName = completeName(contact);
+        String msg = getResources().getString(R.string.contact_notification_update_success, completeName);
+        notification(true, msg);
+        contactPos = ContactsSectionFragment.setContact(contactPos, contact);
+        etContactPos.setText(String.valueOf(contactPos));
         dirty = false;
         setMenuItemsVisibleForEditing(true);
-        setTitle(R.string.edit_contact_activity_name);
+        actionBar.setTitle(R.string.edit_contact_activity_name);
     }
 
     private boolean onExitAttempt() {
@@ -704,8 +742,10 @@ public class ContactActivity extends Activity {
             ImageView toastImg = (ImageView) view.findViewById(R.id.toastImg);
             toastImg.setImageResource(R.drawable.ic_toast_error);
         }
-
-        ((TextView) view.findViewById(R.id.toastText)).setText(msg);
+        Log.d(TAG, "Notification(" + Boolean.toString(succeed) + "): " + msg);
+        Spanned spanned = Html.fromHtml(msg);
+        TextView textView = (TextView) view.findViewById(R.id.toastText);
+        textView.setText(spanned, TextView.BufferType.SPANNABLE);
 
         Toast toast = new Toast(this);
         toast.setDuration(Toast.LENGTH_LONG);
