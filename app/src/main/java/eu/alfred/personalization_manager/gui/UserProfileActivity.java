@@ -151,14 +151,6 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
 
         upController = new UserProfileController(this);
 
-        //TODO Logo
-/*        actionBar.setIcon(R.drawable.ic_launcher);
-        actionBar.setLogo(R.drawable.ic_launcher);*/
-
-        //bindViewsToFields();
-
-//        upController = UserControllerFactory.create(this);
-
         upController.setContactsFragment(mSections.getSfContacts());
         upController.setHealthFragment(mSections.getSfHealth());
         if (existingUser) {

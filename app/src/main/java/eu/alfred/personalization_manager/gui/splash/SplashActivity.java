@@ -244,8 +244,8 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
         }
         intent.putExtra("email", user.getEmail());
 
-        //TODO put other extra params
-//        startActivity(intent);
+        //Put here other extra params
+
         startActivityForResult(intent, 1);
     }
 

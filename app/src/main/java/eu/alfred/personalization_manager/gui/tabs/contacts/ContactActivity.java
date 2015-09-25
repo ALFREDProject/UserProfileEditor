@@ -108,7 +108,6 @@ public class ContactActivity extends Activity {
         controller.setContactActivity(this);
         actionBar = getActionBar();
         if (actionBar != null) {
-            //TODO Logo
 //            actionBar.setIcon(R.drawable.ic_launcher);
             actionBar.setDisplayHomeAsUpEnabled(true);
             if (contactPos < 0) {
