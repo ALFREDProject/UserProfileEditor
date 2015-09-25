@@ -6,6 +6,32 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/up_health_container_list">
+<!--        <TextView
+            android:id="@+id/up_health_loading_resources_label"
+            style="@style/AlfredFormTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/up_health_loading_resources_text" />-->
+        <FrameLayout
+            android:id="@+id/up_health_loading_resources_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/up_health_progress_bar"
+                style="@android:style/Widget.ProgressBar.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_marginTop="18dp"
+                android:textSize="22dp"
+                android:textColor="@android:color/black"
+                android:text="Loading resources..."/>
+        </FrameLayout>
 
         <TextView
             android:id="@+id/up_health_id_label"

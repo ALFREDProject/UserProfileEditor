@@ -1,6 +1,8 @@
 package eu.alfred.personalization_manager.gui.tabs;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +14,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import eu.alfred.internal.wrapper.healthmonitor.resource.Resource;
+import eu.alfred.internal.wrapper.healthmonitor.resource.Value;
 import eu.alfred.personalization_manager.controller.health.HealthListener;
 import eu.alfred.personalization_manager.db_administrator.model.BloodType;
 import eu.alfred.personalization_manager.db_administrator.model.ModifiedRankinScale;
@@ -32,7 +38,9 @@ public class HealthSectionFragment extends SectionFragment implements HealthList
     private Spinner spAbilityLevel;
     private LinearLayout containerList;
     private List<Resource> results = new ArrayList<Resource>();
-    private int total;
+    private Map<Resource, String> resValues = new HashMap<Resource, String>();
+    private int total = -1;
+    private int count = 0;
     private ViewGroup container;
     private Bundle bundle;
 
@@ -53,6 +61,7 @@ public class HealthSectionFragment extends SectionFragment implements HealthList
     }
 
     private void hideInternalViews(View view) {
+        view.findViewById(R.id.up_health_loading_resources_label).setVisibility(View.GONE);
         view.findViewById(R.id.up_health_id_label).setVisibility(View.GONE);
         view.findViewById(R.id.txtHealthId).setVisibility(View.GONE);
         view.findViewById(R.id.up_health_userID_label).setVisibility(View.GONE);
@@ -89,6 +98,7 @@ public class HealthSectionFragment extends SectionFragment implements HealthList
         Resource res = getResourcesByName(newRes.getResourceName());
         if (res == null) {
             results.add(newRes);
+
         } else {
             int index = results.indexOf(res);
             results.remove(res);
@@ -100,11 +110,21 @@ public class HealthSectionFragment extends SectionFragment implements HealthList
     @Override
     public void setTotal(int total) {
         this.total = total;
+        count = 0;
+    }
+
+    @Override
+    public void start() {
+        if (containerList != null) {
+            containerList.findViewById(R.id.up_health_loading_resources_label).setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public void end(Boolean success) {
-
+        if (containerList != null) {
+            containerList.findViewById(R.id.up_health_loading_resources_label).setVisibility(View.GONE);
+        }
     }
 
     private Resource getResourcesByName(String resourceName) {
@@ -130,6 +150,8 @@ public class HealthSectionFragment extends SectionFragment implements HealthList
 
     private void addResourceToView(ViewGroup container, Bundle savedInstanceState, Resource result) {
         if (containerList != null) {
+            start();
+            count++;
             TextView textView = (TextView) getLayoutInflater(savedInstanceState).inflate(R.layout.userprofile_health_textview, container, false);
             textView.setText(result.getLabel());
 
@@ -137,16 +159,77 @@ public class HealthSectionFragment extends SectionFragment implements HealthList
 
             String text = "";
             if (result.getValues().size() > 0) {
-                text += result.getValues().get(0).getStringValue();
+                Value value = selectLastValue(result.getValues());
+                if (value != null) {
+                    try {
+                        text += value.getIntValue();
+                    } catch (NumberFormatException e) {
+                        text += value.getStringValue();
+                    }
+                }
             }
             if (result.getUnit() != null && !result.getUnit().isEmpty()) {
-                text += result.getUnit();
+                text += " " + result.getUnit();
             }
             editText.setText(text);
-            editText.setKeyListener(null);
+//            editText.setKeyListener(null);
+            editText.addTextChangedListener(new ResourceTextWatcher(result));
+//            editText.setOnEditorActionListener(new ResourceOnEditorActionListener(result));
 
             containerList.addView(textView);
             containerList.addView(editText);
+//            updateResource(result, text);
+            if (count >= total) {
+                end(true);
+            }
         }
+    }
+
+    private Value selectLastValue(List<Value> values) {
+        Value lastVal = null;
+        Date lastDate = new Date(0L);
+        for (Value value : values) {
+            if (value.getTimestamp().after(lastDate)) {
+                lastVal = value;
+                lastDate = value.getTimestamp();
+            }
+        }
+
+        return lastVal;
+    }
+
+    private class ResourceTextWatcher implements TextWatcher {
+        private final Resource mResource;
+
+        public ResourceTextWatcher(Resource resource) {
+            this.mResource = resource;
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            String rawText = s.toString();
+//            Log.d(TAG, "afterTextChanged: " + mResource.getResourceName() + " set to " + rawText);
+            updateResource(mResource, rawText);
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            //Empty on purpose
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            //Empty on purpose
+        }
+    }
+
+    private void updateResource(Resource resource, String rawText) {
+//        Log.d(TAG, "updateResource: " + resource.getResourceName() + " set to " + rawText);
+        resValues.put(resource, rawText);
+    }
+
+    @Override
+    public Map<Resource, String> getResourceValues() {
+        return resValues;
     }
 }

@@ -1,6 +1,7 @@
 package eu.alfred.personalization_manager.controller.health;
 
 import java.util.List;
+import java.util.Map;
 
 import eu.alfred.internal.wrapper.healthmonitor.resource.Resource;
 
@@ -9,10 +10,9 @@ import eu.alfred.internal.wrapper.healthmonitor.resource.Resource;
  */
 public interface HealthListener {
     public void notification(List<Resource> results);
-
-    void addResource(Resource value);
-
-    void setTotal(int total);
-
-    void end(Boolean success);
+    public void addResource(Resource value);
+    public void setTotal(int total);
+    public void end(Boolean success);
+    public void start();
+    public Map<Resource, String> getResourceValues();
 }
