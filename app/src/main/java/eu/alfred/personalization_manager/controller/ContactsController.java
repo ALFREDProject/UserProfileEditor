@@ -4,9 +4,11 @@ import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import eu.alfred.personalization_manager.db_administrator.api.volley.VolleyWebServiceContactClient;
 import eu.alfred.personalization_manager.db_administrator.model.Contact;
+import eu.alfred.personalization_manager.db_administrator.model.Relation;
 import eu.alfred.personalization_manager.db_administrator.model.Requesters;
 import eu.alfred.personalization_manager.gui.tabs.ContactsSectionFragment;
 import eu.alfred.personalization_manager.gui.tabs.contacts.ContactActivity;
@@ -22,6 +24,7 @@ public class ContactsController {
     private ContactActivity mActivity;
     private ContactsSectionFragment mFragment;
     private ArrayList<Contact> mContacts;
+    private HashMap<String, Requesters> mRequesters;
 
     static private ContactsController mInstance = null;
     private String mUserId;
@@ -46,6 +49,7 @@ public class ContactsController {
         this.context = context;
         this.client = new VolleyWebServiceContactClient(this);
         mContacts = new ArrayList<Contact>();
+        mRequesters = new HashMap<String, Requesters>();
     }
 
     public void getAllContacts() {
@@ -71,7 +75,72 @@ public class ContactsController {
     }
 
     public void newContact(Contact contact) {
+        if (contact.getAccessRightsToAttributes() == null || contact.getAccessRightsToAttributes().isEmpty()) {
+            defaultAccessRights(contact);
+        }
         client.doPostNewContact(contact);
+    }
+
+    public HashMap<String, Boolean> defaultAccessRights(Contact contact) {
+        HashMap<String, Boolean> rights = new HashMap<String, Boolean>();
+
+        Relation relation = Relation.OTHER;
+
+        if (contact != null && contact.getRelationToUser() != null && contact.getRelationToUser().length > 0) {
+            relation = contact.getRelationToUser()[0];
+        }
+
+        boolean closeRel =
+                relation != Relation.OTHER &&
+                relation != Relation.FRIEND;
+
+        boolean medicalRel =
+                relation == Relation.DOCTOR ||
+                relation == Relation.NURSE ||
+                relation == Relation.CARER;
+
+
+
+        rights.put("firstName", true);
+        rights.put("middleName", true);
+        rights.put("lastName", true);
+        rights.put("prefferedName", true);
+        rights.put("gender", true);
+        rights.put("dateOfBirth", closeRel);
+
+        rights.put("phone", closeRel);
+        rights.put("mobilePhone", closeRel);
+        rights.put("email", closeRel);
+
+        rights.put("residentialAddress", closeRel);
+        rights.put("postalAddress", closeRel);
+
+        rights.put("citizenship", closeRel);
+        rights.put("nationality", closeRel);
+        rights.put("language", closeRel);
+
+        rights.put("socialSecurityNumber", medicalRel);
+        rights.put("anniversaryDate", closeRel);
+        rights.put("maritalStatus", closeRel);
+        rights.put("educationLevel", closeRel);
+        rights.put("employmentStatus", closeRel);
+        rights.put("profession", closeRel);
+        rights.put("healthInsurance", medicalRel);
+        rights.put("myersBriggsIndicator", false);
+
+        rights.put("id", false);
+        rights.put("alfredUserName", true);
+        rights.put("selfDescrPersonalityChar", false);
+        rights.put("socialMediaProfiles", false);
+        rights.put("interests", false);
+        rights.put("culturalOrFamilyNeeds", false);
+        rights.put("nextOfKin", false);
+        rights.put("alfedAppInstalationDate", false);
+
+        if (contact != null) {
+            contact.setAccessRightsToAttributes(rights);
+        }
+        return rights;
     }
 
     public void deleteContact(Contact contact) {
@@ -150,8 +219,10 @@ public class ContactsController {
     }
 
 
-    public void onSuccessCreatingNewRequesters(String response) {
-        System.out.println("New Requesters id: " + response);
+    public void onSuccessCreatingNewRequesters(Requesters req) {
+        Log.d(TAG, "New Requesters id: " + req.getId());
+        mRequesters.put(req.getTargetAlfredId(), req);
+        mActivity.onSuccessCreatingNewRequesters(req);
     }
 
     public void onErrorCreatingNewRequesters(Exception ex) {
@@ -160,5 +231,13 @@ public class ContactsController {
 
     public void setUserId(String userId) {
         this.mUserId = userId;
+    }
+
+    public void onErrorGettingRequester(Exception e) {
+        mActivity.onErrorGettingRequester(e.getMessage());
+    }
+
+    public void onSuccessGettingRequester(Requesters req) {
+
     }
 }

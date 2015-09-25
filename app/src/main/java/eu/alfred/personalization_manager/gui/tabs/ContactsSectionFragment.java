@@ -106,13 +106,7 @@ public class ContactsSectionFragment extends SectionFragment {
         this.mContext = context;
     }
 
-/*    public void init() {
-        mController.setFragment(this);
 
-        mController.getAllContacts();
-    }*/
-
-    //TODO Retrieve real data from server
     private void createFakeContacts(View view) {
         contacts = new ArrayList<Contact>();
         adapter = new ContactListAdapter(view.getContext(), contacts);

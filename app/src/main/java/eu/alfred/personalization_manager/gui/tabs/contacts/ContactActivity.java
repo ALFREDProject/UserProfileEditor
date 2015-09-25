@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
@@ -60,6 +61,7 @@ public class ContactActivity extends Activity {
     private EditText etPreferredName;
     private EditText etPhone;
     private EditText etMobilePhone;
+    private EditText etUsername;
     private EditText etEmail;
     private EditText etContactStreet;
     private EditText etContactNumber;
@@ -119,6 +121,7 @@ public class ContactActivity extends Activity {
         bindFields();
         if (contactPos < 0) {
             emptyForm();
+            dirty = false;
         } else {
             fillForm(contactPos);
         }
@@ -134,6 +137,7 @@ public class ContactActivity extends Activity {
         etPreferredName = (EditText) findViewById(R.id.txtPreferredName);
         etPhone = (EditText) findViewById(R.id.txtPhone);
         etMobilePhone = (EditText) findViewById(R.id.txtMobilePhone);
+        etUsername = (EditText) findViewById(R.id.txtUsername);
         etEmail = (EditText) findViewById(R.id.txtEmail);
         etContactStreet = (EditText) findViewById(R.id.txtContactStreet);
         etContactNumber = (EditText) findViewById(R.id.txtContactNumber);
@@ -220,6 +224,7 @@ public class ContactActivity extends Activity {
 
     private void fillForm(int contactPos) {
         Contact contact = ContactsSectionFragment.getContact(contactPos);
+        mContact = contact;
         fillForm(contact);
     }
 
@@ -227,6 +232,7 @@ public class ContactActivity extends Activity {
     private void fillForm(Contact contact) {
 
         if (contact != null) {
+            mContact = contact;
             if (etFirstName != null) {
                 etFirstName.setText(contact.getFirstName());
             }
@@ -244,6 +250,9 @@ public class ContactActivity extends Activity {
             }
             if (etMobilePhone != null) {
                 etMobilePhone.setText(contact.getMobilePhone());
+            }
+            if (etUsername != null) {
+                etUsername.setText(contact.getAlfredUserName());
             }
             if (etEmail != null) {
                 etEmail.setText(contact.getEmail());
@@ -290,7 +299,7 @@ public class ContactActivity extends Activity {
                     autoContactPostalCountry.setText(address.getCountry());
                 }
             }
-            if(spRelation != null && contact.getRelationToUser()!= null &&
+            if (spRelation != null && contact.getRelationToUser() != null &&
                     contact.getRelationToUser().length > 0) {
                 ArrayAdapter<Relation> adapter = (ArrayAdapter<Relation>) spRelation.getAdapter();
                 int position = adapter.getPosition(contact.getRelationToUser()[0]);
@@ -313,7 +322,7 @@ public class ContactActivity extends Activity {
                 Date date = contact.getDateOfBirth();
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(date);
-                dpDateOfBirth.updateDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)-1, cal.get(Calendar.DATE));
+                dpDateOfBirth.updateDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) - 1, cal.get(Calendar.DATE));
             }
 
             etUserId.setText(userId);
@@ -370,6 +379,13 @@ public class ContactActivity extends Activity {
             String str = etMobilePhone.getText().toString();
             if(str!=null && !"".equals(str)){
                 contact.setMobilePhone(str);
+            }
+
+        }
+        if (etUsername != null) {
+            String str = etUsername.getText().toString();
+            if(str!=null && !"".equals(str)){
+                contact.setAlfredUserName(str);
             }
 
         }
@@ -527,6 +543,9 @@ public class ContactActivity extends Activity {
         if (etMobilePhone != null) {
             etMobilePhone.setText("");
         }
+        if (etUsername != null) {
+            etUsername.setText("");
+        }
         if (etEmail != null) {
             etEmail.setText("");
         }
@@ -615,7 +634,7 @@ public class ContactActivity extends Activity {
     }
 
     private void createContact() {
-        Contact contact = extractContact(null);
+        Contact contact = extractContact(mContact);
         controller.newContact(contact);
 /*        ContactsSectionFragment.setContact(contactPos, mContact);
         notification(true, "Contact saved");
@@ -623,7 +642,7 @@ public class ContactActivity extends Activity {
     }
 
     private void updateContact() {
-        Contact contact = extractContact(null);
+        Contact contact = extractContact(mContact);
         controller.updateContact(contact);
     }
 
@@ -766,16 +785,35 @@ public class ContactActivity extends Activity {
     }
 
     public void editAccessRights(View view) {
+        Log.d(TAG, "Entering editAccessRights()");
         AttributesHelper attrHelp = new AttributesHelper();
         List<String> upFields = attrHelp.getUserProfileFields();
         final CharSequence[] items = upFields.toArray(new CharSequence[upFields.size()]);
         CharSequence[] itemsHuman = new CharSequence[items.length];
+        final boolean[] itemsChecked = new boolean[items.length];
+        mContact = extractContact(mContact);
+        final HashMap<String, Boolean> defaultAccessRights = controller.defaultAccessRights(mContact);
         for (int i = 0; i < items.length; i++) {
-            int itemStringId = getResources().getIdentifier("attr_up_" + items[i], "string", getPackageName());
-            itemsHuman[i] = getResources().getText(itemStringId);
+            Log.d(TAG, "Access Rights for: " + items[i]);
+
+            String attribute = (String) items[i];
+            String label = "attr_up_" + attribute;
+            try {
+                int itemStringId = getResources().getIdentifier(label, "string", getPackageName());
+                itemsHuman[i] = getResources().getText(itemStringId);
+            } catch (Resources.NotFoundException e) {
+                itemsHuman[i] = attribute;
+                Log.e(TAG, "Resource label '" + label + "' not found in res/strings.xml");
+            }
+            if (mContact.getAccessRightsToAttributes() != null &&
+                    !mContact.getAccessRightsToAttributes().isEmpty() &&
+                    mContact.getAccessRightsToAttributes().containsKey(attribute)) {
+                itemsChecked[i] = mContact.getAccessRightsToAttributes().get(attribute);
+            } else {
+                itemsChecked[i] = defaultAccessRights.get(attribute);
+            }
         }
 //        boolean[] checkedItems = new boolean[upFields.size()];
-        final boolean[] itemsChecked = new boolean[items.length];
 
 
 
@@ -787,20 +825,17 @@ public class ContactActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                         itemsChecked[which] = isChecked;
+                        dirty = true;
                     }
                 })
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        HashMap<String, Boolean> accessRights = new HashMap<String, Boolean>(items.length);
+                        HashMap<String, Boolean> accessRights = mContact.getAccessRightsToAttributes();
                         for (int i = 0; i < items.length; i++) {
                             accessRights.put(items[i].toString(), itemsChecked[i]);
-
                         }
-                        for (String key : accessRights.keySet()) {
-                            System.out.println(String.format("{%s, %b}", key, accessRights.get(key)));
-                        }
-
+/*
                         String myUserId = ((EditText) findViewById(R.id.txtUserId)).getText().toString();
                         String contactId = ((EditText) findViewById(R.id.txtContactId)).getText().toString();
 
@@ -810,7 +845,7 @@ public class ContactActivity extends Activity {
                         req.setRequesterAlfredId(contactId); // The Contact
 
 
-                        controller.saveRequester(req);
+                        controller.saveRequester(req);*/
 
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -821,5 +856,16 @@ public class ContactActivity extends Activity {
                 }).create();
         alertDialog.show();
 
+    }
+
+    public void onSuccessCreatingNewRequesters(Requesters req) {
+
+        String completeName = completeName(mContact);
+        String msg = getResources().getString(R.string.contact_permissions_update_success, completeName);
+        notification(true, msg);
+    }
+
+    public void onErrorGettingRequester(String message) {
+        notification(false, "Error getting Requester: " + message);
     }
 }

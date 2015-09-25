@@ -27,8 +27,10 @@
     <string name="up_mobile_phone_text">Mobile phone</string>
     <string name="up_phone_hint">+31 555 00 11 XX</string>
     <string name="up_mobile_phone_hint">+31 955 00 11 XX</string>
+    <string name="up_username_text">Username</string>
+    <string name="up_username_hint">yourcontact@alfreduser.com</string>
     <string name="up_email_text">e-mail</string>
-    <string name="up_email_hint">jonhlsmith@mail.com</string>
+    <string name="up_email_hint">yourcontact@mail.com</string>
     <string name="action_save_title">Save</string>
     <string name="action_delete_profile_title">Delete profile</string>
     <string name="action_new_profile_title">New</string>
@@ -152,7 +154,7 @@
     <string name="pref_db_url_title">Users Database URL</string>
     <string name="pref_db_url_summary">Location of MongoDB for User Profiles</string>
     <string name="pref_db_url_default">http://80.86.83.34:8080/personalization-manager/services/databaseServices/users/</string>
-    <string name="pref_user_id_title">Current User</string>
+    <string name="pref_user_id_title">Current User ID</string>
     <string name="pref_user_id_summary">Hexadecimal identifier</string>
     <string name="pref_activity_name">Settings</string>
     <string name="up_anniversary_date_text">Anniversary Date</string>
@@ -196,7 +198,9 @@
     <string name="attr_up_nextOfKin">Next of Kin</string>
     <string name="attr_up_lastName">Last Name</string>
     <string name="attr_up_alfedAppInstalationDate">Alfred App Installation Date</string>
+    <string name="attr_up_alfredUserName">Username</string>
     <string name="attr_up_language">Language</string>
+
     <string name="splash_bt_register">Register</string>
     <string name="splash_bt_login">Login</string>
     <string name="splash_tv_email">e-mail</string>
@@ -218,13 +222,17 @@
     <string name="splash_tv_middlename_hint">Middle name</string>
     <string name="splash_tv_lastname">Last name</string>
     <string name="splash_tv_lastname_hint">Last name</string>
-    <string name="up_email_info">This is your username.</string>
+    <string name="up_email_info">This is your username. Cannot be changed.</string>
     <string name="contact_notification_create_success"><![CDATA[<font color=\'#017BE3\'>%s</font> is now in your contact list]]></string>
     <string name="contact_notification_update_success"><![CDATA[<font color=\'#017BE3\'>%s</font>\'s info has been saved]]></string>
     <string name="contact_notification_delete_success"><![CDATA[OK, <font color=\'#017BE3\'>%s</font> is no longer your contact]]></string>
+    <string name="contact_permissions_update_success"><![CDATA[Access rights for <font color=\'#017BE3\'>%s</font> have been saved]]></string>
     <string name="progress_overlay_text_content">Connecting to server…</string>
     <string name="progress_overlay_text_content_login">Connecting to server…</string>
     <string name="progress_overlay_text_content_register">Connecting to server…</string>
+    <string name="pref_user_username_title">Current Username</string>
+    <string name="pref_user_username_summary">Alfred Username</string>
+    <string name="up_health_loading_resources_text">Loading resources…</string>
 
 
     <!-- Source: http://www.textfixer.com/resources/dropdowns/country-list-array.txt -->

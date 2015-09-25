@@ -137,6 +137,40 @@
         <View style="@style/AlfredFormSeparator"/>
 
         <TextView
+            android:id="@+id/up_username_label"
+            style="@style/AlfredFormTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/up_username_text" />
+
+        <EditText
+            android:id="@+id/txtUsername"
+            style="@style/AlfredFormEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/up_username_hint"
+            android:inputType="textEmailAddress"
+            android:labelFor="@id/up_username_label"
+            android:drawableStart="@drawable/ic_action_email" />
+
+        <TextView
+            android:id="@+id/up_email_label"
+            style="@style/AlfredFormTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/up_email_text" />
+
+        <EditText
+            android:id="@+id/txtEmail"
+            style="@style/AlfredFormEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/up_email_hint"
+            android:inputType="textEmailAddress"
+            android:labelFor="@id/up_email_label"
+            android:drawableStart="@drawable/ic_action_email" />
+
+        <TextView
             android:id="@+id/up_phone_label"
             style="@style/AlfredFormTextView"
             android:layout_width="match_parent"
@@ -169,23 +203,6 @@
             android:inputType="phone"
             android:labelFor="@id/up_mobile_phone_label"
             android:drawableStart="@drawable/ic_action_call" />
-
-        <TextView
-            android:id="@+id/up_email_label"
-            style="@style/AlfredFormTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/up_email_text" />
-
-        <EditText
-            android:id="@+id/txtEmail"
-            style="@style/AlfredFormEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/up_email_hint"
-            android:inputType="textEmailAddress"
-            android:labelFor="@id/up_email_label"
-            android:drawableStart="@drawable/ic_action_email" />
 
 
         <!--Residential Address info starts here-->

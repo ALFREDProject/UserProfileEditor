@@ -77,6 +77,7 @@ public class UserProfileController {
             up.setId(upId);
             Log.d(TAG, "Updating profile: " + up.toString());
             client.doPutRequest(up);
+            mHealthController.update(user);
         } else {
             Log.w(TAG, "Profile was null when trying to update.");
         }
@@ -88,6 +89,7 @@ public class UserProfileController {
         mActivity.fillForm(newUp);
         mActivity.setMenuItemsVisibleForEditing(true);
         mActivity.notification(true, "New User Profile created.");
+        mHealthController.createInfo(user);
         Log.d(TAG, "New User Profile created with id = " + upId);
 
     }
@@ -126,6 +128,7 @@ public class UserProfileController {
     public void initCreating(User user) {
         this.user = user;
         UserProfile up = new UserProfile();
+        up.setAlfredUserName(user.getEmail());
         up.setAlfredUserName(user.getEmail());
         up.setEmail(user.getEmail());
         up.setFirstName(user.getFirstName());

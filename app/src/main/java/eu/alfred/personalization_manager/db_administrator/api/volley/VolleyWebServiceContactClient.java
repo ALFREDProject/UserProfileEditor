@@ -289,7 +289,7 @@ public class VolleyWebServiceContactClient {
     }
 
 
-    public void doPostNewRequester(Requesters req) {
+    public void doPostNewRequester(final Requesters req) {
         String jsContactStr = mGson.toJson(req);
         try {
             final JSONObject jsContact = new JSONObject(jsContactStr);
@@ -305,8 +305,8 @@ public class VolleyWebServiceContactClient {
                         @Override
                         public void onResponse(String response) {
                             Log.d(TAG, "doPostNewRequester() -> onResponse<String>() " + response);
-
-                            controller.onSuccessCreatingNewRequesters(response);
+                            req.setId(response);
+                            controller.onSuccessCreatingNewRequesters(req);
                         }
                     },
                     new Response.ErrorListener() {
@@ -322,6 +322,40 @@ public class VolleyWebServiceContactClient {
             Log.d(TAG, "doPostRequestToCreate() -> " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public void doGetRequest(final Contact contact) {
+        final String upId = contact.getUserID();
+        final String contactUserID = contact.getId();
+        JsonArrayRequest request = new JsonArrayRequest(
+                URL + "users/" + upId + "/requesters/" + contactUserID,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray jsonArray) {
+
+                        Requesters req = null;
+                        try {
+                            if (jsonArray.length() > 0) {
+                                JSONObject jsonObj = jsonArray.getJSONObject(0);
+                                req = mGson.fromJson(jsonObj.toString(), Requesters.class);
+                                controller.onSuccessGettingRequester(req);
+                            } else {
+                                //controller.onStillNoRequester(contact);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            controller.onErrorGettingRequester(e);
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        controller.onErrorGettingRequester(volleyError);
+                    }
+                });
+        mRequestQueue.add(request);
     }
 
     public void doPutRequester(Requesters req) {

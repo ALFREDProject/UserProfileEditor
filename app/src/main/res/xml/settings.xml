@@ -14,7 +14,18 @@
             android:key="pref_user_id_key"
             android:title="@string/pref_user_id_title"
             android:summary="@string/pref_user_id_summary"
-            android:defaultValue="false"
+            android:editable="false"
+            />
+        <EditTextPreference
+            android:key="pref_user_username_key"
+            android:title="@string/pref_user_username_title"
+            android:summary="@string/pref_user_username_summary"
+            android:editable="false"
+            />
+        <CheckBoxPreference
+            android:key="pref_user_hidden4dev_key"
+            android:title="@string/pref_user_username_title"
+            android:summary="@string/pref_user_username_summary"
             />
 
     </PreferenceCategory>

@@ -45,6 +45,7 @@ public class PersonalSectionFragment extends SectionFragment {
     private DatePicker dpDateOfBirth;
     private EditText etPhone;
     private EditText etMobilePhone;
+    private EditText etUsername;
     private EditText etEmail;
     private View mView;
     private EditText etContactStreet;
@@ -89,16 +90,17 @@ public class PersonalSectionFragment extends SectionFragment {
         dpAnniversaryDate = (DatePicker) view.findViewById(R.id.upAnniversaryDate);
         etPhone = (EditText) view.findViewById(R.id.txtPhone);
         etMobilePhone = (EditText) view.findViewById(R.id.txtMobilePhone);
-        etEmail = (EditText) view.findViewById(R.id.txtEmail);
-//        etEmail.setEnabled(false);
-        etEmail.setKeyListener(null);
-        etEmail.setOnClickListener(new View.OnClickListener() {
+
+        etUsername = (EditText) view.findViewById(R.id.txtUsername);
+        etUsername.setKeyListener(null); //This prevents the user to modify their user profile.
+        etUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showEmailInfo();
             }
         });
         /***/
+        etEmail = (EditText) view.findViewById(R.id.txtEmail);
         etContactStreet = (EditText) view.findViewById(R.id.txtContactStreet);
         etContactNumber = (EditText) view.findViewById(R.id.txtContactNumber);
         etContactPostalCode = (EditText) view.findViewById(R.id.txtContactPostalCode);
@@ -176,6 +178,9 @@ public class PersonalSectionFragment extends SectionFragment {
             }
             if(etMobilePhone!=null) {
                 etMobilePhone.setText(up.getMobilePhone());
+            }
+            if(etUsername!=null) {
+                etUsername.setText(up.getAlfredUserName());
             }
             if(etEmail!=null) {
                 etEmail.setText(up.getEmail());
@@ -341,6 +346,13 @@ public class PersonalSectionFragment extends SectionFragment {
             String str = etMobilePhone.getText().toString();
             if(str!=null && !"".equals(str)){
                 up.setMobilePhone(str);
+            }
+
+        }
+        if (etUsername != null) {
+            String str = etUsername.getText().toString();
+            if(str!=null && !"".equals(str)){
+                up.setAlfredUserName(str);
             }
 
         }
@@ -559,6 +571,9 @@ public class PersonalSectionFragment extends SectionFragment {
         }
         if (etMobilePhone != null) {
             etMobilePhone.setText("");
+        }
+        if (etUsername != null) {
+            etUsername.setText("");
         }
         if (etEmail != null) {
             etEmail.setText("");
