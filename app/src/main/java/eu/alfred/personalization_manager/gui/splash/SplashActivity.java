@@ -25,29 +25,44 @@ import eu.alfred.personalization_manager.gui.animation.AndroidUtils;
 import eu.alfred.userprofile.R;
 
 /**
- * Created by Arturo.Brotons on 31/07/2015.
+ * This is the first activity, started by the user when pressing the ALFRED launcher.
+ * It's responsible of asking the user for the username and password or allowing
+ * the user to register. So only if the information provided is correct and we can get
+ * a valid session, then we can go to the next Activity: UserProfileActivity.
+ *
+ * Note: On this context, email means Alfred Username, not just some random email.
  */
 public class SplashActivity extends FragmentActivity implements AuthListener {
     final public String TAG = "SplashActivity";
-    private EditText etEmail;
-    private EditText etPassword;
-    private AuthController controller;
-    private User user;
-    private boolean modeIsLogin = true; //True = login menu, False = register menu
-    private LinearLayout groupLogin;
-    private LinearLayout groupBtRegister;
-    private SharedPrefHelper prefs;
+
+    /* Form fields*/
     private EditText etFirstName;
     private EditText etMiddleName;
     private EditText etLastName;
+
+    private EditText etEmail; //Alfred Username
+    private EditText etPassword;
+
+    private AuthController controller;
+
+    /* Local storage of previous session username and password */
+    private SharedPrefHelper prefs;
+    private String prefMail; //Previously Alfred Username used if any
+    private String prefPassword; //Not encrypted, shouldn't be needed
+    private String prefUSerId;
+
+    private User user;
+
+    private boolean modeIsLogin = true; //True = login menu, False = register menu
+
+    /* Advance GUI management */
+    private LinearLayout groupLogin;
+    private LinearLayout groupBtRegister;
     private LinearLayout groupBtName;
 
 
     //Animation
     View progressOverlay;
-    private String prefMail;
-    private String prefPassword;
-    private String prefUSerId;
     private TextView progressText;
 
     @Override
@@ -56,23 +71,17 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
         controller = new AuthController(this);
         prefs = new SharedPrefHelper(this);
         setContentView(R.layout.splash_activity);
+        bindForm();
 
-        etFirstName = (EditText) findViewById(R.id.etFirstName);
-        etMiddleName = (EditText) findViewById(R.id.etMiddleName);
-        etLastName = (EditText) findViewById(R.id.etLastName);
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etPassword = (EditText) findViewById(R.id.etPassword);
-
-        groupBtName = (LinearLayout) findViewById(R.id.groupBtName);
-        groupLogin = (LinearLayout) findViewById(R.id.groupBtLogin);
-        groupBtRegister = (LinearLayout) findViewById(R.id.groupBtRegister);
-
+        // Animation stuff
         progressOverlay = findViewById(R.id.progress_overlay);
         progressText = (TextView) findViewById(R.id.progress_overlay_text);
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+
+        /* Retrieve the previous session info */
         prefMail = prefs.get(SharedPrefHelper.CURRENT_UP_EMAIL);
         prefPassword = prefs.get(SharedPrefHelper.CURRENT_UP_PASSWORD);
         prefUSerId = prefs.get(SharedPrefHelper.CURRENT_UP_USERID);
@@ -88,8 +97,23 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
         autoLogin();
     }
 
-    private void autoLogin() {
+    //Binds form elements if the GUI to variables.
+    private void bindForm() {
+        etFirstName = (EditText) findViewById(R.id.etFirstName);
+        etMiddleName = (EditText) findViewById(R.id.etMiddleName);
+        etLastName = (EditText) findViewById(R.id.etLastName);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPassword = (EditText) findViewById(R.id.etPassword);
 
+        groupBtName = (LinearLayout) findViewById(R.id.groupBtName);
+        groupLogin = (LinearLayout) findViewById(R.id.groupBtLogin);
+        groupBtRegister = (LinearLayout) findViewById(R.id.groupBtRegister);
+    }
+
+    /**
+     * Tries to make login from the last session
+     */
+    private void autoLogin() {
 
         if (prefMail != null && prefPassword != null && prefUSerId != null) {
             user = new User(prefMail, prefPassword);
@@ -98,12 +122,19 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
         }
     }
 
+    /**
+     * When logout, we clear completely the credentials.
+     */
     private void clearCredentials() {
         prefs.delete(SharedPrefHelper.CURRENT_UP_EMAIL);
         prefs.delete(SharedPrefHelper.CURRENT_UP_PASSWORD);
         prefs.delete(SharedPrefHelper.CURRENT_UP_USERID);
     }
 
+    /**
+     * Called when the user taps on Login button.
+     * @param view needed in the XML layout to bind a button to a Java method.
+     */
     public void login(View view) {
         Log.d(TAG, "Logging in...");
         if (checkForm()) {
@@ -117,6 +148,10 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
         }
     }
 
+    /**
+     * Called when the user taps on Register button.
+     * @param view needed in the XML layout to bind a button to a Java method.
+     */
     public void register(View view) {
         if (checkForm()) {
 
@@ -127,12 +162,18 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
             user.setLastName(etLastName.getText().toString());
             user.setEmail(etEmail.getText().toString());
             user.setPassword(etPassword.getText().toString());
-            user.addRole("Developer");
+
+            //At least, one role is needed when registering due to Auth Server restrictions
+            user.addRole("Developer"); // TODO Show proper Spinner or change to a proper role
 
             controller.register(user);
         }
     }
 
+    /**
+     * Validates the form (non empty fields, correct email format, etc).
+     * @return true if the form is correct, or false otherwise.
+     */
     private boolean checkForm() {
         boolean emailCorrect, passwordCorrect, firstNameCorrect, lastNameCorrect, emailFormatCorrect;
         emailCorrect = isEditTextEmpty(etEmail);
@@ -167,6 +208,10 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(text).matches();
     }
 
+    /*
+        Animation stuff, it darkens the screen and shows a spinning wheel that indicates that
+        the server is being connected and the App is waiting for some login / register result.
+     */
     @Override
     public void startWaiting() {
         Log.d(TAG, "startWaiting()");
@@ -187,6 +232,10 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
         AndroidUtils.animateView(progressOverlay, View.VISIBLE, 0.9f, 1000);
     }
 
+    /*
+        Animation stuff, restores the visibility, hides any spinning wheel and makes
+        all edit texts (fields) editable again.
+     */
     @Override
     public void stopWaiting() {
         Log.d(TAG, "stopWaiting()");
@@ -231,6 +280,11 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
         });
     }
 
+    /**
+     * Once the login or registration is successful, the main activity is launched passing some
+     * information as extra fields to the UserProfileActivity.
+     * @param existingUser true: we need to retrieve the user from server, false: we're creating it
+     */
     private void openUserProfileActivity(boolean existingUser) {
 
         Intent intent = new Intent(this, UserProfileActivity.class);
@@ -249,6 +303,9 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
         startActivityForResult(intent, 1);
     }
 
+    /**
+     * When the main activity UserProfileActivity is closed
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, String.format("onActivityResult {request: %d, result %d}", requestCode, resultCode));
@@ -289,7 +346,7 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
             groupBtRegister.setVisibility(View.GONE);
             groupLogin.setVisibility(View.VISIBLE);
         } else {
-            Log.d(TAG, "");
+            Log.d(TAG, "properVisibility for Register");
             groupBtName.setVisibility(View.VISIBLE);
             groupBtRegister.setVisibility(View.VISIBLE);
             groupLogin.setVisibility(View.GONE);
@@ -301,6 +358,12 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
         notification(succeed, msg);
     }
 
+    /**
+     * Shows a Toast (temporary information message) with big green tick when success
+     * or a big red cross when fails and a text message.
+     * @param succeed true: success, false: fail
+     * @param msg Message String to show
+     */
     public void notification(boolean succeed, String msg) {
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.toast_custom,

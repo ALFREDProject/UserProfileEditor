@@ -12,6 +12,13 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+
+        <!--
+            This is the first activity, started by the user when pressing the ALFRED launcher.
+            It's responsible of asking the user for the username and password or allowing
+            the user to register. So only if the information provided is correct and we can get
+            a valid session, then we can go to the next Activity: UserProfileActivity.
+         -->
         <activity
             android:name="eu.alfred.personalization_manager.gui.splash.SplashActivity"
             android:label="@string/app_name"
@@ -22,13 +29,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             </activity>
+
+        <!--
+            This is the main activity of the App. It manages the different tabs (Personal,
+            Contacts and Health). It was the first and only activity of the App, until adding
+            the SplashActivity.
+        -->
         <activity
             android:name="eu.alfred.personalization_manager.gui.UserProfileActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
+
+        <!--
+            This is a secondary activity. It's launched from ContactsSectionFragment,
+            when the user either taps on the New Contact button, or on an item of a contact.
+        -->
         <activity
             android:name="eu.alfred.personalization_manager.gui.tabs.contacts.ContactActivity"
             android:label="@string/edit_contact_activity_name"/>
+
+        <!--
+            Side activity. Only meant to manage simple settings as the URL of the server
+            and some developer options.
+        -->
         <activity android:name="eu.alfred.personalization_manager.gui.pref.SettingsActivity"
             android:label="@string/pref_activity_name"/>
     </application>
