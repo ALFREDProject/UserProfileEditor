@@ -133,7 +133,7 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
 
     /**
      * Called when the user taps on Login button.
-     * @param view needed in the XML layout to bind a button to a Java method.
+     * @param view needed so in the XML layout we can bind a button to a Java method.
      */
     public void login(View view) {
         Log.d(TAG, "Logging in...");
@@ -150,7 +150,7 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
 
     /**
      * Called when the user taps on Register button.
-     * @param view needed in the XML layout to bind a button to a Java method.
+     * @param view needed so in the XML layout we can bind a button to a Java method.
      */
     public void register(View view) {
         if (checkForm()) {
@@ -257,18 +257,24 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
     }
 
 
+    /**
+     * It marks the edit text as incorrect (white text over red background) and adds some listener,
+     * so if the user changes the text, the color scheme is restored.
+     *
+     * @param editText to mark.
+     */
     private void markEditText(final EditText editText) {
         editText.setHintTextColor(getResources().getColor(R.color.incorrect_form_field_hint));
         editText.setBackgroundColor(getResources().getColor(R.color.incorrect_form_field_bg));
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                //Empty on purpose
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                //Empty on purpose
             }
 
             @Override
@@ -304,7 +310,8 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
     }
 
     /**
-     * When the main activity UserProfileActivity is closed
+     * When the main activity UserProfileActivity is closed we need to know if the User
+     * made logout or not, to clear the login credentials.
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -325,10 +332,18 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
         }
     }
 
+    /**
+     * TODO It should cancel the request of Login / Register.
+     * @param view needed so in the XML layout we can bind a button to a Java method.
+     */
     public void cancel(View view) {
         controller.cancel();
     }
 
+    /**
+     * Switches between login and register mode
+     * @param view needed so in the XML layout we can bind a button to a Java method.
+     */
     public void switchMode(View view) {
         switchMode();
     }
