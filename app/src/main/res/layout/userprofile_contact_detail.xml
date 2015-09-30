@@ -442,6 +442,21 @@
                 style="@style/AlfredFormTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/up_alfred_user_id_text" />
+
+            <EditText
+                android:id="@+id/txtAlfredUserId"
+                style="@style/AlfredFormEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/up_alfred_user_id_hint"
+                android:inputType="text"
+                android:textColor="#aaa" />
+
+            <TextView
+                style="@style/AlfredFormTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/up_user_contact_id_text" />
 
             <EditText

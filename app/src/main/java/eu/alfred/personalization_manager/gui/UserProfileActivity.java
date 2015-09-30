@@ -40,7 +40,9 @@ import eu.alfred.personalization_manager.gui.tabs.AppSectionsPagerAdapter;
 import eu.alfred.personalization_manager.gui.tabs.contacts.ContactActivity;
 import eu.alfred.userprofile.R;
 
-
+/**
+ * This is the main activity of the ALFRED User Profile Editor
+ */
 public class UserProfileActivity extends FragmentActivity implements ActionBar.TabListener {
 
     final public String TAG = "UserProfileActivity";
@@ -166,6 +168,7 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
     /**
      * If first run of the App, onCreate() -> onStart().
      * If App comes from background, onRestart() -> onStart().
+     * Look for Android App cycle on google for better understanding with a graph.
      */
     @Override
     protected void onStart() {
@@ -191,7 +194,11 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
         Log.d(TAG, "onDestroy()");
     }
 
-
+    /**
+     * Binding the top right menu items of the GUI to java objects.
+     * @param menu Android stuff
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -210,6 +217,11 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
         return true;
     }
 
+    /**
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         Log.d(TAG, "onPrepareOptionsMenu()");
@@ -223,7 +235,6 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
 
     /**
      * Hides or shows action menu items: New / Save and Delete
-     *
      * @param editMode false if it's a new user profile, true if it's for editing the existing one.
      */
     public void setMenuItemsVisibleForEditing(boolean editMode) {
@@ -286,6 +297,9 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
                 .setNegativeButton(android.R.string.no, null).show();
     }
 
+    /**
+     * Shows a dialog to confirm logout
+     */
     private void onAttemptLoggingOut() {
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.logout_attempt_title))
@@ -299,6 +313,9 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
                 .setNegativeButton(android.R.string.no, null).show();
     }
 
+    /**
+     * Actually closes the UserProfileActivity
+     */
     private void logout() {
         Log.d(TAG, "logout()");
         upController.logout();
@@ -364,9 +381,11 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
         Log.d(TAG, "New contact");
         Intent intent = new Intent(this, ContactActivity.class);
         String userId = upController.getStoredUserProfileId();
+        String alfredUserId = upController.getAlfredUserId();
         intent.putExtra("contact-id", "new");
         intent.putExtra("contact-pos", -1);
         intent.putExtra("user-id", userId);
+        intent.putExtra("alfred-user-id", alfredUserId);
         startActivity(intent);
     }
 

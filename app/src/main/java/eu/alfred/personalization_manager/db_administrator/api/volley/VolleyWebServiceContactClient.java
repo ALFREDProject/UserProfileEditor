@@ -141,7 +141,7 @@ public class VolleyWebServiceContactClient {
             );
             mRequestQueue.add(request);
         } catch (JSONException e) {
-            Log.d(TAG, "doPostRequestToCreate() -> " + e.getMessage());
+            Log.d(TAG, "doPostNewContact() -> " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -200,6 +200,7 @@ public class VolleyWebServiceContactClient {
 //            jsUp.put("dateOfBirth", up.getDateOfBirth().getTime());
 //            _tempDate = up.getDateOfBirth();
             fixAddress(jsUp);
+            jsonInline(jsUp, "accessRightsToAttributes");
 
             Log.d(TAG, "Update User Profile: " + jsUp);
 
@@ -288,6 +289,19 @@ public class VolleyWebServiceContactClient {
 
     }
 
+    private void jsonInline(JSONObject jsonUserProfile, String label) throws JSONException {
+        if (jsonUserProfile.has(label)) {
+            JSONObject jsonAddr = jsonUserProfile.getJSONObject(label);
+            Iterator<String> keys = jsonAddr.keys();
+            while (keys.hasNext()) {
+                String field = keys.next();
+                jsonUserProfile.put(label + "." + field, jsonAddr.get(field));
+            }
+            jsonUserProfile.remove(label);
+        }
+
+    }
+
 
     public void doPostNewRequester(final Requesters req) {
         String jsContactStr = mGson.toJson(req);
@@ -313,13 +327,13 @@ public class VolleyWebServiceContactClient {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
                             Log.e(TAG, "doPostNewRequester() -> onErrorResponse<String>() " + volleyError.getMessage());
-                            controller.onErrorCreatingNewRequesters(volleyError);
+                            controller.onErrorCreatingNewRequesters(volleyError, req);
                         }
                     }
             );
             mRequestQueue.add(request);
         } catch (JSONException e) {
-            Log.d(TAG, "doPostRequestToCreate() -> " + e.getMessage());
+            Log.d(TAG, "doPostNewRequester() -> " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -358,7 +372,68 @@ public class VolleyWebServiceContactClient {
         mRequestQueue.add(request);
     }
 
-    public void doPutRequester(Requesters req) {
+    public void doPutRequester(final Requesters req) {
+        Log.d(TAG, "doPutRequester() -> starting...");
+        String reqStr = mGson.toJson(req);
+        try {
+            final JSONObject jsonReq = new JSONObject(reqStr);
+            jsonReq.remove("id");
+            jsonReq.remove("_class");
+            jsonInline(jsonReq, "accessRightsToAttributes");
+            UPRequest request = new UPRequest(
+                    Request.Method.PUT,
+                    URL + "requesters/" + req.getId(),
+                    jsonReq,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Log.d(TAG, "doPutRequester() -> onResponse<String>() " + response);
+                            controller.onSuccessUpdatingRequesters(response, req);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            Log.e(TAG, "doPutRequester() -> onErrorResponse<String>() " + volleyError.getMessage());
+                            controller.onErrorUpdatingRequester(volleyError);
+                        }
+                    }
 
+            );
+            mRequestQueue.add(request);
+        } catch (JSONException e) {
+            Log.d(TAG, "doPutRequester() -> " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void doGetRequestByAlfredUsername(String targetId, String requesterId) {
+        Log.d(TAG, "GetRequestByAlfredUsername, target: " + targetId + ", requester: " + requesterId);
+        JsonArrayRequest request = new JsonArrayRequest(
+                URL + "users/" + targetId + "/requesters/" + requesterId,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray jsonArray) {
+                        Requesters req = null;
+                        try {
+                            if (jsonArray.length() > 0) {
+                                JSONObject jsonObj = jsonArray.getJSONObject(jsonArray.length() - 1);
+                                req = mGson.fromJson(jsonObj.toString(), Requesters.class);
+                                controller.onSuccessGettingRequester(req);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            controller.onErrorGettingRequester(e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                    }
+                }
+        );
+        mRequestQueue.add(request);
     }
 }

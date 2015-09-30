@@ -161,7 +161,9 @@
     <string name="up_myers_briggs_indicator_text">Myers-Briggs Indicator</string>
     <string name="contact_header_dev">Developer</string>
     <string name="up_user_id_text">#dev My User ID</string>
+    <string name="up_alfred_user_id_text">#dev Auth server Username</string>
     <string name="up_user_id_hint">#dev Manual input</string>
+    <string name="up_alfred_user_id_hint">#dev Manual input</string>
     <string name="up_user_contact_id_text">#dev Contact ID</string>
     <string name="up_user_contact_id_hint">#dev Manual input</string>
     <string name="up_user_contact_pos_text">#dev Contact Position</string>

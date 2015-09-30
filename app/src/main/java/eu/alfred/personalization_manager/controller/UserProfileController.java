@@ -99,6 +99,7 @@ public class UserProfileController {
         mActivity.fillForm(up);
         mActivity.setMenuItemsVisibleForEditing(true);
         mContactsController.setUserId(upId);
+        mContactsController.setAlfredUserId(user.getEmail());
         mContactsController.getAllContacts();
         mHealthController.getInfo(user);
     }
@@ -117,6 +118,7 @@ public class UserProfileController {
         this.user = user;
         if (upId != null) {
             mContactsController.setUserId(upId);
+            mContactsController.setAlfredUserId(user.getEmail());
             client.doGetRequest(upId);
         } else {
             Log.d(TAG, "doGetRequestByUsername attempt #" + emailAttempts);
@@ -195,5 +197,9 @@ public class UserProfileController {
 
     public HealthSectionFragment getmHealthFragment() {
         return mHealthFragment;
+    }
+
+    public String getAlfredUserId() {
+        return user.getEmail();
     }
 }

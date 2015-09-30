@@ -89,6 +89,8 @@ public class ContactActivity extends Activity {
     Contact mContact;
 
     private ActionBar actionBar;
+    private String alfredUserId;
+    private EditText etAlfredUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +99,7 @@ public class ContactActivity extends Activity {
         contactId = getIntent().getExtras().getString("contact-id");
         contactPos = getIntent().getExtras().getInt("contact-pos");
         userId = getIntent().getExtras().getString("user-id");
+        alfredUserId = getIntent().getExtras().getString("alfred-user-id");
         mContact = new Contact();
         mContact.setUserID(userId);
         mContact.setId(contactId);
@@ -108,6 +111,7 @@ public class ContactActivity extends Activity {
 //        controller.setContactActivity(this);
         controller = new ContactsController(getApplicationContext());
         controller.setContactActivity(this);
+        controller.setAlfredUserId(alfredUserId);
         actionBar = getActionBar();
         if (actionBar != null) {
 //            actionBar.setIcon(R.drawable.ic_launcher);
@@ -126,6 +130,7 @@ public class ContactActivity extends Activity {
             fillForm(contactPos);
         }
         etUserId.setText(userId);
+        etAlfredUserId.setText(alfredUserId);
         etContactId.setText(contactId);
         etContactPos.setText(String.valueOf(contactPos));
     }
@@ -206,6 +211,8 @@ public class ContactActivity extends Activity {
         autoContactPostalCountry.addTextChangedListener(watcher);
 
         etUserId = (EditText) findViewById(R.id.txtUserId);
+        etAlfredUserId = (EditText) findViewById(R.id.txtAlfredUserId);
+
         etContactId = (EditText) findViewById(R.id.txtContactId);
         etContactPos = (EditText) findViewById(R.id.txtContactPos);
 
@@ -326,6 +333,7 @@ public class ContactActivity extends Activity {
             }
 
             etUserId.setText(userId);
+            etAlfredUserId.setText(alfredUserId);
             etContactId.setText(contactId);
             etContactPos.setText(String.valueOf(contactPos));
         }
@@ -635,7 +643,7 @@ public class ContactActivity extends Activity {
 
     private void createContact() {
         Contact contact = extractContact(mContact);
-        controller.newContact(contact);
+        controller.newContact(contact, alfredUserId);
 /*        ContactsSectionFragment.setContact(contactPos, mContact);
         notification(true, "Contact saved");
         dirty = false;*/
@@ -867,5 +875,16 @@ public class ContactActivity extends Activity {
 
     public void onErrorGettingRequester(String message) {
         notification(false, "Error getting Requester: " + message);
+    }
+
+    public void onSuccessUpdatingRequesters(Requesters req) {
+        String completeName = completeName(mContact);
+        String msg = getResources().getString(R.string.contact_permissions_update_success, completeName);
+        notification(true, msg);
+    }
+
+    public void onErrorCreatingNewRequesters(Exception ex, Requesters req) {
+        String completeName = completeName(mContact);
+        notification(false, "Error saving access rights for " + completeName);
     }
 }
