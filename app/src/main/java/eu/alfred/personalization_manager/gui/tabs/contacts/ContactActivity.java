@@ -133,6 +133,11 @@ public class ContactActivity extends Activity {
         etAlfredUserId.setText(alfredUserId);
         etContactId.setText(contactId);
         etContactPos.setText(String.valueOf(contactPos));
+        View groupContentDevView = findViewById(R.id.groupContentDev);
+        if (groupContentDevView != null) {
+            groupContentDevView.setVisibility(View.GONE);
+        }
+
     }
 
     private void bindFields() {

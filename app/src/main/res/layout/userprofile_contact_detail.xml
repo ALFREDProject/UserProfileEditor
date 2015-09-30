@@ -413,7 +413,7 @@
         <LinearLayout android:layout_height="wrap_content"
             android:layout_width="fill_parent"
             android:orientation="vertical"
-            android:id="@+id/groupContantDev">
+            android:id="@+id/groupContentDev">
 
             <View style="@style/AlfredFormSeparator" />
 
@@ -482,14 +482,13 @@
                 android:inputType="text"
                 android:textColor="#aaa" />
 
-            <Button
-                android:id="@+id/btEditAccessRights"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/up_edit_access_rights_text"
-                android:onClick="editAccessRights" />
         </LinearLayout>
-
+        <Button
+            android:id="@+id/btEditAccessRights"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/up_edit_access_rights_text"
+            android:onClick="editAccessRights" />
 
     </LinearLayout>
 
