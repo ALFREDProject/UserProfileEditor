@@ -470,6 +470,7 @@
             android:labelFor="@id/up_status_marital_status_label"/>
 
         <TextView
+            android:id="@+id/upAnniversaryDateLabel"
             style="@style/AlfredFormTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

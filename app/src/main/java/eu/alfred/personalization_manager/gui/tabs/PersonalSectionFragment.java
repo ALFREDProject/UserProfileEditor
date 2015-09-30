@@ -76,8 +76,36 @@ public class PersonalSectionFragment extends SectionFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         bindViews(view);
         setSpinnersContent(view);
+        hideUnnecessaryFields(view);
         mView = view;
         return view;
+    }
+
+    private void hideUnnecessaryFields(View view) {
+        View up_status_socialSecurityIdentifier_label = view.findViewById(R.id.up_status_socialSecurityIdentifier_label);
+        if(up_status_socialSecurityIdentifier_label!=null) {
+            up_status_socialSecurityIdentifier_label.setVisibility(View.GONE);
+        }
+        View txtSocialSecurityIdentifier = view.findViewById(R.id.txtSocialSecurityIdentifier);
+        if(txtSocialSecurityIdentifier!=null) {
+            txtSocialSecurityIdentifier.setVisibility(View.GONE);
+        }
+        View up_myers_briggs_indicator_label = view.findViewById(R.id.up_myers_briggs_indicator_label);
+        if(up_myers_briggs_indicator_label!=null) {
+            up_myers_briggs_indicator_label.setVisibility(View.GONE);
+        }
+        View txtMyersBriggsIndicator = view.findViewById(R.id.txtMyersBriggsIndicator);
+        if(txtMyersBriggsIndicator!=null) {
+            txtMyersBriggsIndicator.setVisibility(View.GONE);
+        }
+        View upAnniversaryDateLabel = view.findViewById(R.id.upAnniversaryDateLabel);
+        if(upAnniversaryDateLabel!=null) {
+            upAnniversaryDateLabel.setVisibility(View.GONE);
+        }
+        View upAnniversaryDate = view.findViewById(R.id.upAnniversaryDate);
+        if(upAnniversaryDate!=null) {
+            upAnniversaryDate.setVisibility(View.GONE);
+        }
     }
 
     private void bindViews(View view) {
@@ -116,6 +144,7 @@ public class PersonalSectionFragment extends SectionFragment {
         autoCitizenship = (AutoCompleteTextView) view.findViewById(R.id.txtCitizenship);
         autoNationality = (AutoCompleteTextView) view.findViewById(R.id.txtNationality);
         etSocialSecurityNumber = (EditText) view.findViewById(R.id.txtSocialSecurityIdentifier);
+
         etProfession = (EditText) view.findViewById(R.id.txtProfession);
         etHealthInsurance = (EditText) view.findViewById(R.id.txtHealthInsurance);
 
@@ -136,7 +165,6 @@ public class PersonalSectionFragment extends SectionFragment {
                 view.getContext(),
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.nationalities_array)));
-
 
     }
 
