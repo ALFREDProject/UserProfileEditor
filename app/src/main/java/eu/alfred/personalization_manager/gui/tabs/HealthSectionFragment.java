@@ -92,19 +92,34 @@ public class HealthSectionFragment extends SectionFragment implements HealthList
     @Override
     public void addResource(Resource newRes) {
         Log.d(TAG, "addResource: " + newRes.toJsonString());
-        if (results == null) {
-            results = new ArrayList<Resource>();
-        }
-        Resource res = getResourcesByName(newRes.getResourceName());
-        if (res == null) {
-            results.add(newRes);
+        if (allowedResource(newRes)) {
+            if (results == null) {
+                results = new ArrayList<Resource>();
+            }
+            Resource res = getResourcesByName(newRes.getResourceName());
+            if (res == null) {
+                results.add(newRes);
 
+            } else {
+                int index = results.indexOf(res);
+                results.remove(res);
+                results.add(index, newRes);
+            }
+            addResourceToView(container, bundle, newRes);
         } else {
-            int index = results.indexOf(res);
-            results.remove(res);
-            results.add(index, newRes);
+            //Even if we don't show the resources,
+            //we need to count it to hide the spinning wheel
+            count++;
         }
-        addResourceToView(container, bundle, newRes);
+    }
+
+    /**
+     * Health resources that we want to show
+     * @param newRes Resource to check
+     * @return
+     */
+    private boolean allowedResource(Resource newRes) {
+        return !newRes.getResourceName().equals("birthdate");
     }
 
     @Override
