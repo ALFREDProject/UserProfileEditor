@@ -1,5 +1,7 @@
 package eu.alfred.personalization_manager.db_administrator.model;
 
+import android.mtp.MtpObjectInfo;
+
 import java.util.Date;
 
 public class UserProfile {
@@ -34,6 +36,7 @@ public class UserProfile {
 	private String[] interests;
 	private String[] culturalOrFamilyNeeds;
 	private String[] socialMediaProfiles;
+	private MobilityLevel mobilityLevel;
 	private Date alfedAppInstalationDate;   
 	
 	public String getId() {
@@ -210,6 +213,10 @@ public class UserProfile {
 	}
 	public void setSocialMediaProfiles(String[] socialMediaProfiles) {
 		this.socialMediaProfiles = socialMediaProfiles;
+	}
+	public MobilityLevel getMobilityLevel() { return mobilityLevel; }
+	public void setMobilityLevel(MobilityLevel mobilityLevel) {
+		this.mobilityLevel = mobilityLevel;
 	}
     //TODO [UserProfile] AlfedAppInstalationDate
 	public Date getAlfedAppInstalationDate() {

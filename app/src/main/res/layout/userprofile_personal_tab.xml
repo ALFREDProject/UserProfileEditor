@@ -548,6 +548,21 @@
             android:labelFor="@id/up_status_health_insurance_label" />
 
         <TextView
+            android:id="@+id/up_status_mobility_level_label"
+            style="@style/AlfredFormTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/up_mobility_level_text" />
+
+        <Spinner
+            android:id="@+id/txtMobilityLevel"
+            style="@style/AlfredFormSpinner"
+            android:prompt="@string/select_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/up_status_mobility_level_label"/>
+
+        <TextView
             android:id="@+id/up_myers_briggs_indicator_label"
             style="@style/AlfredFormTextView"
             android:layout_width="match_parent"

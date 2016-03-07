@@ -60,6 +60,7 @@
     <string name="up_employment_status_text">Employment status</string>
     <string name="up_living_situation_text">Living situation</string>
     <string name="up_health_insurance_text">Health insurance</string>
+    <string name="up_mobility_level_text">Mobility level</string>
     <string name="select_one">Select one…</string>
     <string name="up_profession_text">Profession</string>
     <string name="up_profession_insurance_hint">Teacher, engineer, lawyer…</string>

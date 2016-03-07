@@ -22,6 +22,7 @@ import eu.alfred.personalization_manager.db_administrator.model.EmploymentStatus
 import eu.alfred.personalization_manager.db_administrator.model.Gender;
 import eu.alfred.personalization_manager.db_administrator.model.Language;
 import eu.alfred.personalization_manager.db_administrator.model.MaritalStatus;
+import eu.alfred.personalization_manager.db_administrator.model.MobilityLevel;
 import eu.alfred.personalization_manager.db_administrator.model.MyersBriggsTypeIndicator;
 import eu.alfred.personalization_manager.db_administrator.model.UserProfile;
 import eu.alfred.userprofile.R;
@@ -35,6 +36,7 @@ public class PersonalSectionFragment extends SectionFragment {
     private Spinner spMaritalStatus;
     private Spinner spEducationLevel;
     private Spinner spEmploymentStatus;
+    private Spinner spMobilityLevel;
     private Spinner spMyersBriggsIndicator;
 
     private EditText etFirstName;
@@ -181,6 +183,9 @@ public class PersonalSectionFragment extends SectionFragment {
         spEmploymentStatus = (Spinner) view.findViewById(R.id.txtEmploymentStatus);
         spEmploymentStatus.setAdapter(new ArrayAdapter<EmploymentStatus>(view.getContext(), android.R.layout.simple_list_item_1, EmploymentStatus.values()));
 
+        spMobilityLevel = (Spinner) view.findViewById(R.id.txtMobilityLevel);
+        spMobilityLevel.setAdapter(new ArrayAdapter<MobilityLevel>(view.getContext(), android.R.layout.simple_list_item_1, MobilityLevel.values()));
+
         spMyersBriggsIndicator = (Spinner) view.findViewById(R.id.txtMyersBriggsIndicator);
         spMyersBriggsIndicator.setAdapter(new ArrayAdapter<MyersBriggsTypeIndicator>(view.getContext(), android.R.layout.simple_list_item_1, MyersBriggsTypeIndicator.values()));
     }
@@ -318,6 +323,11 @@ public class PersonalSectionFragment extends SectionFragment {
                 ArrayAdapter<EmploymentStatus> adapter = (ArrayAdapter<EmploymentStatus>) spEmploymentStatus.getAdapter();
                 int position = adapter.getPosition(up.getEmploymentStatus());
                 spEmploymentStatus.setSelection(position);
+            }
+            if(spMobilityLevel!= null && up.getMobilityLevel()!= null) {
+                ArrayAdapter<MobilityLevel> adapter = (ArrayAdapter<MobilityLevel>) spMobilityLevel.getAdapter();
+                int position = adapter.getPosition(up.getMobilityLevel());
+                spMobilityLevel.setSelection(position);
             }
             if(spMyersBriggsIndicator != null && up.getMyersBriggsIndicator()!= null) {
                 ArrayAdapter<MyersBriggsTypeIndicator> adapter = (ArrayAdapter<MyersBriggsTypeIndicator>) spMyersBriggsIndicator.getAdapter();
@@ -557,6 +567,9 @@ public class PersonalSectionFragment extends SectionFragment {
         }
         if(spEmploymentStatus != null) {
             up.setEmploymentStatus((EmploymentStatus) spEmploymentStatus.getSelectedItem());
+        }
+        if(spMobilityLevel != null) {
+            up.setMobilityLevel((MobilityLevel) spMobilityLevel.getSelectedItem());
         }
         if(spMyersBriggsIndicator != null) {
             up.setMyersBriggsIndicator((MyersBriggsTypeIndicator) spMyersBriggsIndicator.getSelectedItem());
