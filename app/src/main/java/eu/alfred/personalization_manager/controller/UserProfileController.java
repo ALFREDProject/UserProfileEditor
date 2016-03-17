@@ -5,10 +5,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import alfred.eu.personalizationmanagerapi.client.model.UserProfile;
 import eu.alfred.personalization_manager.controller.auth.User;
 import eu.alfred.personalization_manager.controller.health.HealthController;
 import eu.alfred.personalization_manager.db_administrator.api.volley.VolleyWebServiceClient;
-import eu.alfred.personalization_manager.db_administrator.model.UserProfile;
 import eu.alfred.personalization_manager.gui.UserProfileActivity;
 import eu.alfred.personalization_manager.gui.tabs.ContactsSectionFragment;
 import eu.alfred.personalization_manager.gui.tabs.HealthSectionFragment;

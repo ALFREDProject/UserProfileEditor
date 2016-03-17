@@ -27,8 +27,8 @@ import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.Iterator;
 
+import alfred.eu.personalizationmanagerapi.client.model.UserProfile;
 import eu.alfred.personalization_manager.controller.UserProfileController;
-import eu.alfred.personalization_manager.db_administrator.model.UserProfile;
 
 /**
  * Created by Arturo.Brotons on 26/01/2015.

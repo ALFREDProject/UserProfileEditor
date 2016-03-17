@@ -19,10 +19,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import alfred.eu.personalizationmanagerapi.client.model.BloodType;
 import eu.alfred.internal.wrapper.healthmonitor.resource.Resource;
 import eu.alfred.internal.wrapper.healthmonitor.resource.Value;
 import eu.alfred.personalization_manager.controller.health.HealthListener;
-import eu.alfred.personalization_manager.db_administrator.model.BloodType;
 import eu.alfred.personalization_manager.db_administrator.model.ModifiedRankinScale;
 import eu.alfred.userprofile.R;
 

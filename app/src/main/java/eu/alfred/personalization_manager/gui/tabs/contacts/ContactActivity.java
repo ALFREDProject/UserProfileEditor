@@ -31,14 +31,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
+import alfred.eu.personalizationmanagerapi.client.model.Address;
+import alfred.eu.personalizationmanagerapi.client.model.AttributesHelper;
+import alfred.eu.personalizationmanagerapi.client.model.Contact;
+import alfred.eu.personalizationmanagerapi.client.model.Gender;
+import alfred.eu.personalizationmanagerapi.client.model.Relation;
+import alfred.eu.personalizationmanagerapi.client.model.Requesters;
 import eu.alfred.personalization_manager.controller.ContactsController;
-import eu.alfred.personalization_manager.db_administrator.model.Address;
-import eu.alfred.personalization_manager.db_administrator.model.AttributesHelper;
-import eu.alfred.personalization_manager.db_administrator.model.Contact;
-import eu.alfred.personalization_manager.db_administrator.model.Gender;
-import eu.alfred.personalization_manager.db_administrator.model.Relation;
-import eu.alfred.personalization_manager.db_administrator.model.Requesters;
 import eu.alfred.personalization_manager.gui.tabs.ContactsSectionFragment;
 import eu.alfred.userprofile.R;
 
@@ -800,7 +801,7 @@ public class ContactActivity extends Activity {
     public void editAccessRights(View view) {
         Log.d(TAG, "Entering editAccessRights()");
         AttributesHelper attrHelp = new AttributesHelper();
-        List<String> upFields = attrHelp.getUserProfileFields();
+        Set<String> upFields = attrHelp.getUserProfileFields();
         final CharSequence[] items = upFields.toArray(new CharSequence[upFields.size()]);
         CharSequence[] itemsHuman = new CharSequence[items.length];
         final boolean[] itemsChecked = new boolean[items.length];

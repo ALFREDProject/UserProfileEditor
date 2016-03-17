@@ -28,10 +28,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
+import alfred.eu.personalizationmanagerapi.client.model.Contact;
+import alfred.eu.personalizationmanagerapi.client.model.Relation;
+import alfred.eu.personalizationmanagerapi.client.model.Requesters;
 import eu.alfred.personalization_manager.controller.ContactsController;
-import eu.alfred.personalization_manager.db_administrator.model.Contact;
-import eu.alfred.personalization_manager.db_administrator.model.Relation;
-import eu.alfred.personalization_manager.db_administrator.model.Requesters;
 
 /**
  * Created by Arturo.Brotons on 16/04/2015.

@@ -16,15 +16,15 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Date;
 
-import eu.alfred.personalization_manager.db_administrator.model.Address;
-import eu.alfred.personalization_manager.db_administrator.model.EducationLevel;
-import eu.alfred.personalization_manager.db_administrator.model.EmploymentStatus;
-import eu.alfred.personalization_manager.db_administrator.model.Gender;
-import eu.alfred.personalization_manager.db_administrator.model.Language;
-import eu.alfred.personalization_manager.db_administrator.model.MaritalStatus;
-import eu.alfred.personalization_manager.db_administrator.model.MobilityLevel;
-import eu.alfred.personalization_manager.db_administrator.model.MyersBriggsTypeIndicator;
-import eu.alfred.personalization_manager.db_administrator.model.UserProfile;
+import alfred.eu.personalizationmanagerapi.client.model.UserProfile;
+import alfred.eu.personalizationmanagerapi.client.model.Address;
+import alfred.eu.personalizationmanagerapi.client.model.EducationLevel;
+import alfred.eu.personalizationmanagerapi.client.model.EmploymentStatus;
+import alfred.eu.personalizationmanagerapi.client.model.Gender;
+import alfred.eu.personalizationmanagerapi.client.model.Language;
+import alfred.eu.personalizationmanagerapi.client.model.MaritalStatus;
+import alfred.eu.personalizationmanagerapi.client.model.MobilityLevel;
+import alfred.eu.personalizationmanagerapi.client.model.MyersBriggsTypeIndicator;
 import eu.alfred.userprofile.R;
 
 /**

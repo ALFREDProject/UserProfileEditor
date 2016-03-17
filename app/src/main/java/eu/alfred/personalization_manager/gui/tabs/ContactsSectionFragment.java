@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import eu.alfred.personalization_manager.db_administrator.model.Contact;
-import eu.alfred.personalization_manager.db_administrator.model.Gender;
-import eu.alfred.personalization_manager.db_administrator.model.Relation;
+import alfred.eu.personalizationmanagerapi.client.model.Contact;
+import alfred.eu.personalizationmanagerapi.client.model.Gender;
+import alfred.eu.personalizationmanagerapi.client.model.Relation;
 import eu.alfred.personalization_manager.gui.tabs.contacts.ContactActivity;
 import eu.alfred.userprofile.R;
 
