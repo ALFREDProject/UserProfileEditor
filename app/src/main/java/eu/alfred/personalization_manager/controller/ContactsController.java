@@ -3,14 +3,15 @@ package eu.alfred.personalization_manager.controller;
 import android.content.Context;
 import android.util.Log;
 
+
 import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import alfred.eu.personalizationmanagerapi.client.model.Contact;
-import alfred.eu.personalizationmanagerapi.client.model.Relation;
-import alfred.eu.personalizationmanagerapi.client.model.Requesters;
+import eu.alfred.api.personalization.model.Contact;
+import eu.alfred.api.personalization.model.Relation;
+import eu.alfred.api.personalization.model.Requester;
 import eu.alfred.personalization_manager.db_administrator.api.volley.VolleyWebServiceContactClient;
 import eu.alfred.personalization_manager.gui.tabs.ContactsSectionFragment;
 import eu.alfred.personalization_manager.gui.tabs.contacts.ContactActivity;
@@ -26,7 +27,7 @@ public class ContactsController {
     private ContactActivity mActivity;
     private ContactsSectionFragment mFragment;
     private ArrayList<Contact> mContacts;
-    private static HashMap<String, Requesters> mRequesters = new HashMap<String, Requesters>();
+    private static HashMap<String, Requester> mRequesters = new HashMap<String, Requester>();
 
     static private ContactsController mInstance = null;
     private String mUserId;
@@ -86,7 +87,7 @@ public class ContactsController {
     }
 
     private void saveRequester(Contact contact) {
-        Requesters requesters = null;
+        Requester requesters = null;
 
         if (contact.getAlfredUserName() != null) {
             if (mRequesters.containsKey(contact.getAlfredUserName())) {
@@ -94,7 +95,7 @@ public class ContactsController {
                 requesters.setAccessRightsToAttributes(contact.getAccessRightsToAttributes());
                 client.doPutRequester(requesters);
             } else {
-                requesters = new Requesters();
+                requesters = new Requester();
                 requesters.setTargetAlfredId(alfredUserId);
                 requesters.setRequesterAlfredId(contact.getAlfredUserName());
                 requesters.setAccessRightsToAttributes(contact.getAccessRightsToAttributes());
@@ -238,7 +239,7 @@ public class ContactsController {
 
     }
 
-    public void saveRequester(Requesters req) {
+    public void saveRequester(Requester req) {
         if (req.getId() == null) { //Create a new Requester
             client.doPostNewRequester(req);
         } else {
@@ -248,13 +249,13 @@ public class ContactsController {
     }
 
 
-    public void onSuccessCreatingNewRequesters(Requesters req) {
-        Log.d(TAG, "New Requesters id: " + req.getId());
+    public void onSuccessCreatingNewRequesters(Requester req) {
+        Log.d(TAG, "New Requester id: " + req.getId());
         mRequesters.put(req.getRequesterAlfredId(), req);
         mActivity.onSuccessCreatingNewRequesters(req);
     }
 
-    public void onErrorCreatingNewRequesters(Exception ex, Requesters req) {
+    public void onErrorCreatingNewRequesters(Exception ex, Requester req) {
         Log.d(TAG, "[ERROR] Creating New Requester: " + ex.getMessage());
         mActivity.onErrorCreatingNewRequesters(ex, req);
     }
@@ -269,7 +270,7 @@ public class ContactsController {
         }
     }
 
-    public void onSuccessGettingRequester(Requesters req) {
+    public void onSuccessGettingRequester(Requester req) {
         mRequesters.put(req.getRequesterAlfredId(), req);
         if (mActivity != null) {
             mActivity.onSuccessCreatingNewRequesters(req);
@@ -280,7 +281,7 @@ public class ContactsController {
         this.alfredUserId = alfredUserId;
     }
 
-    public void onSuccessUpdatingRequesters(String response, Requesters req) {
+    public void onSuccessUpdatingRequesters(String response, Requester req) {
         Log.d(TAG, "Updated Requester: " + response);
         mRequesters.put(req.getRequesterAlfredId(), req);
         mActivity.onSuccessUpdatingRequesters(req);

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import alfred.eu.personalizationmanagerapi.client.model.UserProfile;
+import eu.alfred.api.personalization.model.UserProfile;
 import eu.alfred.personalization_manager.controller.auth.User;
 import eu.alfred.personalization_manager.controller.health.HealthController;
 import eu.alfred.personalization_manager.db_administrator.api.volley.VolleyWebServiceClient;
@@ -100,7 +100,7 @@ public class UserProfileController {
         mActivity.setMenuItemsVisibleForEditing(true);
         mContactsController.setUserId(upId);
         mContactsController.setAlfredUserId(user.getEmail());
-        mContactsController.getAllContacts();
+	    mContactsController.getAllContacts();
         mHealthController.getInfo(user);
     }
 
@@ -140,21 +140,21 @@ public class UserProfileController {
     }
 
 
-    public void onSuccessDeletingUserProfile(String res) {
+	public void onSuccessDeletingUserProfile(String res) {
         String tempUpId = upId;
         upId = null;
         setStoredUserProfileId(null);
         mActivity.emptyForm();
         mActivity.setMenuItemsVisibleForEditing(false);
         mActivity.notification(true, "User Profile deleted (" + tempUpId + ")");
-    }
+	}
 
-    public void onSuccessUpdatingUserProfile(String response) {
+	public void onSuccessUpdatingUserProfile(String response) {
         /*Stop animation/spinner*/
         mActivity.notification(true, "User Profile updated");
-    }
+	}
 
-    public Context getContext() {
+	public Context getContext() {
         return mActivity.getApplicationContext();
     }
 
@@ -163,7 +163,7 @@ public class UserProfileController {
         mActivity.notification(false, msg);
     }
 
-    public void onErrorDeletingUserProfile(Exception ex) {
+	public void onErrorDeletingUserProfile(Exception ex) {
         String msg = ex.getMessage();
         mActivity.notification(false, msg);
     }
@@ -173,7 +173,7 @@ public class UserProfileController {
         mActivity.notification(false, msg);
     }
 
-    public void onErrorUpdatingUserProfile(Exception ex) {
+	public void onErrorUpdatingUserProfile(Exception ex) {
         String msg = ex.getMessage();
         mActivity.notification(false, msg);
     }

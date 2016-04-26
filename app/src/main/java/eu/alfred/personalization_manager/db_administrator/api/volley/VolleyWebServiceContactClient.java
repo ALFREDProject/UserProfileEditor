@@ -28,9 +28,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
-import alfred.eu.personalizationmanagerapi.client.model.Contact;
-import alfred.eu.personalizationmanagerapi.client.model.Relation;
-import alfred.eu.personalizationmanagerapi.client.model.Requesters;
+import eu.alfred.api.personalization.model.Contact;
+import eu.alfred.api.personalization.model.Relation;
+import eu.alfred.api.personalization.model.Requester;
 import eu.alfred.personalization_manager.controller.ContactsController;
 
 /**
@@ -303,13 +303,13 @@ public class VolleyWebServiceContactClient {
     }
 
 
-    public void doPostNewRequester(final Requesters req) {
+    public void doPostNewRequester(final Requester req) {
         String jsContactStr = mGson.toJson(req);
         try {
             final JSONObject jsContact = new JSONObject(jsContactStr);
             jsContact.remove("id");
             jsContact.remove("_class");
-            Log.d(TAG, "Save Requesters: " + jsContact);
+            Log.d(TAG, "Save Requester: " + jsContact);
 
             UPRequest request = new UPRequest(
                     Request.Method.POST,
@@ -347,11 +347,11 @@ public class VolleyWebServiceContactClient {
                     @Override
                     public void onResponse(JSONArray jsonArray) {
 
-                        Requesters req = null;
+                        Requester req = null;
                         try {
                             if (jsonArray.length() > 0) {
                                 JSONObject jsonObj = jsonArray.getJSONObject(0);
-                                req = mGson.fromJson(jsonObj.toString(), Requesters.class);
+                                req = mGson.fromJson(jsonObj.toString(), Requester.class);
                                 controller.onSuccessGettingRequester(req);
                             } else {
                                 //controller.onStillNoRequester(contact);
@@ -372,7 +372,7 @@ public class VolleyWebServiceContactClient {
         mRequestQueue.add(request);
     }
 
-    public void doPutRequester(final Requesters req) {
+    public void doPutRequester(final Requester req) {
         Log.d(TAG, "doPutRequester() -> starting...");
         String reqStr = mGson.toJson(req);
         try {
@@ -414,11 +414,11 @@ public class VolleyWebServiceContactClient {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray jsonArray) {
-                        Requesters req = null;
+                        Requester req = null;
                         try {
                             if (jsonArray.length() > 0) {
                                 JSONObject jsonObj = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                req = mGson.fromJson(jsonObj.toString(), Requesters.class);
+                                req = mGson.fromJson(jsonObj.toString(), Requester.class);
                                 controller.onSuccessGettingRequester(req);
                             }
                         } catch (JSONException e) {

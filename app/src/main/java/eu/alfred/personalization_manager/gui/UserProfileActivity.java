@@ -34,7 +34,7 @@ import eu.alfred.internal.wrapper.healthmonitor.resource.Resource;
 import eu.alfred.internal.wrapper.healthmonitor.resource.Value;
 import eu.alfred.personalization_manager.controller.UserProfileController;
 import eu.alfred.personalization_manager.controller.auth.User;
-import eu.alfred.personalization_manager.db_administrator.model.UserProfile;
+import eu.alfred.api.personalization.model.UserProfile;
 import eu.alfred.personalization_manager.gui.pref.SettingsActivity;
 import eu.alfred.personalization_manager.gui.tabs.AppSectionsPagerAdapter;
 import eu.alfred.personalization_manager.gui.tabs.contacts.ContactActivity;
