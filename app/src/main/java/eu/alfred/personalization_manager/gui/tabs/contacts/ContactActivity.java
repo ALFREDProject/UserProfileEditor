@@ -31,14 +31,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
-import alfred.eu.personalizationmanagerapi.client.model.Address;
-import alfred.eu.personalizationmanagerapi.client.model.AttributesHelper;
-import alfred.eu.personalizationmanagerapi.client.model.Contact;
-import alfred.eu.personalizationmanagerapi.client.model.Gender;
-import alfred.eu.personalizationmanagerapi.client.model.Relation;
-import alfred.eu.personalizationmanagerapi.client.model.Requesters;
+import eu.alfred.api.personalization.model.Address;
+import eu.alfred.api.personalization.model.AttributesHelper;
+import eu.alfred.api.personalization.model.Contact;
+import eu.alfred.api.personalization.model.Gender;
+import eu.alfred.api.personalization.model.Relation;
+import eu.alfred.api.personalization.model.Requester;
 import eu.alfred.personalization_manager.controller.ContactsController;
 import eu.alfred.personalization_manager.gui.tabs.ContactsSectionFragment;
 import eu.alfred.userprofile.R;
@@ -108,8 +109,6 @@ public class ContactActivity extends Activity {
         tvContactId.setText(contactId);
         tvContactId.setKeyListener(null);
         tvContactId.setVisibility(View.GONE);
-//        controller = ContactsController.getInstance();
-//        controller.setContactActivity(this);
         controller = new ContactsController(getApplicationContext());
         controller.setContactActivity(this);
         controller.setAlfredUserId(alfredUserId);
@@ -845,7 +844,7 @@ public class ContactActivity extends Activity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        HashMap<String, Boolean> accessRights = mContact.getAccessRightsToAttributes();
+                        Map<String, Boolean> accessRights = mContact.getAccessRightsToAttributes();
                         for (int i = 0; i < items.length; i++) {
                             accessRights.put(items[i].toString(), itemsChecked[i]);
                         }
@@ -853,7 +852,7 @@ public class ContactActivity extends Activity {
                         String myUserId = ((EditText) findViewById(R.id.txtUserId)).getText().toString();
                         String contactId = ((EditText) findViewById(R.id.txtContactId)).getText().toString();
 
-                        Requesters req = new Requesters();
+                        Requester req = new Requester();
                         req.setAccessRightsToAttributes(accessRights);
                         req.setTargetAlfredId(myUserId); // MyUser
                         req.setRequesterAlfredId(contactId); // The Contact
@@ -872,7 +871,7 @@ public class ContactActivity extends Activity {
 
     }
 
-    public void onSuccessCreatingNewRequesters(Requesters req) {
+    public void onSuccessCreatingNewRequesters(Requester req) {
 
         String completeName = completeName(mContact);
         String msg = getResources().getString(R.string.contact_permissions_update_success, completeName);
@@ -883,13 +882,13 @@ public class ContactActivity extends Activity {
         notification(false, "Error getting Requester: " + message);
     }
 
-    public void onSuccessUpdatingRequesters(Requesters req) {
+    public void onSuccessUpdatingRequesters(Requester req) {
         String completeName = completeName(mContact);
         String msg = getResources().getString(R.string.contact_permissions_update_success, completeName);
         notification(true, msg);
     }
 
-    public void onErrorCreatingNewRequesters(Exception ex, Requesters req) {
+    public void onErrorCreatingNewRequesters(Exception ex, Requester req) {
         String completeName = completeName(mContact);
         notification(false, "Error saving access rights for " + completeName);
     }

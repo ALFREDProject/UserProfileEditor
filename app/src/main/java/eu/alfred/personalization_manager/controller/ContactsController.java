@@ -3,15 +3,30 @@ package eu.alfred.personalization_manager.controller;
 import android.content.Context;
 import android.util.Log;
 
-import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-import alfred.eu.personalizationmanagerapi.client.model.Contact;
-import alfred.eu.personalizationmanagerapi.client.model.Relation;
-import alfred.eu.personalizationmanagerapi.client.model.Requesters;
-import eu.alfred.personalization_manager.db_administrator.api.volley.VolleyWebServiceContactClient;
+import eu.alfred.api.PersonalAssistant;
+import eu.alfred.api.personalization.client.ContactDto;
+import eu.alfred.api.personalization.client.ContactMapper;
+import eu.alfred.api.personalization.client.RequesterDto;
+import eu.alfred.api.personalization.client.RequesterMapper;
+import eu.alfred.api.personalization.model.Contact;
+import eu.alfred.api.personalization.model.Relation;
+import eu.alfred.api.personalization.model.Requester;
+import eu.alfred.api.personalization.webservice.PersonalizationManager;
+import eu.alfred.personalization_manager.controller.helper.PersonalAssistantProvider;
+import eu.alfred.personalization_manager.controller.helper.PersonalizationArrayResponse;
+import eu.alfred.personalization_manager.controller.helper.PersonalizationObjectResponse;
+import eu.alfred.personalization_manager.controller.helper.PersonalizationStringResponse;
 import eu.alfred.personalization_manager.gui.tabs.ContactsSectionFragment;
 import eu.alfred.personalization_manager.gui.tabs.contacts.ContactActivity;
 
@@ -22,23 +37,16 @@ public class ContactsController {
     private static final String TAG = "ContactsController";
 
 
-    private VolleyWebServiceContactClient client;
     private ContactActivity mActivity;
     private ContactsSectionFragment mFragment;
-    private ArrayList<Contact> mContacts;
-    private static HashMap<String, Requesters> mRequesters = new HashMap<String, Requesters>();
+    private List<Contact> mContacts;
+    private static HashMap<String, Requester> mRequesters = new HashMap<String, Requester>();
 
     static private ContactsController mInstance = null;
     private String mUserId;
     private Context context;
     private String alfredUserId;
-
-    /*static public ContactsController getInstance() {
-        if (mInstance == null) {
-            mInstance = new ContactsController();
-        }
-        return mInstance;
-    }*/
+	private PersonalAssistant PA;
 
     public void setContactActivity(ContactActivity activity) {
         mActivity = activity;
@@ -50,55 +58,133 @@ public class ContactsController {
 
     public ContactsController(Context context) {
         this.context = context;
-        this.client = new VolleyWebServiceContactClient(this);
         mContacts = new ArrayList<Contact>();
-//        mRequesters = new HashMap<String, Requesters>();
+	    this.PA = PersonalAssistantProvider.getPersonalAssistant(context);
     }
 
     public void getAllContacts() {
-        if (mUserId == null) {
-            throw new NullPointerException("In Contacts Controller, User ID cannot be null.");
-        }
-        client.doGetAllContacts(mUserId);
+	    if (mUserId == null) {
+		    throw new NullPointerException("In Contacts Controller, User ID cannot be null.");
+	    }
+//        client.doGetAllContacts(mUserId);
+	    getContacts(mUserId);
     }
-
-//    public void onSuccessGettingAllContacts(ArrayList<Contact> contacts) {
-//        mContacts = contacts;
-//        if (mFragment != null) {
-//            mFragment.updateContactList(mContacts);
-//        }
-//    }
 
     public void getContacts(String id) {
-        client.doGetAllContacts(id);
+        // client.doGetAllContacts(id);
+	    PersonalizationManager PM = new PersonalizationManager(PA.getMessenger());
+	    PM.retrieveUserContacts(id, null, new PersonalizationArrayResponse() {
+		    @Override
+		    public void OnSuccess(JSONArray a) {
+			    Log.i(TAG, "retrieveUserProfiles succeeded");
+			    mActivity.notification(true, "Profile retrieved");
+
+			    Type type = new TypeToken<ArrayList<ContactDto>>() {}.getType();
+			    List<ContactDto> dto = new Gson().fromJson(a.toString(), type);
+
+			    Log.i(TAG, "number of results = " + dto.size());
+
+			    List<Contact> clist = new ArrayList<Contact>();
+			    for (ContactDto cd : dto) {
+				    clist.add(ContactMapper.toModel(cd));
+			    }
+
+			    onSuccessGetAllContacts(clist);
+		    }
+
+		    @Override
+		    public void OnError(Exception e) {
+			    Log.e(TAG, "retrieveUserProfiles failed: " + e.getClass().getSimpleName() + ": " + e.getMessage());
+			    mActivity.notification(false, "Retrieving profile failed");
+		    }
+	    });
     }
 
-    public void getContact(String upId, String contactId) {
-        client.doGetContact(upId, contactId);
-    }
-
-    public void newContact(Contact contact, String alfredUserId) {
+    public void newContact(final Contact contact, String alfredUserId) {
         if (contact.getAccessRightsToAttributes() == null || contact.getAccessRightsToAttributes().isEmpty()) {
             defaultAccessRights(contact);
         }
-        client.doPostNewContact(contact);
-        saveRequester(contact);
+//        client.doPostNewContact(contact);
+
+	    PersonalizationManager PM = new PersonalizationManager(PA.getMessenger());
+	    PM.createUserContact(alfredUserId, contact, new PersonalizationStringResponse() {
+		    @Override
+		    public void OnSuccess(String s) {
+			    Log.i(TAG, "createUserContact succeeded");
+			    mActivity.notification(true, "Contact created");
+			    mActivity.onSuccessCreatingContact(contact);
+		    }
+
+		    @Override
+		    public void OnError(Exception e) {
+			    Log.e(TAG, e.getClass().getSimpleName() + ": " + e.getMessage());
+			    mActivity.notification(false, "Creating contact failed");
+		    }
+	    });
+
+
+	    saveRequester(contact);
     }
 
-    private void saveRequester(Contact contact) {
-        Requesters requesters = null;
+    private void saveRequester(final Contact contact) {
+        Requester requester = null;
 
         if (contact.getAlfredUserName() != null) {
             if (mRequesters.containsKey(contact.getAlfredUserName())) {
-                requesters = mRequesters.get(contact.getAlfredUserName());
-                requesters.setAccessRightsToAttributes(contact.getAccessRightsToAttributes());
-                client.doPutRequester(requesters);
+                requester = mRequesters.get(contact.getAlfredUserName());
+                requester.setAccessRightsToAttributes(contact.getAccessRightsToAttributes());
+//                client.doPutRequester(requester);
+
+	            final Requester r2 = requester;
+
+	            PersonalizationManager PM = new PersonalizationManager(PA.getMessenger());
+	            PM.updateRequester(requester, new PersonalizationStringResponse() {
+		            @Override
+		            public void OnSuccess(String s) {
+			            Log.i(TAG, "updateRequester succeeded");
+			            mActivity.notification(true, "Requester updated");
+
+			            mRequesters.put(contact.getAlfredUserName(), r2);
+			            mActivity.onSuccessUpdatingRequesters(r2);
+		            }
+
+		            @Override
+		            public void OnError(Exception e) {
+			            Log.e(TAG, e.getClass().getSimpleName() + ": " + e.getMessage());
+			            mActivity.notification(false, "Update requester failed");
+		            }
+	            });
+
+
             } else {
-                requesters = new Requesters();
-                requesters.setTargetAlfredId(alfredUserId);
-                requesters.setRequesterAlfredId(contact.getAlfredUserName());
-                requesters.setAccessRightsToAttributes(contact.getAccessRightsToAttributes());
-                client.doPostNewRequester(requesters);
+                requester = new Requester();
+                requester.setTargetAlfredId(alfredUserId);
+                requester.setRequesterAlfredId(contact.getAlfredUserName());
+                requester.setAccessRightsToAttributes(contact.getAccessRightsToAttributes());
+//                client.doPostNewRequester(requester);
+
+	            final Requester r2 = requester;
+
+	            PersonalizationManager PM = new PersonalizationManager(PA.getMessenger());
+	            PM.createRequester(requester, new PersonalizationStringResponse() {
+		            @Override
+		            public void OnSuccess(String s) {
+			            Log.i(TAG, "createRequester succeeded");
+			            mActivity.notification(true, "Requester created");
+
+			            mRequesters.put(contact.getAlfredUserName(), r2);
+			            mActivity.onSuccessCreatingNewRequesters(r2);
+		            }
+
+		            @Override
+		            public void OnError(Exception e) {
+			            Log.e(TAG, e.getClass().getSimpleName() + ": " + e.getMessage());
+			            mActivity.notification(false, "Creating requester failed");
+			            mActivity.onErrorCreatingNewRequesters(e, r2);
+		            }
+	            });
+
+
             }
         }
     }
@@ -165,40 +251,88 @@ public class ContactsController {
         return rights;
     }
 
-    public void deleteContact(Contact contact) {
-        client.doDeleteRequest(contact);
-//        deleteRequester(contact);
+    public void deleteContact(final Contact contact) {
+//        client.doDeleteRequest(contact);
+
+	    PersonalizationManager PM = new PersonalizationManager(PA.getMessenger());
+	    PM.deleteUserContact(contact.getId(), new PersonalizationStringResponse() {
+		    @Override
+		    public void OnSuccess(String s) {
+			    Log.i(TAG, "deleteUserContact succeeded");
+			    mActivity.notification(true, "Contact deleted");
+			    mActivity.onSuccessDeletingContact(contact);
+		    }
+
+		    @Override
+		    public void OnError(Exception e) {
+			    Log.e(TAG, e.getClass().getSimpleName() + ": " + e.getMessage());
+			    mActivity.notification(false, "Delete contact failed");
+		    }
+	    });
+
     }
 
-    public void updateContact(Contact contact) {
-        client.doPutRequest(contact);
-        saveRequester(contact);
+    public void updateContact(final Contact contact) {
+//        client.doPutRequest(contact);
+
+
+	    PersonalizationManager PM = new PersonalizationManager(PA.getMessenger());
+	    PM.updateUserContact(contact, new PersonalizationStringResponse() {
+		    @Override
+		    public void OnSuccess(String s) {
+			    Log.i(TAG, "updateUserContact succeeded");
+			    mActivity.notification(true, "Contact updated");
+			    mActivity.onSuccessUpdatingContact();
+		    }
+
+		    @Override
+		    public void OnError(Exception e) {
+			    Log.e(TAG, e.getClass().getSimpleName() + ": " + e.getMessage());
+			    mActivity.notification(false, "Update contact failed");
+		    }
+	    });
+
+
+	    saveRequester(contact);
     }
 
 
-    public void onSuccessGetAllContacts(ArrayList<Contact> contacts) {
+    public void onSuccessGetAllContacts(List<Contact> contacts) {
         Log.d(TAG, "onSuccessGetAllContacts: " + (contacts!=null?contacts.size():"NULL"));
         mContacts = contacts;
         mFragment.updateContactList(mContacts);
-        for (Contact contact : mContacts) {
+        for (final Contact contact : mContacts) {
             if (contact.getAlfredUserName() != null) {
-                client.doGetRequestByAlfredUsername(alfredUserId, contact.getAlfredUserName());
+//                client.doGetRequestByAlfredUsername(alfredUserId, contact.getAlfredUserName());
+
+
+	            PersonalizationManager PM = new PersonalizationManager(PA.getMessenger());
+	            PM.retrieveRequester(alfredUserId, contact.getAlfredUserName(), new PersonalizationObjectResponse() {
+		            @Override
+		            public void OnSuccess(JSONObject o) {
+			            Log.i(TAG, "retrieveRequester succeeded");
+			            mActivity.notification(true, "Requester retrieved");
+
+
+			            Type type = new TypeToken<RequesterDto>() {}.getType();
+			            RequesterDto dto = new Gson().fromJson(o.toString(), type);
+
+			            Requester requester = RequesterMapper.toModel(dto);
+
+			            mRequesters.put(contact.getAlfredUserName(), requester);
+			            mActivity.onSuccessCreatingNewRequesters(requester);
+
+		            }
+
+		            @Override
+		            public void OnError(Exception e) {
+			            Log.e(TAG, e.getClass().getSimpleName() + ": " + e.getMessage());
+			            mActivity.notification(false, "Retrieve requester failed");
+		            }
+	            });
+
             }
         }
-    }
-
-    public void onErrorGetAllContacts(Exception ex) {
-        Log.d(TAG, "onErrorGetAllContacts " + ex.getMessage());
-    }
-
-    public void onSuccessCreatingNewContact(Contact contact) {
-        Log.d(TAG, "onSuccessCreatingNewContact: contactId=" + contact.getId());
-        mActivity.onSuccessCreatingContact(contact);
-    }
-
-    public void onErrorCreatingNewContact(Exception ex) {
-        Log.d(TAG, "onErrorCreatingNewContact: " + ex.getMessage());
-        //TODO show error message
     }
 
     public Context getContext() {
@@ -210,54 +344,6 @@ public class ContactsController {
     }
 
 
-    public void onSuccessUpdatingContact(String contactId) {
-        Log.d(TAG, "onSuccessUpdatingContact: contactId=" + contactId);
-        mActivity.onSuccessUpdatingContact();
-    }
-
-    public void onErrorUpdatingContact(Exception ex) {
-        Log.d(TAG, "onErrorUpdatingContact: " + ex.getMessage());
-    }
-
-    public void onSuccessDeletingContact(Contact contact) {
-        Log.d(TAG, "onSuccessDeletingContact: contactId=" + contact.getId());
-        mActivity.onSuccessDeletingContact(contact);
-    }
-
-    public void onErrorDeletingContact(Exception ex) {
-        Log.d(TAG, "onErrorDeletingContact: " + ex.getMessage());
-        mActivity.onErrorDeletingContact(ex.getMessage());
-    }
-
-    public void onSuccessGettingContact(Contact contact) {
-        mActivity.onSuccessGettingContact(contact);
-        getContacts(contact.getId());
-    }
-
-    public void onErrorGettingContact(Exception ex) {
-
-    }
-
-    public void saveRequester(Requesters req) {
-        if (req.getId() == null) { //Create a new Requester
-            client.doPostNewRequester(req);
-        } else {
-            client.doPutRequester(req);
-        }
-
-    }
-
-
-    public void onSuccessCreatingNewRequesters(Requesters req) {
-        Log.d(TAG, "New Requesters id: " + req.getId());
-        mRequesters.put(req.getRequesterAlfredId(), req);
-        mActivity.onSuccessCreatingNewRequesters(req);
-    }
-
-    public void onErrorCreatingNewRequesters(Exception ex, Requesters req) {
-        Log.d(TAG, "[ERROR] Creating New Requester: " + ex.getMessage());
-        mActivity.onErrorCreatingNewRequesters(ex, req);
-    }
 
     public void setUserId(String userId) {
         this.mUserId = userId;
@@ -269,24 +355,8 @@ public class ContactsController {
         }
     }
 
-    public void onSuccessGettingRequester(Requesters req) {
-        mRequesters.put(req.getRequesterAlfredId(), req);
-        if (mActivity != null) {
-            mActivity.onSuccessCreatingNewRequesters(req);
-        }
-    }
-
     public void setAlfredUserId(String alfredUserId) {
         this.alfredUserId = alfredUserId;
     }
 
-    public void onSuccessUpdatingRequesters(String response, Requesters req) {
-        Log.d(TAG, "Updated Requester: " + response);
-        mRequesters.put(req.getRequesterAlfredId(), req);
-        mActivity.onSuccessUpdatingRequesters(req);
-    }
-
-    public void onErrorUpdatingRequester(VolleyError ex) {
-        Log.e(TAG, "[ERROR] Updating requester: " + ex.getMessage());
-    }
 }

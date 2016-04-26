@@ -19,9 +19,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.alfred.api.PersonalAssistant;
+import eu.alfred.api.PersonalAssistantConnection;
+import eu.alfred.api.personalization.client.GroupDto;
+import eu.alfred.api.personalization.client.UserProfileDto;
+import eu.alfred.api.personalization.model.UserProfile;
+import eu.alfred.api.personalization.responses.PersonalizationResponse;
+import eu.alfred.api.personalization.webservice.PersonalizationManager;
 import eu.alfred.internal.wrapper.authentication.AuthenticatedUser;
 import eu.alfred.internal.wrapper.authentication.AuthenticationException;
 import eu.alfred.internal.wrapper.authentication.AuthenticationServerWrapper;
@@ -34,7 +48,7 @@ import eu.alfred.internal.wrapper.healthmonitor.resource.Resource;
 import eu.alfred.internal.wrapper.healthmonitor.resource.Value;
 import eu.alfred.personalization_manager.controller.UserProfileController;
 import eu.alfred.personalization_manager.controller.auth.User;
-import eu.alfred.personalization_manager.db_administrator.model.UserProfile;
+import eu.alfred.personalization_manager.controller.helper.PersonalAssistantProvider;
 import eu.alfred.personalization_manager.gui.pref.SettingsActivity;
 import eu.alfred.personalization_manager.gui.tabs.AppSectionsPagerAdapter;
 import eu.alfred.personalization_manager.gui.tabs.contacts.ContactActivity;
@@ -46,11 +60,6 @@ import eu.alfred.userprofile.R;
 public class UserProfileActivity extends FragmentActivity implements ActionBar.TabListener {
 
     final public String TAG = "UserProfileActivity";
-
-
-/*    private Button btNew;
-    private Button btSave;
-    private Button btDelete;*/
 
     UserProfileController upController;
     private MenuItem miNew;
@@ -160,6 +169,7 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
         } else {
             upController.initCreating(user);
         }
+
     }
 
 

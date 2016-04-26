@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import alfred.eu.personalizationmanagerapi.client.model.Contact;
-import alfred.eu.personalizationmanagerapi.client.model.Gender;
-import alfred.eu.personalizationmanagerapi.client.model.Relation;
+import eu.alfred.api.personalization.model.Contact;
+import eu.alfred.api.personalization.model.Gender;
+import eu.alfred.api.personalization.model.Relation;
 import eu.alfred.personalization_manager.gui.tabs.contacts.ContactActivity;
 import eu.alfred.userprofile.R;
 
@@ -139,7 +139,7 @@ public class ContactsSectionFragment extends SectionFragment {
         return adapter.getItem(contactPos);
     }
 
-    public void updateContactList(ArrayList<Contact> contactsList) {
+    public void updateContactList(List<Contact> contactsList) {
         Log.d(TAG, "updateContactList with " + contactsList.size() + " contacts." );
         for (Contact contact : contactsList) {
 //            contacts.add(contact);

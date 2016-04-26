@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import eu.alfred.personalization_manager.controller.UserProfileController;
-import alfred.eu.personalizationmanagerapi.client.model.Contact;
+import eu.alfred.api.personalization.model.Contact;
 import eu.alfred.userprofile.R;
 
 /**
