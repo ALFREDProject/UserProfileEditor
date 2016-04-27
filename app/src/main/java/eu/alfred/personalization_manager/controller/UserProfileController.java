@@ -215,7 +215,7 @@ public class UserProfileController {
 
 		        Log.i(TAG, "call Init() again");
 
-
+/*
 		        PA = new PersonalAssistant(mActivity);
 
 		        PA.setOnPersonalAssistantConnectionListener(new PersonalAssistantConnection() {
@@ -229,7 +229,7 @@ public class UserProfileController {
 				        Log.i(TAG, "PersonalAssistantConnection disconnected");
 			        }
 		        });
-
+*/
 		        PA.Init();
 
 	        }
@@ -266,6 +266,7 @@ public class UserProfileController {
     public void initCreating(User user) {
         this.user = user;
         UserProfile up = new UserProfile();
+	    up.setId(user.getUserId());
         up.setAlfredUserName(user.getEmail());
         up.setAlfredUserName(user.getEmail());
         up.setEmail(user.getEmail());

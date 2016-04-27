@@ -25,6 +25,11 @@ public abstract class PersonalizationStringResponse implements PersonalizationRe
 	}
 
 	@Override
+	public void OnSuccess(Object object) {
+		Log.e(TAG, "Unexpected Object response");
+	}
+
+	@Override
 	public void OnError(Exception e) {
 		Log.e(TAG, e.getClass().getSimpleName() + ": " + e.getMessage());
 	}

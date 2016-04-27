@@ -77,7 +77,7 @@ public class ContactsController {
 		    @Override
 		    public void OnSuccess(JSONArray a) {
 			    Log.i(TAG, "retrieveUserProfiles succeeded");
-			    mActivity.notification(true, "Profile retrieved");
+			    if (mActivity != null) mActivity.notification(true, "Profile retrieved");
 
 			    Type type = new TypeToken<ArrayList<ContactDto>>() {}.getType();
 			    List<ContactDto> dto = new Gson().fromJson(a.toString(), type);
@@ -94,8 +94,9 @@ public class ContactsController {
 
 		    @Override
 		    public void OnError(Exception e) {
-			    Log.e(TAG, "retrieveUserProfiles failed: " + e.getClass().getSimpleName() + ": " + e.getMessage());
-			    mActivity.notification(false, "Retrieving profile failed");
+//			    Log.e(TAG, "retrieveUserProfiles failed: " + e.getClass().getSimpleName() + ": " + e.getMessage());
+			    Log.e(TAG, "retrieveUserProfiles failed", e);
+			    if (mActivity != null) mActivity.notification(false, "Retrieving profile failed");
 		    }
 	    });
     }
