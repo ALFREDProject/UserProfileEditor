@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.alfred.api.PersonalAssistant;
+import eu.alfred.api.PersonalAssistantConnection;
 import eu.alfred.api.personalization.client.UserProfileDto;
 import eu.alfred.api.personalization.client.UserProfileMapper;
 import eu.alfred.api.personalization.model.UserProfile;
@@ -86,6 +87,7 @@ public class UserProfileController {
 			    mActivity.notification(true, "Profile created");
 			    onSuccessCreatingNewUserProfile(up);
 		    }
+
 		    @Override
 		    public void OnError(Exception e) {
 			    Log.e(TAG, e.getClass().getSimpleName() + ": " + e.getMessage());
@@ -196,6 +198,41 @@ public class UserProfileController {
 
 	        Log.d(TAG, "retrieve UserProfile by username " + user.getEmail());
 	        String searchCriteria = "{\"email\":\"" + user.getEmail() + "\"}";
+
+
+	        int ct = 0;
+	        while (++ct <= 3) {
+
+		        int mc = 0;
+		        while (++mc < 10 && PA.getMessenger() == null) {
+
+			        Log.i(TAG, "no messenger available yet, sleeping " + mc);
+			        try { Thread.sleep(1000); } catch (InterruptedException e) { }
+
+		        }
+
+		        if (PA.getMessenger() != null) break;
+
+		        Log.i(TAG, "call Init() again");
+
+
+		        PA = new PersonalAssistant(mActivity);
+
+		        PA.setOnPersonalAssistantConnectionListener(new PersonalAssistantConnection() {
+			        @Override
+			        public void OnConnected() {
+				        Log.i(TAG, "PersonalAssistantConnection connected");
+			        }
+
+			        @Override
+			        public void OnDisconnected() {
+				        Log.i(TAG, "PersonalAssistantConnection disconnected");
+			        }
+		        });
+
+		        PA.Init();
+
+	        }
 
 	        PersonalizationManager PM = new PersonalizationManager(PA.getMessenger());
 	        PM.retrieveUserProfiles(searchCriteria, new PersonalizationArrayResponse() {
