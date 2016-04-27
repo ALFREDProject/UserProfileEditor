@@ -161,7 +161,6 @@ public class VolleyWebServiceClient {
         String jsUpStr = mGson.toJson(up);
         try {
             final JSONObject jsUp = new JSONObject(jsUpStr);
-            jsUp.remove("id");
             jsUp.remove("_class");
             // Until Anniversary Date is fixed on server
             jsUp.remove("anniversaryDate");

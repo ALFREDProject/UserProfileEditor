@@ -19,7 +19,7 @@ import eu.alfred.userprofile.R;
  */
 public class UserProfileController {
 
-    private static final String TAG = "UserProfileController";
+    private static final String TAG = "UPE:UPController";
     private final UserProfileActivity mActivity;
     final private VolleyWebServiceClient client;
     private String upId;
@@ -130,6 +130,7 @@ public class UserProfileController {
     public void initCreating(User user) {
         this.user = user;
         UserProfile up = new UserProfile();
+	    up.setId(user.getUserId());
         up.setAlfredUserName(user.getEmail());
         up.setAlfredUserName(user.getEmail());
         up.setEmail(user.getEmail());
@@ -146,12 +147,12 @@ public class UserProfileController {
         setStoredUserProfileId(null);
         mActivity.emptyForm();
         mActivity.setMenuItemsVisibleForEditing(false);
-        mActivity.notification(true, "User Profile deleted (" + tempUpId + ")");
+		mActivity.notification(true, "User Profile deleted (" + tempUpId + ")");
 	}
 
 	public void onSuccessUpdatingUserProfile(String response) {
         /*Stop animation/spinner*/
-        mActivity.notification(true, "User Profile updated");
+		mActivity.notification(true, "User Profile updated");
 	}
 
 	public Context getContext() {
@@ -160,7 +161,7 @@ public class UserProfileController {
 
     public void onErrorRetrievingUser(Exception ex) {
         String msg = ex.getMessage();
-        mActivity.notification(false, msg);
+	    mActivity.notification(false, msg);
     }
 
 	public void onErrorDeletingUserProfile(Exception ex) {
@@ -170,7 +171,7 @@ public class UserProfileController {
 
     public void onErrorCreatingNewUserProfile(Exception ex) {
         String msg = ex.getMessage();
-        mActivity.notification(false, msg);
+	    mActivity.notification(false, msg);
     }
 
 	public void onErrorUpdatingUserProfile(Exception ex) {

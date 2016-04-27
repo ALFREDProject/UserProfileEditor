@@ -49,7 +49,7 @@ import eu.alfred.userprofile.R;
  */
 public class ContactActivity extends Activity {
 
-    private static final String TAG = "ContactActivity";
+    private static final String TAG = "UPE:ContactActivity";
     ContactsController controller;
     private MenuItem miCreate;
     private MenuItem miUpdate;

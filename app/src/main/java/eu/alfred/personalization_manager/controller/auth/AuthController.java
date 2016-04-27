@@ -15,7 +15,7 @@ import eu.alfred.internal.wrapper.authentication.registration.RegistrationData;
  */
 public class AuthController {
 
-    final public String TAG = "AuthController";
+    final public String TAG = "UPE:AuthController";
 
     final AuthListener caller;
 
@@ -156,7 +156,6 @@ public class AuthController {
                 user.setError(null);
                 user.setRoles(authedUser.getRoles());
 
-
             } catch (Exception e) {
                 Log.d(TAG, "Registering... FAIL");
                 Log.d(TAG, "RegisterAttempt Exception", e);
@@ -176,7 +175,8 @@ public class AuthController {
 
         @Override
         protected void onPostExecute(User user) {
-            caller.stopWaiting();
+	        Log.d(TAG, "RegisterAttempt onPostExecute" + user);
+	        caller.stopWaiting();
             caller.notification(false, user);
         }
 

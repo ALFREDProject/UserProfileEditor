@@ -33,7 +33,7 @@ import eu.alfred.userprofile.R;
  * Note: On this context, email means Alfred Username, not just some random email.
  */
 public class SplashActivity extends FragmentActivity implements AuthListener {
-    final public String TAG = "SplashActivity";
+    final public String TAG = "UPE:SplashActivity";
 
     /* Form fields*/
     private EditText etFirstName;
@@ -116,6 +116,7 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
     private void autoLogin() {
 
         if (prefMail != null && prefPassword != null && prefUSerId != null) {
+	        Log.d(TAG, "autoLogin " + prefUSerId + "/" + prefMail + "/" + prefPassword);
             user = new User(prefMail, prefPassword);
             Log.d(TAG, String.format("User %s found. Logging in...", prefMail));
             controller.login(user);
@@ -166,6 +167,7 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
             //At least, one role is needed when registering due to Auth Server restrictions
             user.addRole("Developer"); // TODO Show proper Spinner or change to a proper role
 
+	        Log.d(TAG, "register user " + user);
             controller.register(user);
         }
     }
@@ -306,6 +308,7 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
 
         //Put here other extra params
 
+	    Log.d(TAG, "open UserProfileActivity with user " + user);
         startActivityForResult(intent, 1);
     }
 
@@ -403,6 +406,7 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
      */
     @Override
     public void notification(boolean mode, User user) {
+	    Log.d(TAG, "notification (mode " + (mode ? "login" : "registration") + "), user: " + user);
         if (user.getError() == null) { //All ok
             String msg = mode ? "Login succeed!" : "Registration succeed!";
             notification(true, msg);

@@ -45,7 +45,7 @@ import eu.alfred.userprofile.R;
  */
 public class UserProfileActivity extends FragmentActivity implements ActionBar.TabListener {
 
-    final public String TAG = "UserProfileActivity";
+    final public String TAG = "UPE:UPActivity";
 
 
 /*    private Button btNew;
