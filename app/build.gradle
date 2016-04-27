@@ -9,8 +9,8 @@ android {
         applicationId "eu.alfred.userprofile"
         minSdkVersion 18
         targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "3.0"
     }
     buildTypes {
         release {
