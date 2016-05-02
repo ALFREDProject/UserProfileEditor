@@ -3,7 +3,6 @@ package eu.alfred.personalization_manager.gui.splash;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -16,12 +15,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Map;
+
 import eu.alfred.personalization_manager.controller.auth.AuthController;
 import eu.alfred.personalization_manager.controller.auth.AuthListener;
 import eu.alfred.personalization_manager.controller.auth.User;
 import eu.alfred.personalization_manager.controller.helper.SharedPrefHelper;
 import eu.alfred.personalization_manager.gui.UserProfileActivity;
 import eu.alfred.personalization_manager.gui.animation.AndroidUtils;
+import eu.alfred.ui.AppActivity;
 import eu.alfred.userprofile.R;
 
 /**
@@ -32,8 +34,10 @@ import eu.alfred.userprofile.R;
  *
  * Note: On this context, email means Alfred Username, not just some random email.
  */
-public class SplashActivity extends FragmentActivity implements AuthListener {
+/*public class SplashActivity extends FragmentActivity implements AuthListener {*/
+public class SplashActivity extends AppActivity implements AuthListener {
     final public String TAG = "UPE:SplashActivity";
+    final static String START_USER_PROFILE_EDITOR = "StartEditorAction";
 
     /* Form fields*/
     private EditText etFirstName;
@@ -413,10 +417,45 @@ public class SplashActivity extends FragmentActivity implements AuthListener {
             prefs.put(SharedPrefHelper.CURRENT_UP_EMAIL, user.getEmail());
             prefs.put(SharedPrefHelper.CURRENT_UP_PASSWORD, user.getPassword());
             prefs.put(SharedPrefHelper.CURRENT_UP_USERID, user.getUserId());
+/*            prefs.put(GlobalsettingsKeys.userId, user.getUserId());*/
 
             openUserProfileActivity(mode);
         } else {
             notification(false, user.getError());
         }
+    }
+    @Override
+    public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+    }
+
+    @Override
+    public void performAction(String s, Map<String, String> map) {
+        Log.d("Perform Action string", s);
+        switch (s) {
+            case START_USER_PROFILE_EDITOR:
+                Log.d("DDD Response to"," START EDITOR");
+                break;
+            default:
+                break;
+        }
+
+        cade.sendActionResult(true);
+    }
+
+    @Override
+    public void performWhQuery(String s, Map<String, String> map) {
+        Log.d("Wh Query", s);
+        cade.sendActionResult(true);
+    }
+
+    @Override
+    public void performValidity(String s, Map<String, String> map) {
+        Log.d("Perform Validity", "works!");
+    }
+
+    @Override
+    public void performEntityRecognizer(String s, Map<String, String> map) {
+        Log.d("Perform Entity Recog", "works!");
     }
 }

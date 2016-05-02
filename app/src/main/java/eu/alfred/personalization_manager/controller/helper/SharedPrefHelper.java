@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-
 public class SharedPrefHelper {
 
     private static final String TAG = "SharedPrefHelper";
@@ -15,7 +14,8 @@ public class SharedPrefHelper {
     public static final String CURRENT_UP_ID = "up_current_id";
     public static final String CURRENT_UP_EMAIL = "up_current_email";
     public static final String CURRENT_UP_PASSWORD = "up_current_password";
-    public static final String CURRENT_UP_USERID = "up_current_userid";
+    public static final String CURRENT_UP_USERID = "pref_userId";
+/*    public static final String CURRENT_UP_USERID = "up_current_userid";*/
 
 
     private SharedPreferences sharedPreferences;
