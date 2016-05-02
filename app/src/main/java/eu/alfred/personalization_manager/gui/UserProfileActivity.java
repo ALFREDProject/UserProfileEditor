@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import eu.alfred.internal.wrapper.authentication.AuthenticatedUser;
 import eu.alfred.internal.wrapper.authentication.AuthenticationException;
@@ -38,12 +39,13 @@ import eu.alfred.api.personalization.model.UserProfile;
 import eu.alfred.personalization_manager.gui.pref.SettingsActivity;
 import eu.alfred.personalization_manager.gui.tabs.AppSectionsPagerAdapter;
 import eu.alfred.personalization_manager.gui.tabs.contacts.ContactActivity;
+import eu.alfred.ui.AppActivity;
 import eu.alfred.userprofile.R;
 
 /**
  * This is the main activity of the ALFRED User Profile Editor
  */
-public class UserProfileActivity extends FragmentActivity implements ActionBar.TabListener {
+public class UserProfileActivity extends AppActivity implements ActionBar.TabListener {
 
     final public String TAG = "UPE:UPActivity";
 
@@ -488,5 +490,25 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
 
     public UserProfileController getUserProfileController() {
         return upController;
+    }
+
+    @Override
+    public void performAction(String s, Map<String, String> map) {
+
+    }
+
+    @Override
+    public void performWhQuery(String s, Map<String, String> map) {
+
+    }
+
+    @Override
+    public void performValidity(String s, Map<String, String> map) {
+
+    }
+
+    @Override
+    public void performEntityRecognizer(String s, Map<String, String> map) {
+
     }
 }
