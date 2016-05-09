@@ -19,36 +19,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
-import eu.alfred.api.PersonalAssistant;
-import eu.alfred.api.PersonalAssistantConnection;
-import eu.alfred.api.personalization.client.GroupDto;
-import eu.alfred.api.personalization.client.UserProfileDto;
 import eu.alfred.api.personalization.model.UserProfile;
-import eu.alfred.api.personalization.responses.PersonalizationResponse;
-import eu.alfred.api.personalization.webservice.PersonalizationManager;
-import eu.alfred.internal.wrapper.authentication.AuthenticatedUser;
-import eu.alfred.internal.wrapper.authentication.AuthenticationException;
-import eu.alfred.internal.wrapper.authentication.AuthenticationServerWrapper;
-import eu.alfred.internal.wrapper.authentication.login.LoginData;
-import eu.alfred.internal.wrapper.authentication.login.LoginDataException;
-import eu.alfred.internal.wrapper.healthmonitor.DataType;
-import eu.alfred.internal.wrapper.healthmonitor.HealthMonitorServerException;
-import eu.alfred.internal.wrapper.healthmonitor.HealthMonitorServerWrapper;
-import eu.alfred.internal.wrapper.healthmonitor.resource.Resource;
-import eu.alfred.internal.wrapper.healthmonitor.resource.Value;
 import eu.alfred.personalization_manager.controller.UserProfileController;
 import eu.alfred.personalization_manager.controller.auth.User;
-import eu.alfred.personalization_manager.controller.helper.PersonalAssistantProvider;
 import eu.alfred.personalization_manager.gui.pref.SettingsActivity;
 import eu.alfred.personalization_manager.gui.tabs.AppSectionsPagerAdapter;
 import eu.alfred.personalization_manager.gui.tabs.contacts.ContactActivity;
@@ -331,7 +304,7 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
         upController.logout();
         Intent returnIntent = new Intent();
         returnIntent.putExtra("result","logout");
-        setResult(RESULT_OK,returnIntent);
+        setResult(RESULT_OK, returnIntent);
         finish();
     }
 
@@ -397,67 +370,6 @@ public class UserProfileActivity extends FragmentActivity implements ActionBar.T
         intent.putExtra("user-id", userId);
         intent.putExtra("alfred-user-id", alfredUserId);
         startActivity(intent);
-    }
-
-    public void tryMe(View view) {
-        Runnable runnable = new Runnable() {
-            public void run() {
-                Log.d(TAG, "start: ");
-                AuthenticationServerWrapper authWrapper = new AuthenticationServerWrapper();
-                List<String> roles = new ArrayList<String>();
-                try {
-                    LoginData data = new LoginData
-                            .Builder()
-                            .setEmail("artur.brotons@gmail.com")
-                            .setPassword("abcartagena2password")
-                            .create();
-                    Log.d(TAG, "Authenticating...");
-                    AuthenticatedUser authedUser = authWrapper.login(data);
-                    Log.d(TAG, "Authed: " + authedUser.getUserId());
-                    Log.d(TAG, "Authed: " + authedUser.getAccessToken());
-
-                    Log.d(TAG, "Health Wrapper creating");
-                    HealthMonitorServerWrapper healthWrapper = new HealthMonitorServerWrapper(authedUser.getUserId(), authedUser.getAccessToken());
-//                    HealthMonitorServerWrapper healthWrapper = new HealthMonitorServerWrapper("55a79aaaa65be2261b375d72", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NWE3OWFhYWE2NWJlMjI2MWIzNzVkNzIiLCJpYXQiOjE0MzcxMzEyMDc1ODgsImV4cCI6MTQzNzE0OTIwNzU4OH0.BRPmQFEmx605LMrcDvu2o42sHeCI5RXpub-SLR1-IaY");
-                    Log.d(TAG, "Health Wrapper created");
-                    Log.d(TAG, "Health Wrapper getting resource list");
-                    List<String> resourceList = healthWrapper.getResourceList(DataType.STATIC);
-                    Log.d(TAG, "Health Wrapper acquired resource list");
-                    for (String s : resourceList) {
-                        Log.d(TAG, s + " (Health Wrapper before)");
-                    }
-//                    Resource ccRes = healthWrapper.createHealthMonitorServerResource("fallriskscore", "Fall Risk Score", DataType.STATIC, "Float");
-//                    Value<Float> val = new Value<Float>(3.7f);
-//                    healthWrapper.updateResource(ccRes, val);
-
-//                    Value<String> val2 = new Value<String>("Alzheimer");
-//                    healthWrapper.updateResource(ccRes, val2);
-
-                    Log.d(TAG, "Health Wrapper getting resource list");
-                    List<String> resourceList2 = healthWrapper.getResourceList(DataType.STATIC);
-                    Log.d(TAG, "Health Wrapper acquired resource list");
-                    for (String s : resourceList2) {
-                        Log.d(TAG, s + " (Health Wrapper after)");
-                        Resource resource = healthWrapper.getResource(s, null);
-                        for (Value value : resource.getValues()) {
-                            Log.d(TAG, resource.getResourceName() + "<" + resource.getUnit() + ">: " + value.getStringValue());
-                        }
-
-                    }
-
-
-                } catch (LoginDataException e) {
-                    e.printStackTrace();
-                } catch (AuthenticationException e) {
-                    e.printStackTrace();
-                } catch (HealthMonitorServerException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        new Thread(runnable).start();
-
     }
 
     /**

@@ -128,7 +128,7 @@ public class UserProfileController {
         PM.updateUserProfile(up, new PersonalizationStringResponse() {
 	        @Override
 	        public void OnSuccess(String s) {
-		        Log.i(TAG, "updateUserProfile succeeded");
+		        Log.i(TAG, "updateUserProfile succeeded: " + s);
 		        mActivity.notification(true, "Profile updated");
 	        }
 

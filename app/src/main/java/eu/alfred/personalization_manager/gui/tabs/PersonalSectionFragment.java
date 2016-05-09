@@ -233,13 +233,13 @@ public class PersonalSectionFragment extends SectionFragment {
                 Date date = up.getDateOfBirth();
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(date);
-                dpDateOfBirth.updateDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)-1, cal.get(Calendar.DATE));
+                dpDateOfBirth.updateDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
             }
             if (dpAnniversaryDate != null && up.getAnniversaryDate() != null) {
                 Date date = up.getAnniversaryDate();
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(date);
-                dpAnniversaryDate.updateDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)-1, cal.get(Calendar.DATE));
+                dpAnniversaryDate.updateDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
             }
 
             /**/
