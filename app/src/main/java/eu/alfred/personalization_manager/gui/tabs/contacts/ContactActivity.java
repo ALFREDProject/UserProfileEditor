@@ -799,8 +799,7 @@ public class ContactActivity extends Activity {
 
     public void editAccessRights(View view) {
         Log.d(TAG, "Entering editAccessRights()");
-        AttributesHelper attrHelp = new AttributesHelper();
-        Set<String> upFields = attrHelp.getUserProfileFields();
+        Set<String> upFields = AttributesHelper.getUserProfileFields();
         final CharSequence[] items = upFields.toArray(new CharSequence[upFields.size()]);
         CharSequence[] itemsHuman = new CharSequence[items.length];
         final boolean[] itemsChecked = new boolean[items.length];

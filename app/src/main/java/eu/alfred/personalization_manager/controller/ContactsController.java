@@ -13,12 +13,14 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import eu.alfred.api.PersonalAssistant;
 import eu.alfred.api.personalization.client.ContactDto;
 import eu.alfred.api.personalization.client.ContactMapper;
 import eu.alfred.api.personalization.client.RequesterDto;
 import eu.alfred.api.personalization.client.RequesterMapper;
+import eu.alfred.api.personalization.model.AttributesHelper;
 import eu.alfred.api.personalization.model.Contact;
 import eu.alfred.api.personalization.model.Relation;
 import eu.alfred.api.personalization.model.Requester;
@@ -246,7 +248,12 @@ public class ContactsController {
         rights.put("nextOfKin", false);
         rights.put("alfedAppInstalationDate", false);
 
-        if (contact != null) {
+	    for (String uf : AttributesHelper.getUserProfileFields()) {
+		    if (!rights.containsKey(uf)) rights.put(uf, Boolean.FALSE);
+	    }
+
+
+	    if (contact != null) {
             contact.setAccessRightsToAttributes(rights);
         }
         return rights;
