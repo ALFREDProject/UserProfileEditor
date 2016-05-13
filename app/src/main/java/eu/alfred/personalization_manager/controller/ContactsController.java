@@ -75,7 +75,7 @@ public class ContactsController {
     public void getContacts(String id) {
         // client.doGetAllContacts(id);
 	    PersonalizationManager PM = new PersonalizationManager(PA.getMessenger());
-	    PM.retrieveUserContacts(id, null, new PersonalizationArrayResponse() {
+	    PM.retrieveAllUserContacts(id, new PersonalizationArrayResponse() {
 		    @Override
 		    public void OnSuccess(JSONArray a) {
 			    Log.i(TAG, "retrieveUserProfiles succeeded");

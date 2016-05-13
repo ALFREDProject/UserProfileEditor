@@ -648,10 +648,7 @@ public class ContactActivity extends Activity {
 
     private void createContact() {
         Contact contact = extractContact(mContact);
-        controller.newContact(contact, alfredUserId);
-/*        ContactsSectionFragment.setContact(contactPos, mContact);
-        notification(true, "Contact saved");
-        dirty = false;*/
+        controller.newContact(contact, userId);
     }
 
     private void updateContact() {
