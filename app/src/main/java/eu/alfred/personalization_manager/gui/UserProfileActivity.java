@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,20 +19,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Map;
+
 import eu.alfred.api.personalization.model.UserProfile;
 import eu.alfred.personalization_manager.controller.UserProfileController;
 import eu.alfred.personalization_manager.controller.auth.User;
 import eu.alfred.personalization_manager.gui.pref.SettingsActivity;
 import eu.alfred.personalization_manager.gui.tabs.AppSectionsPagerAdapter;
 import eu.alfred.personalization_manager.gui.tabs.contacts.ContactActivity;
-import eu.alfred.ui.AppActivity;
 import eu.alfred.userprofile.R;
 
 /**
  * This is the main activity of the ALFRED User Profile Editor
  */
-/*public class UserProfileActivity extends FragmentActivity implements ActionBar.TabListener {*/
-public class UserProfileActivity extends AppActivity implements ActionBar.TabListener {
+public class UserProfileActivity extends FragmentActivity implements ActionBar.TabListener {
 
     final public String TAG = "UPE:UPActivity";
     final static String START_USER_PROFILE_EDITOR = "StartEditorAction";
@@ -413,38 +414,10 @@ public class UserProfileActivity extends AppActivity implements ActionBar.TabLis
     public UserProfileController getUserProfileController() {
         return upController;
     }
+
     @Override
     public void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
     }
 
-    @Override
-    public void performAction(String s, Map<String, String> map) {
-        Log.d("Perform Action string", s);
-        switch (s) {
-            case START_USER_PROFILE_EDITOR:
-                Log.d("DDD Response to"," START EDITOR");
-                break;
-            default:
-                break;
-        }
-
-        cade.sendActionResult(true);
-    }
-
-    @Override
-    public void performWhQuery(String s, Map<String, String> map) {
-        Log.d("Wh Query", s);
-        cade.sendActionResult(true);
-    }
-
-    @Override
-    public void performValidity(String s, Map<String, String> map) {
-        Log.d("Perform Validity", "works!");
-    }
-
-    @Override
-    public void performEntityRecognizer(String s, Map<String, String> map) {
-        Log.d("Perform Entity Recog", "works!");
-    }
 }
