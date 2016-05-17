@@ -20,6 +20,7 @@ import java.util.Map;
 import eu.alfred.personalization_manager.controller.auth.AuthController;
 import eu.alfred.personalization_manager.controller.auth.AuthListener;
 import eu.alfred.personalization_manager.controller.auth.User;
+import eu.alfred.personalization_manager.controller.helper.PersonalAssistantProvider;
 import eu.alfred.personalization_manager.controller.helper.SharedPrefHelper;
 import eu.alfred.personalization_manager.gui.UserProfileActivity;
 import eu.alfred.personalization_manager.gui.animation.AndroidUtils;
@@ -96,6 +97,9 @@ public class SplashActivity extends AppActivity implements AuthListener {
         if (prefPassword != null && !prefPassword.isEmpty()) {
             etPassword.setText(prefPassword);
         }
+
+	    // trigger init
+	    PersonalAssistantProvider.getPersonalAssistant(this);
 
         properVisibility();
         autoLogin();

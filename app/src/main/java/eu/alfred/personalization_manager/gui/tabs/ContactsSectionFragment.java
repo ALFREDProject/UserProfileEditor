@@ -139,7 +139,7 @@ public class ContactsSectionFragment extends SectionFragment {
         return adapter.getItem(contactPos);
     }
 
-    public void updateContactList(ArrayList<Contact> contactsList) {
+    public void updateContactList(List<Contact> contactsList) {
         Log.d(TAG, "updateContactList with " + contactsList.size() + " contacts." );
         for (Contact contact : contactsList) {
 //            contacts.add(contact);

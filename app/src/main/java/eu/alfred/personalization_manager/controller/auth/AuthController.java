@@ -3,6 +3,8 @@ package eu.alfred.personalization_manager.controller.auth;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import eu.alfred.internal.wrapper.authentication.AuthenticatedUser;
 import eu.alfred.internal.wrapper.authentication.AuthenticationException;
 import eu.alfred.internal.wrapper.authentication.AuthenticationServerWrapper;
@@ -56,6 +58,7 @@ public class AuthController {
                         .setPassword(user.getPassword()) // "abcartagena2password"
                         .create();
                 Log.d(TAG, "Authenticating...");
+
                 AuthenticatedUser authedUser = authWrapper.login(data);
                 Log.d(TAG, "Authenticating... SUCCESS");
                 Log.d(TAG, "AuthAttempt Authed id: " + authedUser.getUserId());
@@ -68,7 +71,12 @@ public class AuthController {
                 user.setAccessToken(authedUser.getAccessToken());
                 user.setError(null);
                 user.setRoles(authedUser.getRoles());
-
+/*
+                user.setUserId("123");
+                user.setAccessToken("bla");
+                user.setError(null);
+                user.setRoles(new ArrayList<String>());
+*/
             } catch (Exception e) {
                 Log.d(TAG, "Authenticating... FAIL");
                 Log.d(TAG, "AuthAttempt Exception", e);
@@ -76,6 +84,13 @@ public class AuthController {
                 Log.d(TAG, "AuthAttempt " + errorMsg);
                 Log.d(TAG, "AuthAttempt " + user);
                 user.setError(errorMsg);
+
+/*
+                user.setUserId("123");
+                user.setAccessToken("bla");
+                user.setError(null);
+                user.setRoles(new ArrayList<String>());
+*/
             }
             return user;
         }

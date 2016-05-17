@@ -109,8 +109,6 @@ public class ContactActivity extends Activity {
         tvContactId.setText(contactId);
         tvContactId.setKeyListener(null);
         tvContactId.setVisibility(View.GONE);
-//        controller = ContactsController.getInstance();
-//        controller.setContactActivity(this);
         controller = new ContactsController(getApplicationContext());
         controller.setContactActivity(this);
         controller.setAlfredUserId(alfredUserId);
@@ -650,10 +648,7 @@ public class ContactActivity extends Activity {
 
     private void createContact() {
         Contact contact = extractContact(mContact);
-        controller.newContact(contact, alfredUserId);
-/*        ContactsSectionFragment.setContact(contactPos, mContact);
-        notification(true, "Contact saved");
-        dirty = false;*/
+        controller.newContact(contact, userId);
     }
 
     private void updateContact() {
@@ -801,8 +796,7 @@ public class ContactActivity extends Activity {
 
     public void editAccessRights(View view) {
         Log.d(TAG, "Entering editAccessRights()");
-        AttributesHelper attrHelp = new AttributesHelper();
-        Set<String> upFields = attrHelp.getUserProfileFields();
+        Set<String> upFields = AttributesHelper.getUserProfileFields();
         final CharSequence[] items = upFields.toArray(new CharSequence[upFields.size()]);
         CharSequence[] itemsHuman = new CharSequence[items.length];
         final boolean[] itemsChecked = new boolean[items.length];

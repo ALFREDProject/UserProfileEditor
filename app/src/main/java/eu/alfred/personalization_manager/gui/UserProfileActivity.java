@@ -18,21 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import eu.alfred.api.personalization.model.UserProfile;
-import eu.alfred.internal.wrapper.authentication.AuthenticatedUser;
-import eu.alfred.internal.wrapper.authentication.AuthenticationException;
-import eu.alfred.internal.wrapper.authentication.AuthenticationServerWrapper;
-import eu.alfred.internal.wrapper.authentication.login.LoginData;
-import eu.alfred.internal.wrapper.authentication.login.LoginDataException;
-import eu.alfred.internal.wrapper.healthmonitor.DataType;
-import eu.alfred.internal.wrapper.healthmonitor.HealthMonitorServerException;
-import eu.alfred.internal.wrapper.healthmonitor.HealthMonitorServerWrapper;
-import eu.alfred.internal.wrapper.healthmonitor.resource.Resource;
-import eu.alfred.internal.wrapper.healthmonitor.resource.Value;
 import eu.alfred.personalization_manager.controller.UserProfileController;
 import eu.alfred.personalization_manager.controller.auth.User;
 import eu.alfred.personalization_manager.gui.pref.SettingsActivity;
@@ -49,11 +35,6 @@ public class UserProfileActivity extends AppActivity implements ActionBar.TabLis
 
     final public String TAG = "UPE:UPActivity";
     final static String START_USER_PROFILE_EDITOR = "StartEditorAction";
-
-
-/*    private Button btNew;
-    private Button btSave;
-    private Button btDelete;*/
 
     UserProfileController upController;
     private MenuItem miNew;
@@ -163,6 +144,7 @@ public class UserProfileActivity extends AppActivity implements ActionBar.TabLis
         } else {
             upController.initCreating(user);
         }
+
     }
 
 
@@ -324,7 +306,7 @@ public class UserProfileActivity extends AppActivity implements ActionBar.TabLis
         upController.logout();
         Intent returnIntent = new Intent();
         returnIntent.putExtra("result","logout");
-        setResult(RESULT_OK,returnIntent);
+        setResult(RESULT_OK, returnIntent);
         finish();
     }
 
@@ -390,67 +372,6 @@ public class UserProfileActivity extends AppActivity implements ActionBar.TabLis
         intent.putExtra("user-id", userId);
         intent.putExtra("alfred-user-id", alfredUserId);
         startActivity(intent);
-    }
-
-    public void tryMe(View view) {
-        Runnable runnable = new Runnable() {
-            public void run() {
-                Log.d(TAG, "start: ");
-                AuthenticationServerWrapper authWrapper = new AuthenticationServerWrapper();
-                List<String> roles = new ArrayList<String>();
-                try {
-                    LoginData data = new LoginData
-                            .Builder()
-                            .setEmail("artur.brotons@gmail.com")
-                            .setPassword("abcartagena2password")
-                            .create();
-                    Log.d(TAG, "Authenticating...");
-                    AuthenticatedUser authedUser = authWrapper.login(data);
-                    Log.d(TAG, "Authed: " + authedUser.getUserId());
-                    Log.d(TAG, "Authed: " + authedUser.getAccessToken());
-
-                    Log.d(TAG, "Health Wrapper creating");
-                    HealthMonitorServerWrapper healthWrapper = new HealthMonitorServerWrapper(authedUser.getUserId(), authedUser.getAccessToken());
-//                    HealthMonitorServerWrapper healthWrapper = new HealthMonitorServerWrapper("55a79aaaa65be2261b375d72", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NWE3OWFhYWE2NWJlMjI2MWIzNzVkNzIiLCJpYXQiOjE0MzcxMzEyMDc1ODgsImV4cCI6MTQzNzE0OTIwNzU4OH0.BRPmQFEmx605LMrcDvu2o42sHeCI5RXpub-SLR1-IaY");
-                    Log.d(TAG, "Health Wrapper created");
-                    Log.d(TAG, "Health Wrapper getting resource list");
-                    List<String> resourceList = healthWrapper.getResourceList(DataType.STATIC);
-                    Log.d(TAG, "Health Wrapper acquired resource list");
-                    for (String s : resourceList) {
-                        Log.d(TAG, s + " (Health Wrapper before)");
-                    }
-//                    Resource ccRes = healthWrapper.createHealthMonitorServerResource("fallriskscore", "Fall Risk Score", DataType.STATIC, "Float");
-//                    Value<Float> val = new Value<Float>(3.7f);
-//                    healthWrapper.updateResource(ccRes, val);
-
-//                    Value<String> val2 = new Value<String>("Alzheimer");
-//                    healthWrapper.updateResource(ccRes, val2);
-
-                    Log.d(TAG, "Health Wrapper getting resource list");
-                    List<String> resourceList2 = healthWrapper.getResourceList(DataType.STATIC);
-                    Log.d(TAG, "Health Wrapper acquired resource list");
-                    for (String s : resourceList2) {
-                        Log.d(TAG, s + " (Health Wrapper after)");
-                        Resource resource = healthWrapper.getResource(s, null);
-                        for (Value value : resource.getValues()) {
-                            Log.d(TAG, resource.getResourceName() + "<" + resource.getUnit() + ">: " + value.getStringValue());
-                        }
-
-                    }
-
-
-                } catch (LoginDataException e) {
-                    e.printStackTrace();
-                } catch (AuthenticationException e) {
-                    e.printStackTrace();
-                } catch (HealthMonitorServerException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        new Thread(runnable).start();
-
     }
 
     /**
