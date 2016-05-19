@@ -334,7 +334,7 @@ public class ContactActivity extends Activity {
                 Date date = contact.getDateOfBirth();
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(date);
-                dpDateOfBirth.updateDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) - 1, cal.get(Calendar.DATE));
+                dpDateOfBirth.updateDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
             }
 
             etUserId.setText(userId);

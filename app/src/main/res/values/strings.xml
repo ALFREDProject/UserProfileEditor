@@ -33,7 +33,8 @@
     <string name="up_email_hint">yourcontact@mail.com</string>
     <string name="action_save_title">Save</string>
     <string name="action_delete_profile_title">Delete profile</string>
-    <string name="action_new_profile_title">New</string>
+    <string name="action_delete_contact_title">Delete contact</string>
+    <string name="action_new_profile_title">Create</string>
     <string name="activity_name">Your Profile</string>
     <string name="up_contact_street">Street</string>
     <string name="up_contact_street_hint">Av. United Nations</string>

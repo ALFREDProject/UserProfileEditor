@@ -19,5 +19,5 @@
         android:icon="@drawable/ic_action_discard"
         android:orderInCategory="70"
         app:showAsAction="ifRoom"
-        android:title="@string/action_delete_profile_title" />
+        android:title="@string/action_delete_contact_title" />
 </menu>
