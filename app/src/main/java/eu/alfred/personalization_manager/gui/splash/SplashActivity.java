@@ -24,6 +24,7 @@ import eu.alfred.personalization_manager.controller.helper.PersonalAssistantProv
 import eu.alfred.personalization_manager.controller.helper.SharedPrefHelper;
 import eu.alfred.personalization_manager.gui.UserProfileActivity;
 import eu.alfred.personalization_manager.gui.animation.AndroidUtils;
+import eu.alfred.api.proxies.interfaces.ICadeCommand;
 import eu.alfred.ui.AppActivity;
 import eu.alfred.userprofile.R;
 
@@ -36,7 +37,7 @@ import eu.alfred.userprofile.R;
  * Note: On this context, email means Alfred Username, not just some random email.
  */
 /*public class SplashActivity extends FragmentActivity implements AuthListener {*/
-public class SplashActivity extends AppActivity implements AuthListener {
+public class SplashActivity extends AppActivity implements AuthListener, ICadeCommand {
     final public String TAG = "UPE:SplashActivity";
     final static String START_USER_PROFILE_EDITOR = "StartEditorAction";
 
@@ -435,8 +436,9 @@ public class SplashActivity extends AppActivity implements AuthListener {
 
     @Override
     public void performAction(String s, Map<String, String> map) {
-        Log.d("Perform Action string", s);
-        switch (s) {
+	    Log.e(TAG, "performAction(" + s + ", " + map + ")");
+
+	    switch (s) {
             case START_USER_PROFILE_EDITOR:
                 Log.d("DDD Response to"," START EDITOR");
                 break;
@@ -449,17 +451,17 @@ public class SplashActivity extends AppActivity implements AuthListener {
 
     @Override
     public void performWhQuery(String s, Map<String, String> map) {
-        Log.d("Wh Query", s);
+        Log.e(TAG, "performWhQuery(" + s + ", " + map + ")");
         cade.sendActionResult(true);
     }
 
     @Override
     public void performValidity(String s, Map<String, String> map) {
-        Log.d("Perform Validity", "works!");
+        Log.e(TAG, "performValidity(" + s + ", " + map + ")");
     }
 
-    @Override
+	@Override
     public void performEntityRecognizer(String s, Map<String, String> map) {
-        Log.d("Perform Entity Recog", "works!");
+		Log.e(TAG, "performEntityRecognizer(" + s + ", " + map + ")");
     }
 }

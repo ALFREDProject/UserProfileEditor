@@ -170,8 +170,8 @@
     <string name="up_user_contact_id_hint">#dev Manual input</string>
     <string name="up_user_contact_pos_text">#dev Contact Position</string>
     <string name="up_user_contact_pos_hint">#dev Manual input</string>
-    <string name="up_edit_access_rights_text">Modifier les droits d'accès</string>
-    <string name="up_edit_access_rights_dialog_title">Modifier les droits d'accès</string>
+    <string name="up_edit_access_rights_text">Modifier les droits d\'accès</string>
+    <string name="up_edit_access_rights_dialog_title">Modifier les droits d\'accès</string>
 
     <!-- UserProfile fields' names -->
     <string name="attr_up_profession">Profession</string>
