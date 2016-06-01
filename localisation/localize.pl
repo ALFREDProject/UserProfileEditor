@@ -96,10 +96,28 @@ while ($line = <IN>)
       for my $lk (keys %{$tlang})
       {
 #        print "$lk " . $trans{$tlang->{$lk}}->{$id} . "\n";
+
+        my $tr = $trans{$tlang->{$lk}}->{$id};
+        if ($tr eq "")
+        {
+          my $lng = $tlang->{$lk};
+          print "no $lng translation for $key = \"$val\"\n";
+          $tr = $val;
+        }
         open OUT, ">> ${VALUES}-$lk/strings.xml" || die;
-        print OUT "    <string name=\"$key\">" . $trans{$tlang->{$lk}}->{$id} . "</string>\n";
+        print OUT "    <string name=\"$key\">$tr</string>\n";
         close OUT;
       }
+    }
+  }
+  elsif ($line =~ /<!-- \w+ -->/)
+  {
+    for my $lk (keys %{$tlang})
+    {
+      my $lng = $tlang->{$lk};
+      open OUT, ">> ${VALUES}-$lk/strings.xml" || die;
+      print OUT "    <!-- $lng -->\n";
+      close OUT;
     }
   }
   else

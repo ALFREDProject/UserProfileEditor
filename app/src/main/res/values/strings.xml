@@ -27,13 +27,13 @@
     <string name="up_mobile_phone_text">Mobile phone</string>
     <string name="up_phone_hint">+31 555 00 11 XX</string>
     <string name="up_mobile_phone_hint">+31 955 00 11 XX</string>
-    <string name="up_username_text">Username</string>
+    <string name="up_username_text">User Name</string>
     <string name="up_username_hint">yourcontact@alfreduser.com</string>
     <string name="up_email_text">e-mail</string>
     <string name="up_email_hint">yourcontact@mail.com</string>
     <string name="action_save_title">Save</string>
-    <string name="action_delete_profile_title">Delete profile</string>
-    <string name="action_delete_contact_title">Delete contact</string>
+    <string name="action_delete_profile_title">Delete profile?</string>
+    <string name="action_delete_contact_title">Delete contact?</string>
     <string name="action_new_profile_title">Create</string>
     <string name="activity_name">Your Profile</string>
     <string name="up_contact_street">Street</string>
@@ -57,12 +57,12 @@
     <string name="up_language_text">Language</string>
     <string name="up_social_security_number_text">Social Security Number</string>
     <string name="up_marital_status_text">Marital status</string>
-    <string name="up_education_level_text">Education level</string>
+    <string name="up_education_level_text">Educational level</string>
     <string name="up_employment_status_text">Employment status</string>
     <string name="up_living_situation_text">Living situation</string>
     <string name="up_health_insurance_text">Health insurance</string>
     <string name="up_mobility_level_text">Mobility level</string>
-    <string name="select_one">Select one…</string>
+    <string name="select_one">Select one</string>
     <string name="up_profession_text">Profession</string>
     <string name="up_profession_insurance_hint">Teacher, engineer, lawyer…</string>
     <string name="up_health_id_text">ID</string>
@@ -198,11 +198,11 @@
     <string name="attr_up_maritalStatus">Marital Status</string>
     <string name="attr_up_culturalOrFamilyNeeds">Cultural or Family Needs</string>
     <string name="attr_up_citizenship">Citizenship</string>
-    <string name="attr_up_educationLevel">Education Level</string>
+    <string name="attr_up_educationLevel">Educational Level</string>
     <string name="attr_up_nextOfKin">Next of Kin</string>
     <string name="attr_up_lastName">Last Name</string>
     <string name="attr_up_alfedAppInstalationDate">Alfred App Installation Date</string>
-    <string name="attr_up_alfredUserName">Username</string>
+    <string name="attr_up_alfredUserName">User Name</string>
     <string name="attr_up_language">Language</string>
 
     <string name="splash_bt_register">Register</string>
@@ -213,7 +213,7 @@
     <string name="splash_tv_password_hint">Your password</string>
     <string name="splash_fill_all_fields">Please, fill all fields</string>
     <string name="splash_logging_in">Verifying credentials</string>
-    <string name="splash_login_success">Login success!</string>
+    <string name="splash_login_success">Login success</string>
     <string name="splash_tv_name">Complete Name</string>
     <string name="splash_tv_name_hint">John Smith</string>
     <string name="splash_bt_no_account">No account?</string>
@@ -231,12 +231,12 @@
     <string name="contact_notification_update_success"><![CDATA[<font color=\'#017BE3\'>%s</font>\'s info has been saved]]></string>
     <string name="contact_notification_delete_success"><![CDATA[OK, <font color=\'#017BE3\'>%s</font> is no longer your contact]]></string>
     <string name="contact_permissions_update_success"><![CDATA[Access rights for <font color=\'#017BE3\'>%s</font> have been saved]]></string>
-    <string name="progress_overlay_text_content">Connecting to server…</string>
-    <string name="progress_overlay_text_content_login">Connecting to server…</string>
-    <string name="progress_overlay_text_content_register">Connecting to server…</string>
+    <string name="progress_overlay_text_content">Connecting to server</string>
+    <string name="progress_overlay_text_content_login">Connecting to server</string>
+    <string name="progress_overlay_text_content_register">Connecting to server</string>
     <string name="pref_user_username_title">Current Username</string>
     <string name="pref_user_username_summary">Alfred Username</string>
-    <string name="up_health_loading_resources_text">Loading resources…</string>
+    <string name="up_health_loading_resources_text">Loading resources</string>
 
 
     <!-- Source: http://www.textfixer.com/resources/dropdowns/country-list-array.txt -->
