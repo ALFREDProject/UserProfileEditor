@@ -80,8 +80,37 @@ open IN, "< $VALUES/strings.xml";
 while ($line = <IN>)
 {
   chomp $line;
-  
+
   if ($line =~ /<string name="(\w+)">([^<]+)<\/string>/)
+  {
+    my $key = $1;
+    my $val = $2;
+    my $id = &pickId($val);
+    if ($id == undef)
+    {
+      print "no value $key = \"$val\"\n";
+      &appendAll($line);
+    }
+    else
+    {
+      for my $lk (keys %{$tlang})
+      {
+#        print "$lk " . $trans{$tlang->{$lk}}->{$id} . "\n";
+
+        my $tr = $trans{$tlang->{$lk}}->{$id};
+        if ($tr eq "")
+        {
+          my $lng = $tlang->{$lk};
+          print "no $lng translation for $key = \"$val\"\n";
+          $tr = $val;
+        }
+        open OUT, ">> ${VALUES}-$lk/strings.xml" || die;
+        print OUT "    <string name=\"$key\">$tr</string>\n";
+        close OUT;
+      }
+    }
+  }
+  elsif ($line =~ /<string name="(\w+)"><!\[CDATA\[(.+?)]]><\/string>/)
   {
     my $key = $1;
     my $val = $2;
