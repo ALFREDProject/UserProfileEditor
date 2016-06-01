@@ -22,7 +22,7 @@ import eu.alfred.api.personalization.model.Contact;
 import eu.alfred.api.personalization.model.Gender;
 import eu.alfred.api.personalization.model.Relation;
 import eu.alfred.personalization_manager.gui.tabs.contacts.ContactActivity;
-import eu.alfred.userprofile.R;
+import eu.alfred.upeditor.R;
 
 /**
  * Created by Arturo.Brotons on 26/02/2015.

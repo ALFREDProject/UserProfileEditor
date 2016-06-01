@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.alfred.api.PersonalAssistant;
-import eu.alfred.api.PersonalAssistantConnection;
 import eu.alfred.api.personalization.client.UserProfileDto;
 import eu.alfred.api.personalization.client.UserProfileMapper;
 import eu.alfred.api.personalization.model.UserProfile;
@@ -30,7 +29,7 @@ import eu.alfred.personalization_manager.controller.helper.PersonalizationString
 import eu.alfred.personalization_manager.gui.UserProfileActivity;
 import eu.alfred.personalization_manager.gui.tabs.ContactsSectionFragment;
 import eu.alfred.personalization_manager.gui.tabs.HealthSectionFragment;
-import eu.alfred.userprofile.R;
+import eu.alfred.upeditor.R;
 
 /**
  * Created by Arturo.Brotons on 21/01/2015.

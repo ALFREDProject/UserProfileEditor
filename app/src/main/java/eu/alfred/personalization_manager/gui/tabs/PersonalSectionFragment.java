@@ -25,7 +25,7 @@ import eu.alfred.api.personalization.model.Language;
 import eu.alfred.api.personalization.model.MaritalStatus;
 import eu.alfred.api.personalization.model.MobilityLevel;
 import eu.alfred.api.personalization.model.MyersBriggsTypeIndicator;
-import eu.alfred.userprofile.R;
+import eu.alfred.upeditor.R;
 
 /**
 * Created by Arturo.Brotons on 26/02/2015.

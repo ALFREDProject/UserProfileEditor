@@ -26,7 +26,7 @@ import eu.alfred.personalization_manager.gui.UserProfileActivity;
 import eu.alfred.personalization_manager.gui.animation.AndroidUtils;
 import eu.alfred.api.proxies.interfaces.ICadeCommand;
 import eu.alfred.ui.AppActivity;
-import eu.alfred.userprofile.R;
+import eu.alfred.upeditor.R;
 
 /**
  * This is the first activity, started by the user when pressing the ALFRED launcher.

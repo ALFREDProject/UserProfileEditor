@@ -24,7 +24,7 @@ import eu.alfred.internal.wrapper.healthmonitor.resource.Resource;
 import eu.alfred.internal.wrapper.healthmonitor.resource.Value;
 import eu.alfred.personalization_manager.controller.health.HealthListener;
 import eu.alfred.personalization_manager.db_administrator.model.ModifiedRankinScale;
-import eu.alfred.userprofile.R;
+import eu.alfred.upeditor.R;
 
 /**
  * Created by Arturo.Brotons on 26/02/2015.

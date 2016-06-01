@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import eu.alfred.personalization_manager.controller.UserProfileController;
 import eu.alfred.api.personalization.model.Contact;
-import eu.alfred.userprofile.R;
+import eu.alfred.upeditor.R;
 
 /**
  * Created by Arturo.Brotons on 27/02/2015.

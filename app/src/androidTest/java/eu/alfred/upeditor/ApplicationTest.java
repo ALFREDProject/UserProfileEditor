@@ -1,4 +1,4 @@
-package eu.alfred.userprofile;
+package eu.alfred.upeditor;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

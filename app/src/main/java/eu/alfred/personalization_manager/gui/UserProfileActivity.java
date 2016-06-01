@@ -19,15 +19,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Map;
-
 import eu.alfred.api.personalization.model.UserProfile;
 import eu.alfred.personalization_manager.controller.UserProfileController;
 import eu.alfred.personalization_manager.controller.auth.User;
 import eu.alfred.personalization_manager.gui.pref.SettingsActivity;
 import eu.alfred.personalization_manager.gui.tabs.AppSectionsPagerAdapter;
 import eu.alfred.personalization_manager.gui.tabs.contacts.ContactActivity;
-import eu.alfred.userprofile.R;
+import eu.alfred.upeditor.R;
 
 /**
  * This is the main activity of the ALFRED User Profile Editor

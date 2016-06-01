@@ -30,7 +30,6 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -42,7 +41,7 @@ import eu.alfred.api.personalization.model.Relation;
 import eu.alfred.api.personalization.model.Requester;
 import eu.alfred.personalization_manager.controller.ContactsController;
 import eu.alfred.personalization_manager.gui.tabs.ContactsSectionFragment;
-import eu.alfred.userprofile.R;
+import eu.alfred.upeditor.R;
 
 /**
  * Created by Arturo.Brotons on 02/03/2015.

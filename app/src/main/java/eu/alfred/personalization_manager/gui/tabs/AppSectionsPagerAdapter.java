@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
-import eu.alfred.userprofile.R;
+import eu.alfred.upeditor.R;
 
 /**
  * A {@link android.support.v4.app.FragmentPagerAdapter} that returns a fragment corresponding to one of the primary
