@@ -49,8 +49,8 @@
     <string name="up_contact_country">Land</string>
     <string name="up_contact_country_hint">The Netherlands</string>
     <string name="up_status_citizenship_text">Staatsangehörigkeit</string>
-    <string name="up_citizenship_hint">British, Dutch, French, Swedish…</string>
-    <string name="up_nationality_hint">Spanish, German, Irish…</string>
+    <string name="up_citizenship_hint">Brittisch, Niederländisch, Französisch, Schwedisch...</string>
+    <string name="up_nationality_hint">Spanisch, Deutsch, Irisch...</string>
     <string name="up_social_security_number_hint">8800–123–0000000</string>
     <string name="up_health_insurance_hint">Partial, all assured…</string>
     <string name="up_nationality_text">Nationalität</string>
@@ -133,7 +133,7 @@
     <string name="up_health_rangeOfMotionScore_text">Range Of Motion Score</string>
     <string name="up_contact_postal_address">Postalische Anschrift</string>
     <string name="edit_contact_activity_name">Kontakt bearbeiten</string>
-    <string name="edit_new_contact_activity_name">New Contact</string>
+    <string name="edit_new_contact_activity_name">Neuer Kontakt</string>
     <string name="tab_personal_title">Persönlich</string>
     <string name="tab_contacts_title">Kontakte</string>
     <string name="tab_health_title">Gesundheit</string>
@@ -143,7 +143,7 @@
     <string name="tab_personal_header_contact_info">Kontakt Information</string>
     <string name="contact_header_general">Allgemeine Informationen</string>
     <string name="up_relation_text">Beziehung</string>
-    <string name="contact_item_image_description">Contact icon</string>
+    <string name="contact_item_image_description">Kontakt Bild</string>
     <string name="delete_contact_attempt_title">Kontakt löschen?</string>
     <string name="delete_contact_attempt_message">Dieser Kontakt wird gelöscht.</string>
     <string name="exit_edited_contact_attempt_title">Möchten Sie beenden?</string>

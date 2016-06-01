@@ -49,8 +49,8 @@
     <string name="up_contact_country">Land</string>
     <string name="up_contact_country_hint">The Netherlands</string>
     <string name="up_status_citizenship_text">Nationaliteit</string>
-    <string name="up_citizenship_hint">British, Dutch, French, Swedish…</string>
-    <string name="up_nationality_hint">Spanish, German, Irish…</string>
+    <string name="up_citizenship_hint">Brits, Nederlands, Frans, Zweeds...</string>
+    <string name="up_nationality_hint">Spaans, Duits...</string>
     <string name="up_social_security_number_hint">8800–123–0000000</string>
     <string name="up_health_insurance_hint">Partial, all assured…</string>
     <string name="up_nationality_text">Nationaliteit</string>
