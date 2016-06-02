@@ -227,10 +227,10 @@
     <string name="splash_tv_lastname">Achternaam</string>
     <string name="splash_tv_lastname_hint">Achternaam</string>
     <string name="up_email_info">Dit is uw gebruikersnaam. Deze kan niet veranderd worden.</string>
-    <string name="contact_notification_create_success"><![CDATA[% is nu in uw contacten lijst ]]></string>
-    <string name="contact_notification_update_success"><![CDATA[% van de informatie is nu opgeslagen]]></string>
-    <string name="contact_notification_delete_success"><![CDATA[OK, % is geen contact meer ]]></string>
-    <string name="contact_permissions_update_success"><![CDATA[Toegangsrechten voor % zijn opgeslagen]]></string>
+    <string name="contact_notification_create_success"><![CDATA[<font color=\'#017BE3\'>%s</font> is nu in uw contacten lijst ]]></string>
+    <string name="contact_notification_update_success"><![CDATA[<font color=\'#017BE3\'>%s</font> van de informatie is nu opgeslagen]]></string>
+    <string name="contact_notification_delete_success"><![CDATA[OK, <font color=\'#017BE3\'>%s</font> is geen contact meer ]]></string>
+    <string name="contact_permissions_update_success"><![CDATA[Toegangsrechten voor <font color=\'#017BE3\'>%s</font> zijn opgeslagen]]></string>
     <string name="progress_overlay_text_content">Maakt verbinding met server</string>
     <string name="progress_overlay_text_content_login">Maakt verbinding met server</string>
     <string name="progress_overlay_text_content_register">Maakt verbinding met server</string>

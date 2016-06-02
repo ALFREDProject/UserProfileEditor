@@ -227,10 +227,10 @@
     <string name="splash_tv_lastname">Nom de famille</string>
     <string name="splash_tv_lastname_hint">Nom de famille</string>
     <string name="up_email_info">Ceci est votre nom d\'utilisateur. Il ne pourra être modifié. </string>
-    <string name="contact_notification_create_success"><![CDATA[% a été ajouté à votre liste de contact]]></string>
-    <string name="contact_notification_update_success"><![CDATA[Les informations concernant % ont bien été sauvegardées]]></string>
-    <string name="contact_notification_delete_success"><![CDATA[OK, % ne fait plus partie de vos contacts]]></string>
-    <string name="contact_permissions_update_success"><![CDATA[Les droits d\'accès pour % ont été sauvegardés]]></string>
+    <string name="contact_notification_create_success"><![CDATA[<font color=\'#017BE3\'>%s</font> a été ajouté à votre liste de contact]]></string>
+    <string name="contact_notification_update_success"><![CDATA[Les informations concernant <font color=\'#017BE3\'>%s</font> ont bien été sauvegardées]]></string>
+    <string name="contact_notification_delete_success"><![CDATA[OK, <font color=\'#017BE3\'>%s</font> ne fait plus partie de vos contacts]]></string>
+    <string name="contact_permissions_update_success"><![CDATA[Les droits d\'accès pour <font color=\'#017BE3\'>%s</font> ont été sauvegardés]]></string>
     <string name="progress_overlay_text_content">Connection au serveur</string>
     <string name="progress_overlay_text_content_login">Connection au serveur</string>
     <string name="progress_overlay_text_content_register">Connection au serveur</string>
