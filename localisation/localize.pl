@@ -104,6 +104,7 @@ while ($line = <IN>)
           print "no $lng translation for $key = \"$val\"\n";
           $tr = $val;
         }
+        $tr =~ s/'/\\'/g;
         open OUT, ">> ${VALUES}-$lk/strings.xml" || die;
         print OUT "    <string name=\"$key\">$tr</string>\n";
         close OUT;
@@ -114,6 +115,10 @@ while ($line = <IN>)
   {
     my $key = $1;
     my $val = $2;
+
+    $val =~ s/<font color=\\'#017BE3\\'>%s<\/font>/%s/;
+    $val =~ s/\\'/'/g;
+
     my $id = &pickId($val);
     if ($id == undef)
     {
@@ -133,8 +138,11 @@ while ($line = <IN>)
           print "no $lng translation for $key = \"$val\"\n";
           $tr = $val;
         }
+        $tr =~ s/'/\\'/g;
+        $tr =~ s/%s/<font color=\\'#017BE3\\'>%s<\/font>/;
+
         open OUT, ">> ${VALUES}-$lk/strings.xml" || die;
-        print OUT "    <string name=\"$key\">$tr</string>\n";
+        print OUT "    <string name=\"$key\"><![CDATA[$tr]]></string>\n";
         close OUT;
       }
     }

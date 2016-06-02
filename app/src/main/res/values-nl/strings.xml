@@ -50,7 +50,7 @@
     <string name="up_contact_country_hint">The Netherlands</string>
     <string name="up_status_citizenship_text">Nationaliteit</string>
     <string name="up_citizenship_hint">Brits, Nederlands, Frans, Zweeds...</string>
-    <string name="up_nationality_hint">Spaans, Duits...</string>
+    <string name="up_nationality_hint">Spaans, Duits, Iers...</string>
     <string name="up_social_security_number_hint">8800–123–0000000</string>
     <string name="up_health_insurance_hint">Partial, all assured…</string>
     <string name="up_nationality_text">Nationaliteit</string>
@@ -74,7 +74,7 @@
     <string name="up_health_chronicalConditions_hint">Asthma, diabetes, glaucoma…</string>
     <string name="up_health_medicationsTaking_text">Medicatie  </string>
     <string name="up_health_medicationsTaking_hint">Ibuprofen, Phenergan, Ambien CR….</string>
-    <string name="up_health_abilityLevel_text">Mod. Rankin Scale</string>
+    <string name="up_health_abilityLevel_text">Mod. Rankin Schaal</string>
     <string name="up_health_knownAllergies_text">Bekende allergieen </string>
     <string name="up_health_knownAllergies_hint">Pollen, mites, apricots…</string>
     <string name="up_health_notableMedicalIncidents_text">Medicatie incidenten </string>
@@ -133,7 +133,7 @@
     <string name="up_health_rangeOfMotionScore_text">Range Of Motion Score</string>
     <string name="up_contact_postal_address">Postadres</string>
     <string name="edit_contact_activity_name">Contact bewerken </string>
-    <string name="edit_new_contact_activity_name">New Contact</string>
+    <string name="edit_new_contact_activity_name">Nieuw contact</string>
     <string name="tab_personal_title">Persoonlijk</string>
     <string name="tab_contacts_title">Contacten</string>
     <string name="tab_health_title">Gezondheid</string>
@@ -143,7 +143,7 @@
     <string name="tab_personal_header_contact_info">Contact informatie</string>
     <string name="contact_header_general">Algemene informatie</string>
     <string name="up_relation_text">Relatie</string>
-    <string name="contact_item_image_description">Contact icon</string>
+    <string name="contact_item_image_description">Contactbeeld </string>
     <string name="delete_contact_attempt_title">Contact verwijderen?</string>
     <string name="delete_contact_attempt_message">Dit contact wordt verwijderd.</string>
     <string name="exit_edited_contact_attempt_title">Wilt u weggaan?</string>
@@ -227,10 +227,10 @@
     <string name="splash_tv_lastname">Achternaam</string>
     <string name="splash_tv_lastname_hint">Achternaam</string>
     <string name="up_email_info">Dit is uw gebruikersnaam. Deze kan niet veranderd worden.</string>
-    <string name="contact_notification_create_success"><![CDATA[<font color=\'#017BE3\'>%s</font> is now in your contact list]]></string>
-    <string name="contact_notification_update_success"><![CDATA[<font color=\'#017BE3\'>%s</font>\'s info has been saved]]></string>
-    <string name="contact_notification_delete_success"><![CDATA[OK, <font color=\'#017BE3\'>%s</font> is no longer your contact]]></string>
-    <string name="contact_permissions_update_success"><![CDATA[Access rights for <font color=\'#017BE3\'>%s</font> have been saved]]></string>
+    <string name="contact_notification_create_success"><![CDATA[% is nu in uw contacten lijst ]]></string>
+    <string name="contact_notification_update_success"><![CDATA[% van de informatie is nu opgeslagen]]></string>
+    <string name="contact_notification_delete_success"><![CDATA[OK, % is geen contact meer ]]></string>
+    <string name="contact_permissions_update_success"><![CDATA[Toegangsrechten voor % zijn opgeslagen]]></string>
     <string name="progress_overlay_text_content">Maakt verbinding met server</string>
     <string name="progress_overlay_text_content_login">Maakt verbinding met server</string>
     <string name="progress_overlay_text_content_register">Maakt verbinding met server</string>

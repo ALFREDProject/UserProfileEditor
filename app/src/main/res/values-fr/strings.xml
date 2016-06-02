@@ -133,7 +133,7 @@
     <string name="up_health_rangeOfMotionScore_text">Range Of Motion Score</string>
     <string name="up_contact_postal_address">Adresse postale</string>
     <string name="edit_contact_activity_name">Modifier le contact</string>
-    <string name="edit_new_contact_activity_name">New Contact</string>
+    <string name="edit_new_contact_activity_name">Nouveau contact</string>
     <string name="tab_personal_title">Personnel</string>
     <string name="tab_contacts_title">Contacts</string>
     <string name="tab_health_title">Santé</string>
@@ -143,7 +143,7 @@
     <string name="tab_personal_header_contact_info">Informations de contact</string>
     <string name="contact_header_general">Informations générales</string>
     <string name="up_relation_text">Entourage</string>
-    <string name="contact_item_image_description">Contact icon</string>
+    <string name="contact_item_image_description">Image du contact</string>
     <string name="delete_contact_attempt_title">Supprimer le contact?</string>
     <string name="delete_contact_attempt_message">Ce contact va être supprimé.</string>
     <string name="exit_edited_contact_attempt_title">Voulez-vous quitter?</string>
@@ -156,7 +156,7 @@
     <string name="pref_db_url_title">Users Database URL</string>
     <string name="pref_db_url_summary">Location of MongoDB for User Profiles</string>
     <string name="pref_db_url_default">http://80.86.83.34:8080/personalization-manager/services/databaseServices/users/</string>
-    <string name="pref_user_id_title">Current User ID</string>
+    <string name="pref_user_id_title">Identification d\'utilisateur actuel</string>
     <string name="pref_user_id_summary">Hexadecimal identifier</string>
     <string name="pref_activity_name">Paramètres</string>
     <string name="up_anniversary_date_text">Date d\'anniversaire</string>
@@ -227,10 +227,10 @@
     <string name="splash_tv_lastname">Nom de famille</string>
     <string name="splash_tv_lastname_hint">Nom de famille</string>
     <string name="up_email_info">Ceci est votre nom d\'utilisateur. Il ne pourra être modifié. </string>
-    <string name="contact_notification_create_success"><![CDATA[<font color=\'#017BE3\'>%s</font> is now in your contact list]]></string>
-    <string name="contact_notification_update_success"><![CDATA[<font color=\'#017BE3\'>%s</font>\'s info has been saved]]></string>
-    <string name="contact_notification_delete_success"><![CDATA[OK, <font color=\'#017BE3\'>%s</font> is no longer your contact]]></string>
-    <string name="contact_permissions_update_success"><![CDATA[Access rights for <font color=\'#017BE3\'>%s</font> have been saved]]></string>
+    <string name="contact_notification_create_success"><![CDATA[% a été ajouté à votre liste de contact]]></string>
+    <string name="contact_notification_update_success"><![CDATA[Les informations concernant % ont bien été sauvegardées]]></string>
+    <string name="contact_notification_delete_success"><![CDATA[OK, % ne fait plus partie de vos contacts]]></string>
+    <string name="contact_permissions_update_success"><![CDATA[Les droits d\'accès pour % ont été sauvegardés]]></string>
     <string name="progress_overlay_text_content">Connection au serveur</string>
     <string name="progress_overlay_text_content_login">Connection au serveur</string>
     <string name="progress_overlay_text_content_register">Connection au serveur</string>

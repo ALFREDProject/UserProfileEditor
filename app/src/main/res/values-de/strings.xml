@@ -227,10 +227,10 @@
     <string name="splash_tv_lastname">Nachname</string>
     <string name="splash_tv_lastname_hint">Nachname</string>
     <string name="up_email_info">Dies ist Ihr Benutzername. Dieser kann nicht geändert werden.</string>
-    <string name="contact_notification_create_success"><![CDATA[<font color=\'#017BE3\'>%s</font> is now in your contact list]]></string>
-    <string name="contact_notification_update_success"><![CDATA[<font color=\'#017BE3\'>%s</font>\'s info has been saved]]></string>
-    <string name="contact_notification_delete_success"><![CDATA[OK, <font color=\'#017BE3\'>%s</font> is no longer your contact]]></string>
-    <string name="contact_permissions_update_success"><![CDATA[Access rights for <font color=\'#017BE3\'>%s</font> have been saved]]></string>
+    <string name="contact_notification_create_success"><![CDATA[<font color=\'#017BE3\'>%s</font> ist jetzt in Ihrer Kontaktliste]]></string>
+    <string name="contact_notification_update_success"><![CDATA[Die Kontaktinformationen für <font color=\'#017BE3\'>%s</font> wurden gespeichert]]></string>
+    <string name="contact_notification_delete_success"><![CDATA[<font color=\'#017BE3\'>%s</font> wurde aus Ihrer Kontaktliste entfernt]]></string>
+    <string name="contact_permissions_update_success"><![CDATA[Zugriffsrechte für <font color=\'#017BE3\'>%s</font> wurden gespeichert]]></string>
     <string name="progress_overlay_text_content">Verbinde mit Server</string>
     <string name="progress_overlay_text_content_login">Verbinde mit Server</string>
     <string name="progress_overlay_text_content_register">Verbinde mit Server</string>
