@@ -13,7 +13,7 @@
     <string name="up_middle_name_text">Deuxième prénom</string>
     <string name="up_middle_name_hint">Larry…</string>
     <string name="up_save_button_text">Sauvegarder</string>
-    <string name="up_id_text">Numéro d'identification</string>
+    <string name="up_id_text">Numéro d\'identification</string>
     <string name="up_id_hint">Auto generated…</string>
     <string name="up_last_name_text">Nom de famille</string>
     <string name="up_last_name_hint">Smith…</string>
@@ -27,7 +27,7 @@
     <string name="up_mobile_phone_text">Numéro de portable</string>
     <string name="up_phone_hint">+31 555 00 11 XX</string>
     <string name="up_mobile_phone_hint">+31 955 00 11 XX</string>
-    <string name="up_username_text">Nom d'utilisateur</string>
+    <string name="up_username_text">Nom d\'utilisateur</string>
     <string name="up_username_hint">yourcontact@alfreduser.com</string>
     <string name="up_email_text">E-Mail</string>
     <string name="up_email_hint">yourcontact@mail.com</string>
@@ -57,7 +57,7 @@
     <string name="up_language_text">Langue </string>
     <string name="up_social_security_number_text">Numéro de sécurité sociale</string>
     <string name="up_marital_status_text">Situation de famille</string>
-    <string name="up_education_level_text">Niveau d'études</string>
+    <string name="up_education_level_text">Niveau d\'études</string>
     <string name="up_employment_status_text">Situation professionnelle</string>
     <string name="up_living_situation_text">Conditions de vie</string>
     <string name="up_health_insurance_text">Assurance maladie</string>
@@ -93,9 +93,9 @@
     <string name="up_health_bodyTemperatureAtRest_hint">36ºC</string>
     <string name="up_health_selfRatedHealth_text">Auto évaluation de santé</string>
     <string name="up_health_selfRatedHealth_hint">Normal…</string>
-    <string name="up_health_visionAcuityScore_text">Score d'acuité visuelle</string>
+    <string name="up_health_visionAcuityScore_text">Score d\'acuité visuelle</string>
     <string name="up_health_visionAcuityScore_hint">3</string>
-    <string name="up_health_hearingAcuityScore_text">Score d'acuité auditive</string>
+    <string name="up_health_hearingAcuityScore_text">Score d\'acuité auditive</string>
     <string name="up_health_hearingAcuityScore_hint">4</string>
     <string name="up_health_lifestyleHealthRelated_text">Mode de vie</string>
     <string name="up_health_lifestyleHealthRelated_hint">Smoker, alcohol, sedentarism…</string>
@@ -159,7 +159,7 @@
     <string name="pref_user_id_title">Current User ID</string>
     <string name="pref_user_id_summary">Hexadecimal identifier</string>
     <string name="pref_activity_name">Paramètres</string>
-    <string name="up_anniversary_date_text">Date d'anniversaire</string>
+    <string name="up_anniversary_date_text">Date d\'anniversaire</string>
     <string name="up_myers_briggs_indicator_text">Myers-Briggs Indicator</string>
     <string name="contact_header_dev">Développer</string>
     <string name="up_user_id_text">#dev My User ID</string>
@@ -170,8 +170,8 @@
     <string name="up_user_contact_id_hint">#dev Manual input</string>
     <string name="up_user_contact_pos_text">#dev Contact Position</string>
     <string name="up_user_contact_pos_hint">#dev Manual input</string>
-    <string name="up_edit_access_rights_text">Modifier les droits d'accès</string>
-    <string name="up_edit_access_rights_dialog_title">Modifier les droits d'accès</string>
+    <string name="up_edit_access_rights_text">Modifier les droits d\'accès</string>
+    <string name="up_edit_access_rights_dialog_title">Modifier les droits d\'accès</string>
 
     <!-- UserProfile fields' names -->
     <string name="attr_up_profession">Profession</string>
@@ -190,22 +190,22 @@
     <string name="attr_up_postalAddress">Adresse postale</string>
     <string name="attr_up_selfDescrPersonalityChar">Auto description de votre personnalité</string>
     <string name="attr_up_socialMediaProfiles">Profiles sur les réseaux sociaux</string>
-    <string name="attr_up_anniversaryDate">Date d'anniversaire</string>
-    <string name="attr_up_interests">Centres d'intérêt</string>
+    <string name="attr_up_anniversaryDate">Date d\'anniversaire</string>
+    <string name="attr_up_interests">Centres d\'intérêt</string>
     <string name="attr_up_healthInsurance">Assurance maladie</string>
     <string name="attr_up_email">E-Mail</string>
     <string name="attr_up_nationality">Nationalité</string>
     <string name="attr_up_maritalStatus">Situation de famille</string>
     <string name="attr_up_culturalOrFamilyNeeds">Besoins familiaux ou culturels</string>
     <string name="attr_up_citizenship">Nationalité</string>
-    <string name="attr_up_educationLevel">Niveau d'études</string>
+    <string name="attr_up_educationLevel">Niveau d\'études</string>
     <string name="attr_up_nextOfKin">Proches parents</string>
     <string name="attr_up_lastName">Nom de famille</string>
-    <string name="attr_up_alfedAppInstalationDate">Date d'installation de l'application ALFRED</string>
-    <string name="attr_up_alfredUserName">Nom d'utilisateur</string>
+    <string name="attr_up_alfedAppInstalationDate">Date d\'installation de l\'application ALFRED</string>
+    <string name="attr_up_alfredUserName">Nom d\'utilisateur</string>
     <string name="attr_up_language">Langue </string>
 
-    <string name="splash_bt_register">S'inscrire</string>
+    <string name="splash_bt_register">S\'inscrire</string>
     <string name="splash_bt_login">Login</string>
     <string name="splash_tv_email">E-Mail</string>
     <string name="splash_tv_password">Mot de passe</string>
@@ -226,7 +226,7 @@
     <string name="splash_tv_middlename_hint">Deuxième prénom</string>
     <string name="splash_tv_lastname">Nom de famille</string>
     <string name="splash_tv_lastname_hint">Nom de famille</string>
-    <string name="up_email_info">Ceci est votre nom d'utilisateur. Il ne pourra être modifié. </string>
+    <string name="up_email_info">Ceci est votre nom d\'utilisateur. Il ne pourra être modifié. </string>
     <string name="contact_notification_create_success"><![CDATA[<font color=\'#017BE3\'>%s</font> is now in your contact list]]></string>
     <string name="contact_notification_update_success"><![CDATA[<font color=\'#017BE3\'>%s</font>\'s info has been saved]]></string>
     <string name="contact_notification_delete_success"><![CDATA[OK, <font color=\'#017BE3\'>%s</font> is no longer your contact]]></string>
@@ -234,8 +234,8 @@
     <string name="progress_overlay_text_content">Connection au serveur</string>
     <string name="progress_overlay_text_content_login">Connection au serveur</string>
     <string name="progress_overlay_text_content_register">Connection au serveur</string>
-    <string name="pref_user_username_title">Nom d'utilisateur actuel</string>
-    <string name="pref_user_username_summary">Nom d'utilisateur ALFRED</string>
+    <string name="pref_user_username_title">Nom d\'utilisateur actuel</string>
+    <string name="pref_user_username_summary">Nom d\'utilisateur ALFRED</string>
     <string name="up_health_loading_resources_text">Charge des ressources</string>
 
 
