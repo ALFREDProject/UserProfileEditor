@@ -1,6 +1,7 @@
 package eu.alfred.personalization_manager.gui.splash;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.Editable;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 
 import java.util.Map;
 
+import eu.alfred.api.personalization.helper.eventrecommendation.EventHelper;
+import eu.alfred.api.personalization.model.eventrecommendation.GlobalsettingsKeys;
 import eu.alfred.personalization_manager.controller.auth.AuthController;
 import eu.alfred.personalization_manager.controller.auth.AuthListener;
 import eu.alfred.personalization_manager.controller.auth.User;
@@ -52,7 +55,7 @@ public class SplashActivity extends AppActivity implements AuthListener, ICadeCo
     private AuthController controller;
 
     /* Local storage of previous session username and password */
-    private SharedPrefHelper prefs;
+    private SharedPrefHelper localPrefs;
     private String prefMail; //Previously Alfred Username used if any
     private String prefPassword; //Not encrypted, shouldn't be needed
     private String prefUSerId;
@@ -75,7 +78,7 @@ public class SplashActivity extends AppActivity implements AuthListener, ICadeCo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         controller = new AuthController(this);
-        prefs = new SharedPrefHelper(this);
+        localPrefs = new SharedPrefHelper(this);
         setContentView(R.layout.splash_activity);
         bindForm();
 
@@ -88,9 +91,9 @@ public class SplashActivity extends AppActivity implements AuthListener, ICadeCo
         }
 
         /* Retrieve the previous session info */
-        prefMail = prefs.get(SharedPrefHelper.CURRENT_UP_EMAIL);
-        prefPassword = prefs.get(SharedPrefHelper.CURRENT_UP_PASSWORD);
-        prefUSerId = prefs.get(SharedPrefHelper.CURRENT_UP_USERID);
+        prefMail = localPrefs.get(SharedPrefHelper.CURRENT_UP_EMAIL);
+        prefPassword = localPrefs.get(SharedPrefHelper.CURRENT_UP_PASSWORD);
+        prefUSerId = localPrefs.get(SharedPrefHelper.CURRENT_UP_USERID);
 
         if (prefMail != null && !prefMail.isEmpty()) {
             etEmail.setText(prefMail);
@@ -136,9 +139,9 @@ public class SplashActivity extends AppActivity implements AuthListener, ICadeCo
      * When logout, we clear completely the credentials.
      */
     private void clearCredentials() {
-        prefs.delete(SharedPrefHelper.CURRENT_UP_EMAIL);
-        prefs.delete(SharedPrefHelper.CURRENT_UP_PASSWORD);
-        prefs.delete(SharedPrefHelper.CURRENT_UP_USERID);
+        localPrefs.delete(SharedPrefHelper.CURRENT_UP_EMAIL);
+        localPrefs.delete(SharedPrefHelper.CURRENT_UP_PASSWORD);
+        localPrefs.delete(SharedPrefHelper.CURRENT_UP_USERID);
     }
 
     /**
@@ -305,6 +308,14 @@ public class SplashActivity extends AppActivity implements AuthListener, ICadeCo
     private void openUserProfileActivity(boolean existingUser) {
 
         Intent intent = new Intent(this, UserProfileActivity.class);
+
+        SharedPreferences.Editor edit = prefs.edit();
+        edit.putString(GlobalsettingsKeys.userId+"",""+user.getUserId());
+        edit.commit();
+        globalSettings.setGlobalSetting(GlobalsettingsKeys.userId+"",""+user.getUserId());
+        edit.apply();
+
+
         intent.putExtra("userId", user.getUserId());
         intent.putExtra("accessToken", user.getAccessToken());
         intent.putExtra("existingUser", existingUser);
@@ -419,10 +430,10 @@ public class SplashActivity extends AppActivity implements AuthListener, ICadeCo
         if (user.getError() == null) { //All ok
             String msg = mode ? "Login succeed!" : "Registration succeed!";
             notification(true, msg);
-            prefs.put(SharedPrefHelper.CURRENT_UP_EMAIL, user.getEmail());
-            prefs.put(SharedPrefHelper.CURRENT_UP_PASSWORD, user.getPassword());
-            prefs.put(SharedPrefHelper.CURRENT_UP_USERID, user.getUserId());
-/*            prefs.put(GlobalsettingsKeys.userId, user.getUserId());*/
+            localPrefs.put(SharedPrefHelper.CURRENT_UP_EMAIL, user.getEmail());
+            localPrefs.put(SharedPrefHelper.CURRENT_UP_PASSWORD, user.getPassword());
+            localPrefs.put(SharedPrefHelper.CURRENT_UP_USERID, user.getUserId());
+/*            localPrefs.put(GlobalsettingsKeys.userId, user.getUserId());*/
 
             openUserProfileActivity(mode);
         } else {
