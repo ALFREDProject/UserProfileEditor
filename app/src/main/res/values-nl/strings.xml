@@ -64,7 +64,9 @@
     <string name="up_mobility_level_text">Mobiliteit niveau</string>
     <string name="select_one">Selecteer </string>
     <string name="up_profession_text">Beroep</string>
-    <string name="up_profession_insurance_hint">Teacher, engineer, lawyer…</string>
+    <string name="up_profession_insurance_hint">leraar, ingenieur, advocaat…</string>
+    <string name="up_interests_text">Interesses</string>
+    <string name="up_interests_hint">muziek, dans, wandelen…</string>
     <string name="up_health_id_text">ID</string>
     <string name="up_health_id_hint">Auto…</string>
     <string name="up_health_userID_text">userID</string>
@@ -98,13 +100,13 @@
     <string name="up_health_hearingAcuityScore_text">Hoorvermogen </string>
     <string name="up_health_hearingAcuityScore_hint">4</string>
     <string name="up_health_lifestyleHealthRelated_text">Leefstijlgerelateerd </string>
-    <string name="up_health_lifestyleHealthRelated_hint">Smoker, alcohol, sedentarism…</string>
+    <string name="up_health_lifestyleHealthRelated_hint">roker, alcohol, sendentair…</string>
     <string name="up_health_weight_text">Gewicht</string>
     <string name="up_health_weight_hint">72 kg</string>
     <string name="up_health_height_text">Lengte </string>
     <string name="up_health_height_hint">172 cm</string>
     <string name="up_health_painLevel_text">Pijnniveau</string>
-    <string name="up_health_painLevel_hint">Middle, low, sporadic…</string>
+    <string name="up_health_painLevel_hint">medium, laag, sporadisch…</string>
     <string name="up_health_functionalReachScore_text">Functional Reach Score</string>
     <string name="up_health_functionalReachScore_hint">Risk of fall off…</string>
     <string name="up_health_fiveXSitToStandTestScore_text">Five X sit to stand test score</string>

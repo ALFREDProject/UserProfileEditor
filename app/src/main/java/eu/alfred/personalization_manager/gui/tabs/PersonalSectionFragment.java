@@ -13,10 +13,12 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
-import eu.alfred.api.personalization.model.UserProfile;
 import eu.alfred.api.personalization.model.Address;
 import eu.alfred.api.personalization.model.EducationLevel;
 import eu.alfred.api.personalization.model.EmploymentStatus;
@@ -25,6 +27,7 @@ import eu.alfred.api.personalization.model.Language;
 import eu.alfred.api.personalization.model.MaritalStatus;
 import eu.alfred.api.personalization.model.MobilityLevel;
 import eu.alfred.api.personalization.model.MyersBriggsTypeIndicator;
+import eu.alfred.api.personalization.model.UserProfile;
 import eu.alfred.upeditor.R;
 
 /**
@@ -66,6 +69,7 @@ public class PersonalSectionFragment extends SectionFragment {
     private AutoCompleteTextView autoNationality;
     private EditText etSocialSecurityNumber;
     private EditText etProfession;
+    private EditText etInterests;
     private EditText etHealthInsurance;
 
     private DatePicker dpAnniversaryDate;
@@ -148,6 +152,7 @@ public class PersonalSectionFragment extends SectionFragment {
         etSocialSecurityNumber = (EditText) view.findViewById(R.id.txtSocialSecurityIdentifier);
 
         etProfession = (EditText) view.findViewById(R.id.txtProfession);
+        etInterests = (EditText) view.findViewById(R.id.txtInterests);
         etHealthInsurance = (EditText) view.findViewById(R.id.txtHealthInsurance);
 
         autoContactCountry.setAdapter(new ArrayAdapter<String>(
@@ -297,6 +302,12 @@ public class PersonalSectionFragment extends SectionFragment {
             }
             if(etProfession != null){
                 etProfession.setText(up.getProfession());
+            }
+            if(etInterests != null){
+                String str = Arrays.toString(up.getInterests());
+                str = str.replace("[", "");
+                str = str.replace("]", "");
+                etInterests.setText(str);
             }
             if(etHealthInsurance != null){
                 etHealthInsurance.setText(up.getHealthInsurance());
@@ -546,6 +557,27 @@ public class PersonalSectionFragment extends SectionFragment {
             }
 
         }
+        if(etInterests != null) {
+            String[] strArr = etInterests.getText().toString().split(",| |\\.");
+            if(strArr!=null && !"".equals(strArr)){
+                List<String> list = new ArrayList<String>();
+
+                for(String s : strArr) {
+                    if(s != null && s.length() > 0) {
+                        list.add(s);
+                    }
+                }
+                strArr = list.toArray(new String[list.size()]);
+
+
+                for (int i = 0; i <  strArr.length; i++) {
+                    strArr[i] = strArr[i].replace(" ","");
+                    strArr[i] = strArr[i].toLowerCase();
+                }
+                up.setInterests(strArr);
+            }
+
+        }
         if(etHealthInsurance != null) {
             String str = etHealthInsurance.getText().toString();
             if(str!=null && !"".equals(str)){
@@ -669,6 +701,9 @@ public class PersonalSectionFragment extends SectionFragment {
         }
         if (etProfession != null) {
             etProfession.setText("");
+        }
+        if (etInterests != null) {
+            etInterests.setText("");
         }
         if (etHealthInsurance != null) {
             etHealthInsurance.setText("");

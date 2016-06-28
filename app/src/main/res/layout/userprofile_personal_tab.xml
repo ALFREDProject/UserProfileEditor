@@ -241,6 +241,15 @@
             android:hint="@string/up_contact_number_hint"
             android:inputType="textCapCharacters|text"
             android:labelFor="@id/up_contact_number_label"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:ems="10"
+            android:id="@+id/editText" />
+
         <TextView android:id="@+id/up_contact_postalCode_label"
             style="@style/AlfredFormTextView"
             android:layout_width="match_parent"
@@ -528,6 +537,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/up_profession_insurance_hint"
+            android:inputType="text|textCapSentences|textAutoComplete"
+            android:labelFor="@id/up_status_profession_label" />
+
+        <TextView
+            style="@style/AlfredFormTextView"
+            android:id="@+id/up_status_interests_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/up_interests_text" />
+
+        <EditText
+            style="@style/AlfredFormEditText"
+            android:id="@+id/txtInterests"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/up_interests_hint"
             android:inputType="text|textCapSentences|textAutoComplete"
             android:labelFor="@id/up_status_profession_label" />
 

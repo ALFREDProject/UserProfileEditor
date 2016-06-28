@@ -65,6 +65,8 @@
     <string name="select_one">Auswählen</string>
     <string name="up_profession_text">Beruf</string>
     <string name="up_profession_insurance_hint">Teacher, engineer, lawyer…</string>
+    <string name="up_interests_text">Interessen</string>
+    <string name="up_interests_hint">Musik, tanzen, wandern…</string>
     <string name="up_health_id_text">ID</string>
     <string name="up_health_id_hint">Auto…</string>
     <string name="up_health_userID_text">userID</string>

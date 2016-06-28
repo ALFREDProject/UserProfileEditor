@@ -121,7 +121,7 @@ public class ContactsController {
 		    @Override
 		    public void OnError(Exception e) {
 			    Log.e(TAG, e.getClass().getSimpleName() + ": " + e.getMessage());
-			    if (mActivity != null) mActivity.notification(false, "Creating contact failed");
+				if (mActivity != null) mActivity.notification(false, "Creating contact failed");
 		    }
 	    });
 
@@ -154,7 +154,7 @@ public class ContactsController {
 		            @Override
 		            public void OnError(Exception e) {
 			            Log.e(TAG, e.getClass().getSimpleName() + ": " + e.getMessage());
-			            if (mActivity != null) mActivity.notification(false, "Update requester failed");
+						if (mActivity != null) mActivity.notification(false, "Update requester failed");
 		            }
 	            });
 
@@ -182,8 +182,8 @@ public class ContactsController {
 		            @Override
 		            public void OnError(Exception e) {
 			            Log.e(TAG, e.getClass().getSimpleName() + ": " + e.getMessage());
-			            if (mActivity != null) mActivity.notification(false, "Creating requester failed");
-			            if (mActivity != null) mActivity.onErrorCreatingNewRequesters(e, r2);
+						if (mActivity != null) mActivity.notification(false, "Creating requester failed");
+						if (mActivity != null) mActivity.onErrorCreatingNewRequesters(e, r2);
 		            }
 	            });
 
@@ -274,7 +274,7 @@ public class ContactsController {
 		    @Override
 		    public void OnError(Exception e) {
 			    Log.e(TAG, e.getClass().getSimpleName() + ": " + e.getMessage());
-			    if (mActivity != null) mActivity.notification(false, "Delete contact failed");
+				if (mActivity != null) mActivity.notification(false, "Delete contact failed");
 		    }
 	    });
 
@@ -296,7 +296,7 @@ public class ContactsController {
 		    @Override
 		    public void OnError(Exception e) {
 			    Log.e(TAG, e.getClass().getSimpleName() + ": " + e.getMessage());
-			    if (mActivity != null) mActivity.notification(false, "Update contact failed");
+				if (mActivity != null) mActivity.notification(false, "Update contact failed");
 		    }
 	    });
 
@@ -334,8 +334,8 @@ public class ContactsController {
 
 		            @Override
 		            public void OnError(Exception e) {
-			            Log.e(TAG, e.getClass().getSimpleName() + ": " + e.getMessage());
-			            if (mActivity != null) mActivity.notification(false, "Retrieve requester failed");
+						Log.e(TAG, e.getClass().getSimpleName() + ": " + e.getMessage());
+						if (mActivity != null) mActivity.notification(false, "Retrieve requester failed");
 		            }
 	            });
 

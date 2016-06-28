@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.Spanned;
@@ -41,6 +42,7 @@ import eu.alfred.api.personalization.model.Relation;
 import eu.alfred.api.personalization.model.Requester;
 import eu.alfred.personalization_manager.controller.ContactsController;
 import eu.alfred.personalization_manager.gui.tabs.ContactsSectionFragment;
+import eu.alfred.ui.AppActivity;
 import eu.alfred.upeditor.R;
 
 /**

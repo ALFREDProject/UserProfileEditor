@@ -65,6 +65,8 @@
     <string name="select_one">Sélectionner un choix</string>
     <string name="up_profession_text">Profession</string>
     <string name="up_profession_insurance_hint">Teacher, engineer, lawyer…</string>
+    <string name="up_interests_text">Centres d\'intérêt</string>
+    <string name="up_interests_hint">musique, danse, randonnée…</string>
     <string name="up_health_id_text">ID</string>
     <string name="up_health_id_hint">Auto…</string>
     <string name="up_health_userID_text">userID</string>
@@ -98,13 +100,13 @@
     <string name="up_health_hearingAcuityScore_text">Score d\'acuité auditive</string>
     <string name="up_health_hearingAcuityScore_hint">4</string>
     <string name="up_health_lifestyleHealthRelated_text">Mode de vie</string>
-    <string name="up_health_lifestyleHealthRelated_hint">Smoker, alcohol, sedentarism…</string>
+    <string name="up_health_lifestyleHealthRelated_hint">Fumeur, alcohol, sedentarism…</string>
     <string name="up_health_weight_text">Poids</string>
     <string name="up_health_weight_hint">72 kg</string>
     <string name="up_health_height_text">Taille</string>
     <string name="up_health_height_hint">172 cm</string>
     <string name="up_health_painLevel_text">Degrés de douleur</string>
-    <string name="up_health_painLevel_hint">Middle, low, sporadic…</string>
+    <string name="up_health_painLevel_hint">moyen, faible, sporadique…</string>
     <string name="up_health_functionalReachScore_text">Functional Reach Score</string>
     <string name="up_health_functionalReachScore_hint">Risk of fall off…</string>
     <string name="up_health_fiveXSitToStandTestScore_text">Five X sit to stand test score</string>
