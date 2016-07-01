@@ -192,6 +192,8 @@
     <string name="attr_up_socialMediaProfiles">Social Media Profiles</string>
     <string name="attr_up_anniversaryDate">Anniversary Date</string>
     <string name="attr_up_interests">Interests</string>
+    <string name="up_interests_text">Interests</string>
+    <string name="up_interests_hint">Music, Dancing, Walking…</string>
     <string name="attr_up_healthInsurance">Health Insurance</string>
     <string name="attr_up_email">E-mail</string>
     <string name="attr_up_nationality">Nationality</string>
