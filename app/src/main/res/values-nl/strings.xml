@@ -12,7 +12,7 @@
     <string name="up_first_name_text">Voornaam</string>
     <string name="up_middle_name_text">Tweede naam</string>
     <string name="up_middle_name_hint">Larry…</string>
-    <string name="up_save_button_text">Besparen</string>
+    <string name="up_save_button_text">Opslaan</string>
     <string name="up_id_text">Gebruiker profiel ID </string>
     <string name="up_id_hint">Auto generated…</string>
     <string name="up_last_name_text">Achternaam</string>
@@ -31,7 +31,7 @@
     <string name="up_username_hint">yourcontact@alfreduser.com</string>
     <string name="up_email_text">E-Mail</string>
     <string name="up_email_hint">yourcontact@mail.com</string>
-    <string name="action_save_title">Besparen</string>
+    <string name="action_save_title">Opslaan</string>
     <string name="action_delete_profile_title">Profiel verwijderen?</string>
     <string name="action_delete_contact_title">Contact verwijderen?</string>
     <string name="action_new_profile_title">Creeren </string>
