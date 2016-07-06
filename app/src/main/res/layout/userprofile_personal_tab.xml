@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/up_first_name_hint"
             android:inputType="textCapWords" />
-
+<!--
         <TextView
             style="@style/AlfredFormTextView"
             android:layout_width="match_parent"
@@ -53,8 +53,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/up_middle_name_hint"
             android:inputType="textCapWords" />
-
-
+-->
         <TextView
             style="@style/AlfredFormTextView"
             android:layout_width="match_parent"
@@ -69,65 +68,65 @@
             android:hint="@string/up_last_name_hint"
             android:inputType="textCapWords" />
 
-
+<!--
         <TextView
             style="@style/AlfredFormTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/up_preferred_name_text" />
 
-        <EditText
-            android:id="@+id/txtPreferredName"
-            style="@style/AlfredFormEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/up_preferred_name_hint"
-            android:inputType="textCapWords" />
-
-        <TextView
-            style="@style/AlfredFormTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/up_gender_text" />
-
-        <RadioGroup
-            android:id="@+id/upGenderRadioGroup"
-            style="@style/AlfredFormGenderRadioGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RadioButton
-                android:id="@+id/upGenderMale"
-                style="@style/AlfredFormGenderRadioButton"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/txtPreferredName"
+                style="@style/AlfredFormEditText"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/up_gender_male_text" />
-
-            <RadioButton
-                android:id="@+id/upGenderFemale"
-                style="@style/AlfredFormGenderRadioButton"
-                android:layout_width="wrap_content"
+                android:hint="@string/up_preferred_name_hint"
+                android:inputType="textCapWords" />
+-->
+            <TextView
+                style="@style/AlfredFormTextView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/up_gender_female_text" />
-        </RadioGroup>
+                android:text="@string/up_gender_text" />
 
-        <TextView
-            style="@style/AlfredFormTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/up_date_birth_text" />
+            <RadioGroup
+                android:id="@+id/upGenderRadioGroup"
+                style="@style/AlfredFormGenderRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <DatePicker
-            android:id="@+id/upDateOfBirth"
-            style="@style/AlfredFormEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner" />
+                <RadioButton
+                    android:id="@+id/upGenderMale"
+                    style="@style/AlfredFormGenderRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/up_gender_male_text" />
+
+                <RadioButton
+                    android:id="@+id/upGenderFemale"
+                    style="@style/AlfredFormGenderRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/up_gender_female_text" />
+            </RadioGroup>
+
+            <TextView
+                style="@style/AlfredFormTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/up_date_birth_text" />
+
+            <DatePicker
+                android:id="@+id/upDateOfBirth"
+                style="@style/AlfredFormEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner" />
 
 
 
-        <!-- User contact info-->
+                <!-- User contact info-->
         <!-- Phone, mobile & email-->
         <TextView
             android:layout_width="wrap_content"
@@ -241,7 +240,7 @@
             android:hint="@string/up_contact_number_hint"
             android:inputType="textCapCharacters|text"
             android:labelFor="@id/up_contact_number_label"/>
-
+<!--
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -249,6 +248,7 @@
             android:text="Name"
             android:ems="10"
             android:id="@+id/editText" />
+-->
 
         <TextView android:id="@+id/up_contact_postalCode_label"
             style="@style/AlfredFormTextView"
@@ -304,79 +304,81 @@
             android:labelFor="@id/up_contact_country_label"/>
 
         <!--Postal Address info starts here-->
+        <!--
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/AlfredTextViewTitle"
+                    android:text="@string/tab_personal_header_postal_address"/>
+                <View style="@style/AlfredFormSeparator"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/AlfredTextViewTitle"
-            android:text="@string/tab_personal_header_postal_address"/>
-        <View style="@style/AlfredFormSeparator"/>
-
-        <TextView android:id="@+id/up_contact_postal_street_label"
-            style="@style/AlfredFormTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/up_contact_street"/>
-        <EditText
-            android:id="@+id/txtContactPostalStreet"
-            style="@style/AlfredFormEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/up_contact_street_hint"
-            android:inputType="text|textCapWords"
-            android:labelFor="@id/up_contact_postal_street_label"/>
-        <TextView android:id="@+id/up_contact_postal_number_label"
-            style="@style/AlfredFormTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/up_contact_number"/>
-        <EditText
-            android:id="@+id/txtContactPostalNumber"
-            style="@style/AlfredFormEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/up_contact_number_hint"
-            android:inputType="textCapCharacters|text"
-            android:labelFor="@id/up_contact_postal_number_label"/>
-        <TextView android:id="@+id/up_contact_postal_postal_code_label"
-            style="@style/AlfredFormTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/up_contact_postalCode"/>
-        <EditText
-            android:id="@+id/txtContactPostalPostalCode"
-            style="@style/AlfredFormEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/up_contact_postalCode_hint"
-            android:inputType="textCapCharacters|text"
-            android:labelFor="@id/up_contact_postal_postal_code_label"/>
-        <TextView android:id="@+id/up_contact_postal_city_label"
-            style="@style/AlfredFormTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/up_contact_city"/>
-        <EditText
-            android:id="@+id/txtContactPostalCity"
-            style="@style/AlfredFormEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/up_contact_city_hint"
-            android:inputType="text|textCapWords"
-            android:labelFor="@id/up_contact_postal_city_label"/>
-        <TextView android:id="@+id/up_contact_postal_state_label"
-            style="@style/AlfredFormTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/up_contact_state"/>
-        <EditText
-            android:id="@+id/txtContactPostalState"
-            style="@style/AlfredFormEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/up_contact_state_hint"
-            android:inputType="text|textCapWords"
-            android:labelFor="@id/up_contact_postal_state_label"/>
+                <TextView android:id="@+id/up_contact_postal_street_label"
+                    style="@style/AlfredFormTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/up_contact_street"/>
+                <EditText
+                    android:id="@+id/txtContactPostalStreet"
+                    style="@style/AlfredFormEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/up_contact_street_hint"
+                    android:inputType="text|textCapWords"
+                    android:labelFor="@id/up_contact_postal_street_label"/>
+                <TextView android:id="@+id/up_contact_postal_number_label"
+                    style="@style/AlfredFormTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/up_contact_number"/>
+                <EditText
+                    android:id="@+id/txtContactPostalNumber"
+                    style="@style/AlfredFormEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/up_contact_number_hint"
+                    android:inputType="textCapCharacters|text"
+                    android:labelFor="@id/up_contact_postal_number_label"/>
+                <TextView android:id="@+id/up_contact_postal_postal_code_label"
+                    style="@style/AlfredFormTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/up_contact_postalCode"/>
+                <EditText
+                    android:id="@+id/txtContactPostalPostalCode"
+                    style="@style/AlfredFormEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/up_contact_postalCode_hint"
+                    android:inputType="textCapCharacters|text"
+                    android:labelFor="@id/up_contact_postal_postal_code_label"/>
+                <TextView android:id="@+id/up_contact_postal_city_label"
+                    style="@style/AlfredFormTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/up_contact_city"/>
+                <EditText
+                    android:id="@+id/txtContactPostalCity"
+                    style="@style/AlfredFormEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/up_contact_city_hint"
+                    android:inputType="text|textCapWords"
+                    android:labelFor="@id/up_contact_postal_city_label"/>
+                <TextView android:id="@+id/up_contact_postal_state_label"
+                    style="@style/AlfredFormTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/up_contact_state"/>
+                <EditText
+                    android:id="@+id/txtContactPostalState"
+                    style="@style/AlfredFormEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/up_contact_state_hint"
+                    android:inputType="text|textCapWords"
+                    android:labelFor="@id/up_contact_postal_state_label"/>
+        -->
+<!--    remove comment in PersonalSectionFragment.java autoContactPostalCountry.setAdapter as soon as you remove the comment here
         <TextView android:id="@+id/up_contact_postal_country_label"
             style="@style/AlfredFormTextView"
             android:layout_width="match_parent"
@@ -390,6 +392,7 @@
             android:hint="@string/up_contact_country_hint"
             android:inputType="text|textCapWords|textAutoComplete"
             android:labelFor="@id/up_contact_postal_country_label"/>
+-->
 
 
         <!--Citizenship, marital status, etc...-->
@@ -399,6 +402,7 @@
             style="@style/AlfredTextViewTitle"
             android:text="@string/tab_personal_header_other"/>
         <View style="@style/AlfredFormSeparator"/>
+<!--    remove comment in PersonalSectionFragment.java autoCitizenship.setAdapter as soon as you remove the comment here
 
         <TextView
             android:id="@+id/up_status_citizenship_label"
@@ -415,7 +419,7 @@
             android:hint="@string/up_citizenship_hint"
             android:inputType="text|textCapWords|textAutoComplete"
             android:labelFor="@id/up_status_citizenship_label" />
-
+-->
         <TextView
             android:id="@+id/up_status_nationality_label"
             style="@style/AlfredFormTextView"
@@ -446,7 +450,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:labelFor="@id/up_status_language_label"/>
-
+<!--
         <TextView
             android:id="@+id/up_status_socialSecurityIdentifier_label"
             style="@style/AlfredFormTextView"
@@ -462,7 +466,7 @@
             android:hint="@string/up_social_security_number_hint"
             android:inputType="text|textCapWords"
             android:labelFor="@id/up_status_socialSecurityIdentifier_label" />
-
+-->
         <TextView
             android:id="@+id/up_status_marital_status_label"
             style="@style/AlfredFormTextView"
@@ -492,7 +496,7 @@
             android:layout_height="wrap_content"
             android:calendarViewShown="false"
             android:datePickerMode="spinner" />
-
+<!--
         <TextView
             android:id="@+id/up_status_education_level_label"
             style="@style/AlfredFormTextView"
@@ -507,8 +511,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:labelFor="@id/up_status_education_level_label"/>
-
-
+-->
+<!--
         <TextView
             android:id="@+id/up_status_employment_status_label"
             style="@style/AlfredFormTextView"
@@ -523,7 +527,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:labelFor="@id/up_status_employment_status_label"/>
-
+-->
+<!--
         <TextView
             android:id="@+id/up_status_profession_label"
             style="@style/AlfredFormTextView"
@@ -539,23 +544,23 @@
             android:hint="@string/up_profession_insurance_hint"
             android:inputType="text|textCapSentences|textAutoComplete"
             android:labelFor="@id/up_status_profession_label" />
-
+-->
         <TextView
-            style="@style/AlfredFormTextView"
             android:id="@+id/up_status_interests_label"
+            style="@style/AlfredFormTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/up_interests_text" />
 
         <EditText
-            style="@style/AlfredFormEditText"
             android:id="@+id/txtInterests"
+            style="@style/AlfredFormEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/up_interests_hint"
             android:inputType="text|textCapSentences|textAutoComplete"
-            android:labelFor="@id/up_status_profession_label" />
-
+            android:labelFor="@id/up_status_interests_label" />
+<!--
         <TextView
             android:id="@+id/up_status_health_insurance_label"
             style="@style/AlfredFormTextView"
@@ -571,7 +576,7 @@
             android:hint="@string/up_health_insurance_hint"
             android:inputType="text|textCapSentences"
             android:labelFor="@id/up_status_health_insurance_label" />
-
+-->
         <TextView
             android:id="@+id/up_status_mobility_level_label"
             style="@style/AlfredFormTextView"
