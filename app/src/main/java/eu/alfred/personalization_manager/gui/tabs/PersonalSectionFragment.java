@@ -88,6 +88,7 @@ public class PersonalSectionFragment extends SectionFragment {
     }
 
     private void hideUnnecessaryFields(View view) {
+/*      remove this comment, as soon as you include again EditText socialSecurityIdentifier in userprofile_personal_tab.xml
         View up_status_socialSecurityIdentifier_label = view.findViewById(R.id.up_status_socialSecurityIdentifier_label);
         if(up_status_socialSecurityIdentifier_label!=null) {
             up_status_socialSecurityIdentifier_label.setVisibility(View.GONE);
@@ -96,6 +97,7 @@ public class PersonalSectionFragment extends SectionFragment {
         if(txtSocialSecurityIdentifier!=null) {
             txtSocialSecurityIdentifier.setVisibility(View.GONE);
         }
+*/
         View up_myers_briggs_indicator_label = view.findViewById(R.id.up_myers_briggs_indicator_label);
         if(up_myers_briggs_indicator_label!=null) {
             up_myers_briggs_indicator_label.setVisibility(View.GONE);
@@ -116,9 +118,9 @@ public class PersonalSectionFragment extends SectionFragment {
 
     private void bindViews(View view) {
         etFirstName = (EditText) view.findViewById(R.id.txtFirstName);
-        etMiddleName = (EditText) view.findViewById(R.id.txtMiddleName);
+/*        etMiddleName = (EditText) view.findViewById(R.id.txtMiddleName); */
         etLastName = (EditText) view.findViewById(R.id.txtLastName);
-        etPreferredName = (EditText) view.findViewById(R.id.txtPreferredName);
+/*        etPreferredName = (EditText) view.findViewById(R.id.txtPreferredName); */
         rgGender = (RadioGroup) view.findViewById(R.id.upGenderRadioGroup);
         dpDateOfBirth = (DatePicker) view.findViewById(R.id.upDateOfBirth);
         dpAnniversaryDate = (DatePicker) view.findViewById(R.id.upAnniversaryDate);
@@ -141,33 +143,40 @@ public class PersonalSectionFragment extends SectionFragment {
         etContactCity = (EditText) view.findViewById(R.id.txtContactCity);
         etContactState = (EditText) view.findViewById(R.id.txtContactState);
         autoContactCountry = (AutoCompleteTextView) view.findViewById(R.id.txtContactCountry);
+/*
         etContactPostalStreet = (EditText) view.findViewById(R.id.txtContactPostalStreet);
         etContactPostalNumber = (EditText) view.findViewById(R.id.txtContactPostalNumber);
         etContactPostalPostalCode = (EditText) view.findViewById(R.id.txtContactPostalPostalCode);
         etContactPostalCity = (EditText) view.findViewById(R.id.txtContactPostalCity);
         etContactPostalState = (EditText) view.findViewById(R.id.txtContactPostalState);
         autoContactPostalCountry = (AutoCompleteTextView) view.findViewById(R.id.txtContactPostalCountry);
-        autoCitizenship = (AutoCompleteTextView) view.findViewById(R.id.txtCitizenship);
+*/
+/*        autoCitizenship = (AutoCompleteTextView) view.findViewById(R.id.txtCitizenship);*/
         autoNationality = (AutoCompleteTextView) view.findViewById(R.id.txtNationality);
-        etSocialSecurityNumber = (EditText) view.findViewById(R.id.txtSocialSecurityIdentifier);
+/*        etSocialSecurityNumber = (EditText) view.findViewById(R.id.txtSocialSecurityIdentifier); */
 
-        etProfession = (EditText) view.findViewById(R.id.txtProfession);
+/*        etProfession = (EditText) view.findViewById(R.id.txtProfession); */
         etInterests = (EditText) view.findViewById(R.id.txtInterests);
-        etHealthInsurance = (EditText) view.findViewById(R.id.txtHealthInsurance);
+/*        etHealthInsurance = (EditText) view.findViewById(R.id.txtHealthInsurance); */
 
         autoContactCountry.setAdapter(new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.countries_array)));
-
+/*  remove this comment, as soon as AutoCompleteTextView PostalCountry in userprofile_personal_tb.xml will be included again */
+/*
         autoContactPostalCountry.setAdapter(new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.countries_array)));
+*/
+/*  remove this comment, as soon as AutoCompleteTextView Citizenship in userprofile_personal_tb.xml will be included again */
+/*
         autoCitizenship.setAdapter(new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.nationalities_array)));
+*/
         autoNationality.setAdapter(new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_list_item_1,
@@ -181,13 +190,14 @@ public class PersonalSectionFragment extends SectionFragment {
 
         spMaritalStatus = (Spinner) view.findViewById(R.id.txtMaritalStatus);
         spMaritalStatus.setAdapter(new ArrayAdapter<MaritalStatus>(view.getContext(), android.R.layout.simple_list_item_1, MaritalStatus.values()));
-
+/*
         spEducationLevel = (Spinner) view.findViewById(R.id.txtEducationLevel);
         spEducationLevel.setAdapter(new ArrayAdapter<EducationLevel>(view.getContext(), android.R.layout.simple_list_item_1, EducationLevel.values()));
-
+*/
+/*
         spEmploymentStatus = (Spinner) view.findViewById(R.id.txtEmploymentStatus);
         spEmploymentStatus.setAdapter(new ArrayAdapter<EmploymentStatus>(view.getContext(), android.R.layout.simple_list_item_1, EmploymentStatus.values()));
-
+*/
         spMobilityLevel = (Spinner) view.findViewById(R.id.txtMobilityLevel);
         spMobilityLevel.setAdapter(new ArrayAdapter<MobilityLevel>(view.getContext(), android.R.layout.simple_list_item_1, MobilityLevel.values()));
 
