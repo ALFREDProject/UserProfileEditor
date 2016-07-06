@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/up_first_name_hint"
             android:inputType="textCapWords" />
-
+<!--
         <TextView
             style="@style/AlfredFormTextView"
             android:layout_width="match_parent"
@@ -53,8 +53,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/up_middle_name_hint"
             android:inputType="textCapWords" />
-
-
+-->
         <TextView
             style="@style/AlfredFormTextView"
             android:layout_width="match_parent"
@@ -69,7 +68,7 @@
             android:hint="@string/up_last_name_hint"
             android:inputType="textCapWords" />
 
-
+<!--
         <TextView
             style="@style/AlfredFormTextView"
             android:layout_width="match_parent"
@@ -83,7 +82,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/up_preferred_name_hint"
             android:inputType="textCapWords" />
-
+-->
         <TextView
             style="@style/AlfredFormTextView"
             android:layout_width="match_parent"
@@ -296,7 +295,7 @@
             android:labelFor="@id/up_contact_country_label"/>
 
         <!--Postal Address info starts here-->
-
+<!--
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -384,7 +383,7 @@
             android:hint="@string/up_contact_country_hint"
             android:inputType="text|textCapWords|textAutoComplete"
             android:labelFor="@id/up_contact_postal_country_label"/>
-
+-->
         <!--More information-->
 
         <TextView
