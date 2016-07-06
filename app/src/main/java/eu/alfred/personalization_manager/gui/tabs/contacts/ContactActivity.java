@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.Spanned;
@@ -42,7 +41,6 @@ import eu.alfred.api.personalization.model.Relation;
 import eu.alfred.api.personalization.model.Requester;
 import eu.alfred.personalization_manager.controller.ContactsController;
 import eu.alfred.personalization_manager.gui.tabs.ContactsSectionFragment;
-import eu.alfred.ui.AppActivity;
 import eu.alfred.upeditor.R;
 
 /**
@@ -143,9 +141,9 @@ public class ContactActivity extends Activity {
 
     private void bindFields() {
         etFirstName = (EditText) findViewById(R.id.txtFirstName);
-        etMiddleName = (EditText) findViewById(R.id.txtMiddleName);
+/*        etMiddleName = (EditText) findViewById(R.id.txtMiddleName); */
         etLastName = (EditText) findViewById(R.id.txtLastName);
-        etPreferredName = (EditText) findViewById(R.id.txtPreferredName);
+/*        etPreferredName = (EditText) findViewById(R.id.txtPreferredName); */
         etPhone = (EditText) findViewById(R.id.txtPhone);
         etMobilePhone = (EditText) findViewById(R.id.txtMobilePhone);
         etUsername = (EditText) findViewById(R.id.txtUsername);
@@ -156,12 +154,13 @@ public class ContactActivity extends Activity {
         etContactCity = (EditText) findViewById(R.id.txtContactCity);
         etContactState = (EditText) findViewById(R.id.txtContactState);
         autoContactCountry = (AutoCompleteTextView) findViewById(R.id.txtContactCountry);
-        etContactPostalStreet = (EditText) findViewById(R.id.txtContactPostalStreet);
+/*        etContactPostalStreet = (EditText) findViewById(R.id.txtContactPostalStreet);
         etContactPostalNumber = (EditText) findViewById(R.id.txtContactPostalNumber);
         etContactPostalPostalCode = (EditText) findViewById(R.id.txtContactPostalPostalCode);
         etContactPostalCity = (EditText) findViewById(R.id.txtContactPostalCity);
         etContactPostalState = (EditText) findViewById(R.id.txtContactPostalState);
         autoContactPostalCountry = (AutoCompleteTextView) findViewById(R.id.txtContactPostalCountry);
+*/
         rgGender = (RadioGroup) findViewById(R.id.upGenderRadioGroup);
         dpDateOfBirth = (DatePicker) findViewById(R.id.upDateOfBirth);
         spRelation = (Spinner) findViewById(R.id.spRelation);
@@ -173,12 +172,12 @@ public class ContactActivity extends Activity {
                 this,
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.countries_array)));
-
+/*
         autoContactPostalCountry.setAdapter(new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.countries_array)));
-
+*/
         TextWatcher watcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -197,9 +196,9 @@ public class ContactActivity extends Activity {
         };
 
         etFirstName.addTextChangedListener(watcher);
-        etMiddleName.addTextChangedListener(watcher);
+/*        etMiddleName.addTextChangedListener(watcher); */
         etLastName.addTextChangedListener(watcher);
-        etPreferredName.addTextChangedListener(watcher);
+/*        etPreferredName.addTextChangedListener(watcher); */
         etPhone.addTextChangedListener(watcher);
         etMobilePhone.addTextChangedListener(watcher);
         etEmail.addTextChangedListener(watcher);
@@ -209,13 +208,14 @@ public class ContactActivity extends Activity {
         etContactCity.addTextChangedListener(watcher);
         etContactState.addTextChangedListener(watcher);
         autoContactCountry.addTextChangedListener(watcher);
+/*
         etContactPostalStreet.addTextChangedListener(watcher);
         etContactPostalNumber.addTextChangedListener(watcher);
         etContactPostalPostalCode.addTextChangedListener(watcher);
         etContactPostalCity.addTextChangedListener(watcher);
         etContactPostalState.addTextChangedListener(watcher);
         autoContactPostalCountry.addTextChangedListener(watcher);
-
+*/
         etUserId = (EditText) findViewById(R.id.txtUserId);
         etAlfredUserId = (EditText) findViewById(R.id.txtAlfredUserId);
 
@@ -249,15 +249,15 @@ public class ContactActivity extends Activity {
             if (etFirstName != null) {
                 etFirstName.setText(contact.getFirstName());
             }
-            if (etMiddleName != null) {
+/*            if (etMiddleName != null) {
                 etMiddleName.setText(contact.getMiddleName());
-            }
+            }*/
             if (etLastName != null) {
                 etLastName.setText(contact.getLastName());
             }
-            if (etPreferredName != null) {
+/*            if (etPreferredName != null) {
                 etPreferredName.setText(contact.getPrefferedName());
-            }
+            }*/
             if (etPhone != null) {
                 etPhone.setText(contact.getPhone());
             }
@@ -361,13 +361,12 @@ public class ContactActivity extends Activity {
             }
 
         }
-        if (etMiddleName != null) {
+/*        if (etMiddleName != null) {
             String str = etMiddleName.getText().toString();
             if(str!=null && !"".equals(str)){
                 contact.setMiddleName(str);
             }
-
-        }
+        } */
         if (etLastName != null) {
             String str = etLastName.getText().toString();
             if(str!=null && !"".equals(str)){
@@ -375,13 +374,13 @@ public class ContactActivity extends Activity {
             }
 
         }
-        if (etPreferredName != null) {
+/*        if (etPreferredName != null) {
             String str = etPreferredName.getText().toString();
             if(str!=null && !"".equals(str)){
                 contact.setPrefferedName(str);
             }
 
-        }
+        }*/
         if (etPhone != null) {
             String str = etPhone.getText().toString();
             if(str!=null && !"".equals(str)){
@@ -542,15 +541,15 @@ public class ContactActivity extends Activity {
         if (etFirstName != null) {
             etFirstName.setText("");
         }
-        if (etMiddleName != null) {
+/*        if (etMiddleName != null) {
             etMiddleName.setText("");
-        }
+        }*/
         if (etLastName != null) {
             etLastName.setText("");
         }
-        if (etPreferredName != null) {
+/*        if (etPreferredName != null) {
             etPreferredName.setText("");
-        }
+        }*/
         if (etPhone != null) {
             etPhone.setText("");
         }
@@ -709,9 +708,9 @@ public class ContactActivity extends Activity {
         if (contact.getFirstName() != null) {
             ret += contact.getFirstName().trim();
         }
-        if (contact.getMiddleName() != null && !contact.getMiddleName().trim().isEmpty()) {
+/*        if (contact.getMiddleName() != null && !contact.getMiddleName().trim().isEmpty()) {
             ret += " " + contact.getMiddleName().trim();
-        }
+        }*/
         if (contact.getLastName() != null) {
             ret += " " + contact.getLastName().trim();
         }
