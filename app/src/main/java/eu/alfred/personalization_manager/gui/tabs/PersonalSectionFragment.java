@@ -428,6 +428,13 @@ public class PersonalSectionFragment extends SectionFragment {
             RadioButton b = (RadioButton) mView.findViewById(rgGender.getCheckedRadioButtonId());
             if (b != null) {
                 String genderStr = b.getText().toString();
+                String genderStrTmp = genderStr.toUpperCase();
+                if (genderStrTmp.equals("HOMME") || genderStrTmp.equals("MANNELIJK")) {
+                    genderStr = "MALE";
+                }
+                else if (genderStrTmp.equals("FEMME") || genderStrTmp.equals("VROUWELIJK")) {
+                    genderStr = "FEMALE";
+                }
                 Gender gender = Gender.valueOf(genderStr.toUpperCase());
                 up.setGender(gender);
             }
